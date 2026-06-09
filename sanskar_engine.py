@@ -1,4 +1,5 @@
 # OPTIONAL SAFE IMPORT
+
 try:
     from bucket_emitter import emit_bucket_artifact
 except ImportError:
@@ -9,33 +10,34 @@ except ImportError:
 # -----------------------------------
 # RISK LEVEL ENGINE
 # -----------------------------------
-def get_risk_level(confidence):
 
-    if confidence >= 0.75:
-        return "LOW"
-    elif confidence >= 0.5:
-        return "MEDIUM"
-    elif confidence >= 0.3:
+def get_risk_level(value):
+
+    try:
+        value = float(value)
+    except:
+        value = 0.0
+
+    # Weather / AQI dataset thresholds
+    if value >= 45:
         return "HIGH"
+
+    elif value >= 35:
+        return "MEDIUM"
+
     else:
-        return "CRITICAL"
+        return "LOW"
 
 
 # -----------------------------------
 # ANOMALY DETECTOR
 # -----------------------------------
+
 def detect_anomaly(signal):
 
-    vessel_type = signal.get("asset_id", "unknown")
     metadata = signal.get("metadata", {})
 
-    incoming_flag = metadata.get("anomaly_flag", False)
-
-    # Priority rules
-    if incoming_flag is True:
-        return True
-
-    if vessel_type == "unknown":
+    if metadata.get("anomaly_flag") is True:
         return True
 
     return False
@@ -44,77 +46,123 @@ def detect_anomaly(signal):
 # -----------------------------------
 # EXPLANATION ENGINE
 # -----------------------------------
-def generate_explanation(confidence, vessel_type, risk, anomaly):
+
+def generate_explanation(value, feature_type, risk, anomaly):
 
     if anomaly:
-        return "Anomalous acoustic pattern detected — classified as critical risk"
-
-    if vessel_type == "unknown":
-        return "Unknown vessel detected — classified as critical risk"
-
-    if risk == "CRITICAL":
-        return "Very low confidence acoustic detection — critical risk"
+        return f"Anomalous {feature_type} signal detected"
 
     if risk == "HIGH":
-        return "Low confidence acoustic detection — high risk"
+        return f"High {feature_type} reading detected"
 
     if risk == "MEDIUM":
-        return "Moderate confidence acoustic detection — medium risk"
+        return f"Moderate {feature_type} reading detected"
 
-    return f"High confidence acoustic classification of {vessel_type} vessel — low risk"
+    return f"Normal {feature_type} reading detected"
 
 
 # -----------------------------------
-# MAIN FUNCTION (FINAL FIXED)
+# MAIN ANALYSIS ENGINE
 # -----------------------------------
+
 def analyze_signal(signal):
 
     try:
-        # ✅ ALWAYS TAKE TRACE FROM SIGNAL (IMPORTANT FIX)
-        trace_id = signal.get("trace_id", "TRACE_UNKNOWN")
 
-        confidence = float(signal.get("value", 0.0))
-        vessel_type = signal.get("asset_id", "unknown")
+        trace_id = signal.get(
+            "trace_id",
+            f"TRACE_{signal.get('signal_id', 'UNKNOWN')}"
+        )
 
-        # anomaly first
+        value = float(signal.get("value", 0))
+
+        feature_type = signal.get(
+            "feature_type",
+            "unknown_feature"
+        )
+
         anomaly = detect_anomaly(signal)
 
-        # risk logic
-        risk = get_risk_level(confidence)
+        risk = get_risk_level(value)
 
         if anomaly:
-            risk = "CRITICAL"
+            risk = "HIGH"
 
         explanation = generate_explanation(
-            confidence,
-            vessel_type,
+            value,
+            feature_type,
             risk,
             anomaly
         )
 
-        # ✅ FINAL CORRECT OUTPUT
         intelligence = {
             "trace_id": trace_id,
-            "vessel_type": vessel_type,
-            "confidence": confidence,
+            "feature_type": feature_type,
+            "confidence": value,
             "risk_level": risk,
             "anomaly_flag": anomaly,
+            "anomaly_score": value,
+            "anomaly_type": feature_type,
+            "recommendation_signal": risk,
             "explanation": explanation
         }
 
-        # optional logging
         emit_bucket_artifact({
             "trace_id": trace_id,
-            "type": "intelligence_event",
             "input": signal,
-            "output": intelligence
+            "output": intelligence,
+            "layer": "SANSKAR_ENGINE"
         })
 
         return intelligence
 
     except Exception as e:
+
         return {
-            "trace_id": signal.get("trace_id", "TRACE_UNKNOWN"),
+            "trace_id": signal.get(
+                "trace_id",
+                "TRACE_UNKNOWN"
+            ),
+            "status": "ERROR",
+            "reason": str(e)
+        }
+
+
+# -----------------------------------
+# PATTERN DETECTION
+# -----------------------------------
+
+def analyze_patterns(events):
+
+    try:
+
+        if not events:
+            return {
+                "pattern_id": "PATTERN_000",
+                "anomaly_count": 0,
+                "affected_zones": [],
+                "pattern_type": "NONE",
+                "severity_trend": "STABLE",
+                "pattern_summary": "No events received"
+            }
+
+        anomaly_count = len([
+            e for e in events
+            if e.get("risk_level") in ["HIGH", "MEDIUM"]
+        ])
+
+        return {
+            "pattern_id": "PATTERN_001",
+            "anomaly_count": anomaly_count,
+            "affected_zones": [],
+            "pattern_type": "ENVIRONMENTAL_CLUSTER",
+            "severity_trend": "STABLE",
+            "pattern_summary": f"{anomaly_count} elevated-risk events detected"
+        }
+
+    except Exception as e:
+
+        return {
             "status": "ERROR",
             "reason": str(e)
         }
