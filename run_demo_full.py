@@ -8,7 +8,7 @@ import traceback   # ✅ FIX: import at top
 from datetime import datetime, timezone
 
 from samachar_input_adapter import load_data, convert_to_signals
-from sanskar_engine import analyze_signal, analyze_patterns
+from sanskar_engine import analyze_signal
 from error_handler import error_response, validate_basic_input
 
 
@@ -109,6 +109,12 @@ def run_demo():
             # ANALYSIS
             # -----------------------------
             analysis = analyze_signal(signal)
+
+            print("\nDEBUG SIGNAL:")
+            print(signal)
+
+            print("\nDEBUG ANALYSIS:")
+            print(analysis)
 
             if not isinstance(analysis, dict):
                 continue
