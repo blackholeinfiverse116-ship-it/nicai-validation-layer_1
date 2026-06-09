@@ -85,7 +85,7 @@ def evaluate(signals: list):
 
             trace_id = validation.get("trace_id")
 
-            analysis = analyze_signal(signal, trace_id)
+            analysis = analyze_signal(signal)
 
             combined = {
                 "signal_id": signal.get("signal_id"),
@@ -153,7 +153,7 @@ def dashboard():
             trace_id = to_str(validation.get("trace_id"))
 
             # 🔥 FIXED: PASS TRACE_ID
-            analysis = analyze_signal(signal, trace_id)
+            analysis = analyze_signal(signal)
 
             if not isinstance(analysis, dict):
                 continue
