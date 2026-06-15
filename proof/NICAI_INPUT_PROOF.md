@@ -4,22 +4,30 @@
 
 SVACS Unified Core
 
-## Input Artifact
+## Input Dataset
 
-runtime/single_trace_runtime.json
+Weather Runtime Dataset
 
-## Input Trace ID
+## Input Signal
 
-e0753814-9ab3-494e-8541-7f6bc43a4827
+signal_id: W_0
 
-## Input Status
+## Trace ID
 
-RECEIVED
+TRACE_W_0
 
-## Validation
+## Input Validation
 
-TRACE PRESERVED
+SUCCESS
 
 ## Evidence
 
-SVACS runtime output successfully entered NICAI processing pipeline.
+The input signal was successfully received by NICAI through the Samachar Input Adapter and converted into a structured signal.
+
+## Runtime Status
+
+RECEIVED
+
+## Verification
+
+Trace successfully entered the NICAI processing pipeline.
