@@ -2,28 +2,30 @@
 
 ## Trace ID
 
-TRACE_W_0
+c960bfae6da79d6f15f73694ff366f5b13806451dba578fb8b3dbe55508a3071
 
-## Generated Output
+## Output Generated
 
-Risk Level: HIGH
+Risk Level: LOW
 
-Confidence: 50.0
+Anomaly Type: NORMAL
 
-Recommendation: HIGH
+Anomaly Score: 0.2
 
-Anomaly Type: temperature
+Recommendation Signal: monitor
 
-Explanation: High temperature reading detected
+Explanation:
+
+No anomaly detected (value=19.9)
 
 ## Output Status
 
 GENERATED
 
-## Trace Continuity
+## Dashboard Visibility
 
 VERIFIED
 
-## Evidence
+## Result
 
-The intelligence output was successfully generated and made available for dashboard visibility and downstream audit review.
+NICAI successfully generated an intelligence output suitable for review and dashboard visualization.
