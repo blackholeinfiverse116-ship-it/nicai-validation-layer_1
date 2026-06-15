@@ -1,33 +1,33 @@
 # NICAI Input Proof
 
-## Source System
+## Input Source
 
-SVACS Unified Core
+Weather Dataset
 
-## Input Dataset
+## Signal ID
 
-Weather Runtime Dataset
-
-## Input Signal
-
-signal_id: W_0
+W_19
 
 ## Trace ID
 
-TRACE_W_0
+c960bfae6da79d6f15f73694ff366f5b13806451dba578fb8b3dbe55508a3071
 
-## Input Validation
+## Validation Result
 
-SUCCESS
+VALID
+
+## Confidence Score
+
+0.9
 
 ## Evidence
 
-The input signal was successfully received by NICAI through the Samachar Input Adapter and converted into a structured signal.
+The signal was successfully loaded from the dataset and converted into a valid NICAI runtime signal.
 
 ## Runtime Status
 
-RECEIVED
+INPUT VERIFIED
 
-## Verification
+## Result
 
-Trace successfully entered the NICAI processing pipeline.
+Signal successfully entered the deterministic NICAI processing pipeline.
