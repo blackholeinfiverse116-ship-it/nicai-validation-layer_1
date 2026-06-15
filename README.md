@@ -86,6 +86,15 @@ nicai_system/
 │── README.md
 │── REVIEW_PACKET.md
 │── TESTING_PACKET.md
+
+proof/
+│── NICAI_INPUT_PROOF.md
+│── NICAI_PROCESSING_PROOF.md
+│── NICAI_OUTPUT_PROOF.md
+│── NICAI_TRACE_VALIDATION.md
+│── NICAI_EVIDENCE_PACKET.md
+
+nicai_anomaly_log.png
 ```
 
 ✔ Clean, unified, demo-safe structure
@@ -357,6 +366,213 @@ Same Input → Same Output
 * ✅ Demo-Ready
 
 ---
+
+---
+
+# 📑 Runtime Proof & Evidence
+
+NICAI includes runtime validation evidence demonstrating deterministic execution, trace continuity, intelligence generation, and operator-facing outputs.
+
+## Proof Directory
+
+```text
+proof/
+
+├── NICAI_INPUT_PROOF.md
+├── NICAI_PROCESSING_PROOF.md
+├── NICAI_OUTPUT_PROOF.md
+├── NICAI_TRACE_VALIDATION.md
+└── NICAI_EVIDENCE_PACKET.md
+```
+
+---
+
+## Input Validation Proof
+
+File:
+
+```text
+proof/NICAI_INPUT_PROOF.md
+```
+
+Contains:
+
+* Original dataset signal
+* Validation layer output
+* Trace generation evidence
+* Signal integrity verification
+
+Demonstrates:
+
+```text
+DATASET
+↓
+SIGNAL
+↓
+VALIDATION
+```
+
+---
+
+## Processing Proof
+
+File:
+
+```text
+proof/NICAI_PROCESSING_PROOF.md
+```
+
+Contains:
+
+* Intelligence engine execution
+* Risk classification
+* Confidence scoring
+* Explanation generation
+
+Demonstrates:
+
+```text
+VALIDATION
+↓
+INTELLIGENCE
+↓
+ANALYSIS
+```
+
+---
+
+## Output Proof
+
+File:
+
+```text
+proof/NICAI_OUTPUT_PROOF.md
+```
+
+Contains:
+
+* Final intelligence output
+* Recommendation signal
+* Risk assessment
+* Dashboard-ready payload
+
+Demonstrates:
+
+```text
+INTELLIGENCE
+↓
+OUTPUT
+↓
+DASHBOARD
+```
+
+---
+
+## Trace Validation Proof
+
+File:
+
+```text
+proof/NICAI_TRACE_VALIDATION.md
+```
+
+Contains:
+
+* Validation trace
+* Intelligence trace
+* Output trace
+* Trace continuity verification
+
+Demonstrates:
+
+```text
+SAME TRACE ID
+↓
+VALIDATION
+↓
+INTELLIGENCE
+↓
+OUTPUT
+```
+
+---
+
+## Evidence Packet
+
+File:
+
+```text
+proof/NICAI_EVIDENCE_PACKET.md
+```
+
+Contains:
+
+* End-to-end execution evidence
+* Runtime logs
+* Validation evidence
+* Intelligence evidence
+* Output evidence
+* Trace continuity evidence
+
+Demonstrates:
+
+```text
+INPUT
+↓
+PROCESSING
+↓
+OUTPUT
+↓
+TRACEABILITY
+```
+
+---
+
+## Runtime Log Evidence
+
+Runtime evidence is also stored in:
+
+```text
+validation_logs.json
+anomaly_logs.json
+pattern_logs.json
+action_logs.json
+telemetry_metrics.json
+trace_proof.txt
+END_TO-END-TRACE-PROOF.json
+```
+
+---
+
+## Dashboard Evidence
+
+Dashboard execution screenshots and evidence:
+
+```text
+nicai_anomaly_log.png
+```
+
+Demonstrates:
+
+* anomaly visibility
+* trace visibility
+* intelligence visibility
+* dashboard observability
+
+---
+
+## Evidence Guarantees
+
+NICAI validates:
+
+```text
+INPUT_VERIFIED
+PROCESSING_VERIFIED
+OUTPUT_VERIFIED
+TRACE_CONTINUITY_VERIFIED
+INTELLIGENCE_GENERATION_VERIFIED
+DASHBOARD_VISIBILITY_VERIFIED
+```
 
 # 📌 Final Note
 
