@@ -2,7 +2,7 @@
 
 ## Trace ID
 
-TRACE_W_0
+c960bfae6da79d6f15f73694ff366f5b13806451dba578fb8b3dbe55508a3071
 
 ## Processing Chain
 
@@ -14,19 +14,27 @@ Validation Layer
 ↓
 Sanskar Intelligence Engine
 ↓
-Risk Assessment
+Risk Analysis
 
-## Processing Output
+## Runtime Result
 
-Feature Type: Temperature
+Signal ID: W_19
 
-Confidence Score: 50.0
+Risk Level: LOW
 
-Risk Level: HIGH
+Anomaly Score: 0.2
 
-Recommendation Signal: HIGH
+Anomaly Type: NORMAL
 
-Explanation: High temperature reading detected
+Recommendation Signal: monitor
+
+Explanation:
+
+No anomaly detected (value=19.9)
+
+## Processing Status
+
+SUCCESS
 
 ## Deterministic Validation
 
@@ -34,4 +42,4 @@ TRUE
 
 ## Result
 
-NICAI successfully processed the signal and generated explainable intelligence output while preserving trace continuity.
+NICAI successfully processed the signal and generated explainable intelligence output.
