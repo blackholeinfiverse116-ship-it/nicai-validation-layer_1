@@ -1,0 +1,34 @@
+{
+  "cluster_result": {
+    "trace_id": "TASK12_TRACE",
+    "risk_level": "MEDIUM",
+    "anomaly_type": "clustered_moderate_environmental_risk",
+    "explanation": "Cluster analysis: 0/1 HIGH risk signals, 1/1 MEDIUM. Situation classified as MEDIUM. Context: Elevated environmental risk observed in Delhi.",
+    "temporal_context": "CLUSTERED",
+    "spatial_context": "Delhi",
+    "confidence": 0.9,
+    "recommendation_signal": "monitor"
+  },
+  "contract_result": {
+    "trace_id": "TASK12_TRACE",
+    "contract_status": "VALID",
+    "errors": []
+  },
+  "action": {
+    "trace_id": "TASK12_TRACE",
+    "action": "RECOMMEND_ENVIRONMENTAL_REVIEW",
+    "status": "EMITTED"
+  },
+  "tantra_participation": {
+    "trace_id": "TASK12_TRACE",
+    "consumer": "TANTRA",
+    "ack_status": "ACCEPTED",
+    "participation_type": "DOWNSTREAM_CONTRACT"
+  },
+  "ttg_consume": {
+    "trace_id": "TASK12_TRACE",
+    "consumer": "TTG",
+    "simulation_pack": "RUDRA_ATHARVA",
+    "consume_status": "CONSUMED"
+  }
+}
