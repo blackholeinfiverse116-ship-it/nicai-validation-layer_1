@@ -24,20 +24,55 @@ REQUIRED_STAGES = [
 
 
 def load_logs(filepath):
+    """
+    Load replay logs from either:
+    1. JSON array format (legacy)
+    2. JSONL (JSON Lines) format (current runtime)
+    """
 
     if not os.path.exists(filepath):
         return []
 
     try:
+        with open(filepath, "r", encoding="utf-8") as f:
 
-        with open(filepath, "r") as f:
+            content = f.read().strip()
 
-            data = json.load(f)
+            if not content:
+                return []
 
-            if isinstance(data, list):
-                return data
+            # -----------------------------
+            # Legacy JSON array support
+            # -----------------------------
+            if content.startswith("["):
+                data = json.loads(content)
 
-            return [data]
+                if isinstance(data, list):
+                    return data
+
+                return [data]
+
+            # -----------------------------
+            # JSONL support
+            # -----------------------------
+            records = []
+
+            for line in content.splitlines():
+
+                line = line.strip()
+
+                if not line:
+                    continue
+
+                try:
+                    records.append(json.loads(line))
+
+                except json.JSONDecodeError as e:
+                    print(
+                        f"JSONL PARSE WARNING: {filepath}: {e}"
+                    )
+
+            return records
 
     except Exception as e:
 
