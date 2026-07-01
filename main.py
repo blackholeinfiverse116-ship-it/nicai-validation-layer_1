@@ -1,3 +1,10 @@
+from integration_orchestrator import orchestrate_intelligence
+from cluster_intelligence import analyze_signal_cluster
+from contract_validator import validate_contract
+from action_router import route_action
+from tantra_participation import emit_tantra_participation
+from ttg_simulation import emit_ttg_consume
+
 from fastapi import FastAPI, Body
 from fastapi.responses import HTMLResponse
 from datetime import datetime, timezone
@@ -317,3 +324,44 @@ def trigger_action(data: dict):
 
     except Exception as e:
         return error_response(str(e))
+
+@app.get("/run")
+def run_pipeline():
+
+    signal = {
+        "signal_id": "TASK12_DEMO",
+        "trace_id": "TASK12_TRACE",
+        "feature_type": "aqi",
+        "value": 180,
+        "location": "Delhi",
+        "status": "ALLOW"
+    }
+
+    processed = []
+
+    intelligence = orchestrate_intelligence(signal)
+    processed.append(intelligence)
+
+    cluster_result = analyze_signal_cluster(processed)
+
+    contract_result = validate_contract(cluster_result)
+
+    if contract_result["contract_status"] != "VALID":
+        return {
+            "contract_result": contract_result,
+            "status": "BLOCKED"
+        }
+
+    action = route_action(cluster_result)
+
+    tantra = emit_tantra_participation(cluster_result)
+
+    ttg = emit_ttg_consume(tantra)
+
+    return {
+        "cluster_result": cluster_result,
+        "contract_result": contract_result,
+        "action": action,
+        "tantra_participation": tantra,
+        "ttg_consume": ttg
+    }
