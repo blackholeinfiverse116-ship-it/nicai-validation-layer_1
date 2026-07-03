@@ -29,6 +29,9 @@
 - dashboard.png
 - frontend.png
 - swagger.png
+- render_service.png
+- render_logs_startup.png
+- render_logs_runtime.png
 
 ## Health
 
