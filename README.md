@@ -59,11 +59,45 @@ Action Router (Simulation)
 Logging System
 ```
 
+
 ✔ No shortcuts
 ✔ No bypass
 ✔ Fully deterministic pipeline
 
 ---
+
+# Replay Validation
+
+NICAI includes deterministic replay support using JSONL runtime logs.
+
+Verified capabilities:
+
+- JSONL log ingestion
+- Replay reconstruction
+- Trace continuity
+- Deterministic replay
+- Historical compatibility
+
+Replay validation evidence is available in:
+
+review_packets/review_assets/validation_evidence/replay/
+---
+---
+
+# Ecosystem Participation
+
+NICAI integrates through bounded interface adapters.
+
+Validated adapters:
+
+- SVACS
+- Bucket
+- InsightFlow
+- Maritime Knowledge Registry
+- Fleet History Registry
+- Vessel Lineage Registry
+
+These adapters preserve ownership boundaries and deterministic execution.
 
 # 📂 Project Structure
 
@@ -99,6 +133,32 @@ nicai_anomaly_log.png
 
 ✔ Clean, unified, demo-safe structure
 
+---
+
+# Production Deployment
+
+## Live Backend
+
+https://nicai-intelligence-engine-3.onrender.com
+
+## Live Frontend
+
+https://nicai-frontend-8wut.vercel.app
+
+## Dashboard
+
+https://nicai-intelligence-engine-3.onrender.com/dashboard
+
+## API Documentation
+
+https://nicai-intelligence-engine-3.onrender.com/docs
+
+Status:
+
+- Backend deployed
+- Frontend connected
+- Runtime verified
+- Production validated
 ---
 
 # ▶️ How to Run (Demo Mode)
@@ -290,8 +350,11 @@ Displays:
 
 ---
 
-# 📊 Logging System
-
+Logging System
+↓
+Replay Engine
+↓
+Ecosystem Adapters
 ```text
 logs/
 
@@ -300,6 +363,30 @@ logs/
 │── pattern_logs.json
 │── action_logs.json
 ```
+'''final pipline '''
+Dataset
+↓
+Samachar Input Adapter
+↓
+Signal Conversion
+↓
+Validation Layer
+↓
+Sanskar Intelligence Engine
+↓
+Multi-Signal Pattern Analysis
+↓
+FastAPI Layer
+↓
+Dashboard
+↓
+Action Router
+↓
+Logging System
+↓
+Replay Engine
+↓
+Ecosystem Adapters
 
 ### Format:
 
@@ -316,6 +403,21 @@ logs/
 ✔ No manual setup required
 
 ---
+
+# Production API Endpoints
+
+The deployed backend exposes the following production endpoints:
+
+| Method | Endpoint |
+|---------|-----------|
+| GET | / |
+| GET | /docs |
+| GET | /dashboard |
+| GET | /run |
+| POST | /nicai/evaluate |
+| POST | /action |
+
+All endpoints have been validated against the deployed production backend.
 
 # 🔗 Traceability Flow
 
@@ -355,17 +457,26 @@ Same Input → Same Output
 ✔ Consistent outputs
 
 ---
+# Final Status
 
-# 📌 Final Status
+Current Engineering Status
 
-* ✅ Fully Integrated
-* ✅ Crash-Free
-* ✅ Deterministic
-* ✅ Traceable
-* ✅ Minimal & Clean
-* ✅ Demo-Ready
+- Production Backend: Complete
+- Production Deployment: Complete
+- Runtime Validation: Complete
+- Replay Validation: Complete
+- API Compatibility: Verified
+- Documentation: Complete
+- Handover Package: Complete
 
----
+Pending External Validation
+
+- Context Intelligence Validation (Nupur)
+- Independent Testing (Vinayak)
+- Governance Acceptance
+- Production Acceptance
+
+
 
 ---
 
@@ -573,6 +684,43 @@ TRACE_CONTINUITY_VERIFIED
 INTELLIGENCE_GENERATION_VERIFIED
 DASHBOARD_VISIBILITY_VERIFIED
 ```
+---
+
+# Production Review Package
+
+Engineering review artifacts are available under:
+
+review_packets/
+
+Contents include:
+
+- Review Packet
+- Deployment Guide
+- Backend Handover
+- API Compatibility Report
+- Testing Packet
+- Runtime Evidence
+- Deployment Evidence
+- Production Acceptance Documents
+- Validation Evidence
+- Code Review Packet
+
+---
+
+# Known Observations
+
+The production backend currently does not expose a dedicated `/health` endpoint.
+
+Accessing:
+
+https://nicai-intelligence-engine-3.onrender.com/health
+
+returns:
+
+404 Not Found
+
+This behaviour matches the current deployed implementation and has been documented as an operational observation rather than a production defect.
+
 
 # 📌 Final Note
 
