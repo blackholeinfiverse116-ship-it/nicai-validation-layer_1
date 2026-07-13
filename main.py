@@ -76,6 +76,21 @@ def home():
     </html>
     """
 
+# -----------------------------
+# HEALTH CHECK
+# -----------------------------
+@app.get("/health")
+def health():
+    """
+    Health check endpoint for deployment,
+    monitoring and integration.
+    """
+    return {
+        "status": "healthy",
+        "service": "NICAI Intelligence Engine",
+        "version": "1.0.0",
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
 
 # =========================================================
 # 🔥 FIXED PIPELINE API (ONLY THIS PART CHANGED)
