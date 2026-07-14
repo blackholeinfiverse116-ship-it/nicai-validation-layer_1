@@ -4,6 +4,7 @@ from contract_validator import validate_contract
 from action_router import route_action
 from tantra_participation import emit_tantra_participation
 from ttg_simulation import emit_ttg_consume
+from replay_engine import verify_replay
 
 from fastapi import FastAPI, Body
 from fastapi.responses import HTMLResponse
@@ -91,6 +92,26 @@ def health():
         "version": "1.0.0",
         "timestamp": datetime.now(timezone.utc).isoformat()
     }
+
+# -----------------------------
+# REPLAY TRACE VERIFICATION
+# -----------------------------
+@app.get("/trace/{trace_id}")
+def replay_trace(trace_id: str):
+    """
+    Replay verification endpoint.
+    Returns replay summary for a given trace ID.
+    """
+    try:
+        result = verify_replay(trace_id)
+        return result
+
+    except Exception as e:
+        return {
+            "status": "ERROR",
+            "trace_id": trace_id,
+            "reason": str(e)
+        }
 
 # =========================================================
 # 🔥 FIXED PIPELINE API (ONLY THIS PART CHANGED)
@@ -339,6 +360,50 @@ def trigger_action(data: dict):
 
     except Exception as e:
         return error_response(str(e))
+    
+
+# -----------------------------
+# CONTRACT VALIDATION
+# -----------------------------
+@app.post("/contract/validate")
+def validate_output_contract(payload: dict = Body(...)):
+    """
+    Validate NICAI intelligence output contract.
+    """
+    try:
+        result = validate_contract(payload)
+        return result
+
+    except Exception as e:
+        return {
+            "contract_status": "ERROR",
+            "errors": [str(e)]
+        }
+    
+
+# -----------------------------
+# CLUSTER ANALYSIS
+# -----------------------------
+@app.post("/cluster/analyze")
+def cluster_analysis(processed: list = Body(...)):
+    """
+    Perform multi-signal cluster intelligence analysis.
+    """
+    try:
+        if not isinstance(processed, list):
+            return {
+                "status": "ERROR",
+                "reason": "Input must be a list of processed intelligence outputs."
+            }
+
+        result = analyze_signal_cluster(processed)
+        return result
+
+    except Exception as e:
+        return {
+            "status": "ERROR",
+            "reason": str(e)
+        }
 
 @app.get("/run")
 def run_pipeline():
