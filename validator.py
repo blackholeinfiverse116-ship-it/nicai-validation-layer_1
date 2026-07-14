@@ -43,7 +43,12 @@ def validate_signal(signal):
             return build_flag("Invalid signal format")
 
         # ✅ USE EXISTING TRACE ID (DO NOT GENERATE NEW)
-        trace_id = signal.get("trace_id", "TRACE_UNKNOWN")
+        signal_id = signal.get("signal_id", "UNKNOWN")
+
+        trace_id = signal.get("trace_id")
+
+        if not trace_id:
+            trace_id = f"TRACE_{signal_id}"
 
         # -------------------------------
         # REQUIRED FIELDS CHECK
