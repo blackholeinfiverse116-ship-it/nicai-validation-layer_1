@@ -155,3 +155,12 @@ websocket-client==1.9.0
 Werkzeug==3.1.6
 widgetsnbextension==4.0.15
 yarl==1.22.0
+fastapi==0.128.0
+uvicorn==0.40.0
+pydantic==2.12.5
+pandas==2.3.3
+requests==2.32.5
+python-dotenv==1.2.1
+python-multipart==0.0.21
+starlette==0.50.0
+jinja2
