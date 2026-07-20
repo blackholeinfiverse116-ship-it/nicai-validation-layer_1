@@ -1,0 +1,943 @@
+PS C:\Users\sansk\Downloads\nicai-validation-layer_1> python replay_engine.py
+Enter trace_id: TRACE_a9b29a691df7
+TRACE SEARCH: TRACE_a9b29a691df7
+logs/ingestion_logs.json => 0
+logs/tantra_logs.json => 0
+logs/validation_logs.json => 2480
+logs/anomaly_logs.json => 3319
+logs/pattern_logs.json => 164
+logs/contract_logs.json => 0
+logs/action_logs.json => 30
+logs/ttg_logs.json => 0
+
+REPLAY ENTRIES
+
+[
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:17:01.514971+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:18:04.813759+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:18:08.667351+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:18:53.066221+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:19:42.384995+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:23:53.096029+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:23:58.160988+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:24:02.715668+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:24:54.474127+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:24:59.362190+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:25:03.528548+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:25:35.439475+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:27:02.278337+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:27:42.796221+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:43:12.113615+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:43:16.341121+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:43:20.519391+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:43:28.428605+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:43:40.000857+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:43:44.834707+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:45:34.374743+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:47:20.330808+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:47:26.600403+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:47:28.615654+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:48:02.171836+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:48:07.122717+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:52:19.530865+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:52:40.573698+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T14:42:54.279985+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T14:43:22.933986+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T07:40:36.973741+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T07:41:25.638927+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T07:41:29.828976+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T07:45:11.760970+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T07:51:23.405331+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T08:12:57.273607+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T08:14:18.115729+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T08:14:22.577342+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T08:14:26.624924+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T08:14:40.459562+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T08:14:46.816491+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T08:15:31.629776+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T08:15:38.147510+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "VALID",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T14:37:50.908451+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "ALLOW",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T14:38:03.426701+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "ALLOW",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T14:45:53.734583+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "ALLOW",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T14:45:58.539441+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "ALLOW",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T14:48:55.620404+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "ALLOW",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T15:01:25.564394+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "ALLOW",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T15:01:44.488496+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "ALLOW",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T15:05:38.276146+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "ALLOW",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T15:05:42.757105+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "ALLOW",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T15:05:45.945359+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "ALLOW",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T15:11:23.668881+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "ALLOW",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T15:11:38.642515+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "ALLOW",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T15:18:46.942859+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "ALLOW",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T15:21:46.011904+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "ALLOW",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-24T04:49:15.678221+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "ALLOW",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-24T08:42:03.442843+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "ALLOW",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-24T08:42:07.402835+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "ALLOW",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-24T08:42:15.583241+00:00",
+    "type": "VALIDATION",
+    "data": {
+      "signal_id": "W_1",
+      "status": "ALLOW",
+      "confidence_score": 0.9,
+      "trace_id": "TRACE_a9b29a691df7",
+      "reason": "Normal temperature"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T15:11:23.671409+00:00",
+    "type": "ANALYSIS",
+    "data": {
+      "trace_id": "TRACE_a9b29a691df7",
+      "risk_level": "LOW",
+      "anomaly_score": 0.2,
+      "anomaly_type": "NORMAL",
+      "explanation": "Normal condition",
+      "confidence": 0.9,
+      "temporal_context": "current_window",
+      "recommendation_signal": "monitor"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-23T15:11:38.673899+00:00",
+    "type": "ANALYSIS",
+    "data": {
+      "trace_id": "TRACE_a9b29a691df7",
+      "risk_level": "LOW",
+      "anomaly_score": 0.2,
+      "anomaly_type": "NORMAL",
+      "explanation": "Normal condition",
+      "confidence": 0.9,
+      "temporal_context": "current_window",
+      "recommendation_signal": "monitor"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-24T08:42:03.443881+00:00",
+    "type": "ANALYSIS",
+    "data": {
+      "trace_id": "TRACE_a9b29a691df7",
+      "risk_level": "LOW",
+      "anomaly_score": 0.2,
+      "anomaly_type": "NORMAL",
+      "explanation": "Normal condition",
+      "confidence": 0.9,
+      "temporal_context": "current_window",
+      "recommendation_signal": "monitor"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-24T08:42:07.404459+00:00",
+    "type": "ANALYSIS",
+    "data": {
+      "trace_id": "TRACE_a9b29a691df7",
+      "risk_level": "LOW",
+      "anomaly_score": 0.2,
+      "anomaly_type": "NORMAL",
+      "explanation": "Normal condition",
+      "confidence": 0.9,
+      "temporal_context": "current_window",
+      "recommendation_signal": "monitor"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-24T08:42:15.586998+00:00",
+    "type": "ANALYSIS",
+    "data": {
+      "trace_id": "TRACE_a9b29a691df7",
+      "risk_level": "LOW",
+      "anomaly_score": 0.2,
+      "anomaly_type": "NORMAL",
+      "explanation": "Normal condition",
+      "confidence": 0.9,
+      "temporal_context": "current_window",
+      "recommendation_signal": "monitor"
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:24:00.379099+00:00",
+    "type": "ACTION",
+    "data": {
+      "trace_id": "TRACE_a9b29a691df7",
+      "action_type": "MONITOR",
+      "target_role": "monitor",
+      "timestamp": "2026-04-21T12:24:00.379076+00:00",
+      "context": {}
+    }
+  },
+  {
+    "trace_id": "TRACE_a9b29a691df7",
+    "timestamp": "2026-04-21T12:25:00.787625+00:00",
+    "type": "ACTION",
+    "data": {
+      "trace_id": "TRACE_a9b29a691df7",
+      "action_type": "MONITOR",
+      "target_role": "monitor",
+      "timestamp": "2026-04-21T12:25:00.787611+00:00",
+      "context": {}
+    }
+  }
+]
+TRACE SEARCH: TRACE_a9b29a691df7
+logs/ingestion_logs.json => 0
+logs/tantra_logs.json => 0
+logs/validation_logs.json => 2480
+logs/anomaly_logs.json => 3319
+logs/pattern_logs.json => 164
+logs/contract_logs.json => 0
+logs/action_logs.json => 30
+logs/ttg_logs.json => 0
+
+REPLAY SUMMARY
+
+{
+  "trace_id": "TRACE_a9b29a691df7",
+  "found_stages": [
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "VALIDATION",
+    "ANALYSIS",
+    "ANALYSIS",
+    "ANALYSIS",
+    "ANALYSIS",
+    "ANALYSIS",
+    "ACTION",
+    "ACTION"
+  ],
+  "missing_stages": [
+    "INGESTION",
+    "TANTRA_PARTICIPATION",
+    "CLUSTER_ANALYSIS",
+    "CONTRACT_VALIDATION",
+    "TTG_CONSUME"
+  ],
+  "ordered_replay": true,
+  "sequence_chain": [],
+  "replay_status": "INCOMPLETE"
+}
+PS C:\Users\sansk\Downloads\nicai-validation-layer_1> 
