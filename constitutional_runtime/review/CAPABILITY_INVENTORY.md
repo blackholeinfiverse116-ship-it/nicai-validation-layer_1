@@ -1,116 +1,186 @@
 # NICAI Hydro — Constitutional Runtime Capability Inventory
 
-## 1. Purpose
+## 1. Document Purpose
 
-This document is the master inventory for the NICAI Hydro Constitutional Runtime Convergence task.
+This document establishes the authoritative inventory of existing NICAI Hydro capabilities for Constitutional Runtime Convergence.
 
-Its purpose is to identify every existing Hydro capability that is required to become a Constitutional Runtime Participant.
+The purpose of this inventory is to identify the existing Hydro capabilities that must participate as permanent Constitutional Runtime Participants within the BHIV/TANTRA ecosystem.
 
-This inventory is the authoritative starting point for:
+This document does not introduce new Hydro features, redesign the existing Hydro architecture, or create parallel capabilities.
 
-- Runtime Identity Cards
-- Constitutional Layer Mapping
-- Authority Boundary Definition
-- Runtime Contract Validation
-- API and Event Contract Validation
-- Registry Participation
-- Replay Validation
-- Observability Validation
-- Runtime Health Validation
-- Production Certification
-- Final Constitutional Runtime Handover
-
-No new Hydro capability is introduced by this document.
-
-Only capabilities that already exist in the NICAI Hydro implementation or are explicitly established by existing authoritative engineering documentation should be included.
+Only capabilities supported by the existing NICAI repository, existing engineering documentation, runtime implementation, contracts, integrations, or executable evidence are eligible for inclusion.
 
 ---
 
-# 2. Scope
+## 2. Constitutional Runtime Convergence Objective
 
-The inventory covers existing NICAI Hydro capabilities participating in the BHIV/TANTRA Constitutional Runtime.
+NICAI Hydro is being transitioned from a standalone capability model into a reusable Constitutional Runtime Participant.
 
-The inventory does not:
+Each confirmed Hydro capability must ultimately have:
 
-- create new Hydro features;
-- redesign Hydro architecture;
-- create parallel capabilities;
-- duplicate responsibilities owned by another subsystem;
-- establish unsupported runtime contracts;
-- claim production certification without evidence.
+- one permanent constitutional identity;
+- one defined constitutional layer;
+- explicit authority boundaries;
+- deterministic runtime contracts;
+- versioned API contracts;
+- versioned event contracts;
+- defined provider and consumer relationships;
+- registry participation;
+- replay participation;
+- deterministic execution evidence;
+- observability;
+- measurable runtime health;
+- version and compatibility information;
+- evidence-backed production certification status.
 
 ---
 
-# 3. Capability Inventory
+## 3. Repository Under Audit
 
-| ID | Capability | Existing Repository Location | Owner | Purpose | Runtime Present | API Present | Events Present | Replay Present | Observability Present | Health Present | Evidence Available | Certification Status |
+**Repository:**
+
+`https://github.com/blackholeinfiverse116-ship-it/nicai-validation-layer_1`
+
+**Repository Purpose:**
+
+NICAI validation/runtime infrastructure and associated validation, replay, integration, telemetry, registry, contract, and evidence components.
+
+**Audit Scope:**
+
+The audit covers existing NICAI Hydro/runtime-related implementation, validation infrastructure, runtime contracts, APIs, events, replay infrastructure, observability infrastructure, registry adapters, integrations, and existing production evidence.
+
+---
+
+## 4. Capability Identification Rule
+
+A repository file, module, adapter, report, or test is not automatically considered a separate Constitutional capability.
+
+A capability is considered a candidate only when repository evidence demonstrates that it represents a distinct reusable responsibility, runtime function, or governed interaction.
+
+Multiple implementation files may collectively represent one capability.
+
+Conversely, a single implementation file must not automatically be treated as a capability if it is only an internal helper or implementation detail.
+
+---
+
+# 5. Candidate Capability Domains Identified During Repository Audit
+
+The current repository contains implementation and evidence covering the following capability domains.
+
+These domains are candidates for capability mapping and require final capability-level consolidation before Runtime Identity Cards are created.
+
+| Candidate Domain | Repository Evidence / Components | Initial Status |
+|---|---|---|
+| Runtime/API Validation | `api_server.py`, `API_COMPATIBILITY_REPORT.md` | To Be Verified |
+| Contract Validation | `contract_validator.py` and related contract artifacts | To Be Verified |
+| Validation Execution | Existing validation/runtime components and validation evidence | To Be Verified |
+| Registry Participation | `consumer_registry.py`, `dataset_registry.py`, `maritime_registry_adapter.py`, registry-related artifacts | To Be Verified |
+| Replay | `replay_engine.py`, `replay_divergence_checker.py`, `replay_corruption_simulator.py`, `REPLAY_VALIDATION_REPORT.md` | To Be Verified |
+| Observability / Telemetry | `telemetry_emitter.py`, `telemetry_metrics.json`, telemetry-related evidence | To Be Verified |
+| Trace / Execution Correlation | `trace_graph.py`, `execution_correlation.py`, `END-TO-END-TRACE-PROOF.json` | To Be Verified |
+| Runtime Integration / Orchestration | `integration_orchestrator.py` and integration evidence | To Be Verified |
+| External Runtime Attachments | `insightflow_adapter.py`, `svacs_adapter.py`, `tantra_participation.py` | To Be Verified |
+| Dataset / Knowledge Registry | `dataset_registry.py` and associated evidence | To Be Verified |
+
+> These are capability domains identified from repository evidence. They are not yet declared as final permanent constitutional identities. Final capability boundaries must be established after reviewing the implementation and avoiding duplicate or overlapping responsibilities.
+
+---
+
+# 6. Existing Evidence Inventory
+
+The repository contains existing evidence and validation artifacts relevant to Constitutional Runtime Convergence.
+
+| Evidence / Artifact | Relevance | Status |
+|---|---|---|
+| `API_COMPATIBILITY_REPORT.md` | API/runtime compatibility evidence | To Be Verified |
+| `REPLAY_VALIDATION_REPORT.md` | Replay validation evidence | To Be Verified |
+| `DEPLOYMENT_VALIDATION_REPORT.md` | Deployment/runtime readiness evidence | To Be Verified |
+| `ECOSYSTEM_ATTACHMENT_REPORT.md` | Ecosystem attachment evidence | To Be Verified |
+| `FINAL_RUNTIME_EVIDENCE.md` | Existing runtime evidence | To Be Verified |
+| `HANDOVER_PACKAGE.md` | Existing handover evidence | To Be Verified |
+| `REVIEW_PACKET.md` | Existing review package | To Be Verified |
+| `END-TO-END-TRACE-PROOF.json` | End-to-end execution/trace evidence | To Be Verified |
+| `validation_logs.json` | Validation execution evidence | To Be Verified |
+| `telemetry_metrics.json` | Telemetry/observability evidence | To Be Verified |
+
+---
+
+# 7. Capability Consolidation Requirement
+
+Before creating permanent Runtime Identity Cards, the candidate domains must be consolidated into final capability boundaries.
+
+The consolidation process must determine:
+
+1. Which repository components belong to the same capability.
+2. Which components are only internal implementation details.
+3. Which components represent independent reusable runtime responsibilities.
+4. Which capabilities are already owned by another constitutional participant.
+5. Which responsibilities overlap.
+6. Which responsibilities must remain outside Hydro authority.
+7. Which capabilities have independent runtime contracts.
+8. Which capabilities have independent evidence.
+9. Which capabilities require separate registry participation.
+10. Which capabilities require separate replay and observability treatment.
+
+No duplicate capability may be created solely for documentation purposes.
+
+---
+
+# 8. Capability Inventory
+
+The following table is the authoritative working inventory.
+
+Final permanent capability identities will be assigned only after repository-level capability consolidation.
+
+| Capability ID | Final Capability Name | Existing Components | Repository Evidence | Owner | Constitutional Layer | Runtime Contract | API | Events | Replay | Observability | Health | Certification |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-| HYDRO-CAP-001 | TO BE VERIFIED | TO BE VERIFIED | TO BE VERIFIED | TO BE VERIFIED | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Not Yet Certified |
-| HYDRO-CAP-002 | TO BE VERIFIED | TO BE VERIFIED | TO BE VERIFIED | TO BE VERIFIED | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Not Yet Certified |
-| HYDRO-CAP-003 | TO BE VERIFIED | TO BE VERIFIED | TO BE VERIFIED | TO BE VERIFIED | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Not Yet Certified |
+| HYDRO-CAP-001 | To Be Verified | To Be Verified | To Be Verified | To Be Verified | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Not Yet Certified |
+| HYDRO-CAP-002 | To Be Verified | To Be Verified | To Be Verified | To Be Verified | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Not Yet Certified |
+| HYDRO-CAP-003 | To Be Verified | To Be Verified | To Be Verified | To Be Verified | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Not Yet Certified |
+| HYDRO-CAP-004 | To Be Verified | To Be Verified | To Be Verified | To Be Verified | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Not Yet Certified |
+| HYDRO-CAP-005 | To Be Verified | To Be Verified | To Be Verified | To Be Verified | Pending | Pending | Pending | Pending | Pending | Pending | Pending | Not Yet Certified |
 
-> The placeholder rows above must be replaced with actual capabilities after repository and existing engineering documentation audit.
-
----
-
-# 4. Capability Identification Rules
-
-A capability may be added to this inventory only when at least one of the following is available:
-
-1. An existing implementation in the NICAI repository.
-2. An existing runtime component.
-3. An existing API or service contract.
-4. An existing event producer or consumer.
-5. An authoritative existing engineering document defining the capability.
-6. Existing executable evidence demonstrating the capability.
-
-A capability must not be added solely because it would be useful or desirable for the Constitutional Runtime.
+> Placeholder capability IDs must not be interpreted as confirmed capabilities. They are temporary inventory slots until repository-level consolidation is complete.
 
 ---
 
-# 5. Permanent Identity Requirement
+# 9. Capability Ownership
 
-Every confirmed Hydro capability must receive exactly one permanent Constitutional Runtime identity.
+Every confirmed capability must have one clearly identified owner.
 
-Identity assignment will be performed only after the capability inventory has been verified.
+The owner must be established from existing repository documentation, existing runtime ownership, existing architecture documentation, or authoritative team ownership information.
 
-The identity must not create a duplicate responsibility or parallel capability.
-
----
-
-# 6. Evidence Classification
-
-Evidence for each capability will be classified using the following states:
-
-### Verified
-
-The capability and its associated claim are supported by independently verifiable repository, runtime, test, or execution evidence.
-
-### Demonstrated
-
-The capability has been successfully demonstrated through an executable validation or reproducible test.
-
-### Pending
-
-The capability or claim is identified, but the required evidence or validation is not yet available.
-
-### Not Yet Certified
-
-The capability or claim cannot currently be certified because the required independent evidence is incomplete or unavailable.
+No capability may be certified when ownership is ambiguous.
 
 ---
 
-# 7. Validation Requirements
+# 10. Authority Boundary Requirement
 
-Each confirmed capability must eventually be evaluated against:
+For every confirmed capability, the following must be determined:
 
-- Constitutional Runtime Identity
-- Constitutional Layer
-- Authority Boundary
-- Runtime Contract
-- API Contract
-- Event Contract
-- SDK / Attachment Contract
+### Authority Owned
+
+The decisions, execution responsibilities, or runtime responsibilities directly owned by the capability.
+
+### Authority Explicitly Not Owned
+
+Responsibilities that remain outside the capability and belong to other constitutional participants.
+
+The authority boundary must prevent:
+
+- duplicate decision authority;
+- duplicate validation authority;
+- duplicate registry authority;
+- duplicate execution authority;
+- duplicate governance authority;
+- duplicate knowledge ownership.
+
+---
+
+# 11. Runtime Participation Requirements
+
+Every confirmed capability must eventually be mapped against:
+
 - Capability Registry
 - Runtime Registry
 - Execution Registry
@@ -119,75 +189,168 @@ Each confirmed capability must eventually be evaluated against:
 - Review Registry
 - Build Registry
 - Migration Registry
-- Replay Support
-- Deterministic Trace ID
-- Structured Runtime Events
-- Observability
-- Runtime Health
-- Version Compatibility
-- Production Certification
+
+Registry participation must be supported by actual registration evidence.
+
+Registration identifiers must never be fabricated.
 
 ---
 
-# 8. Duplicate Responsibility Check
+# 12. Runtime Contract Requirements
 
-Before a capability is certified as a Constitutional Runtime Participant, the following must be checked:
+Every confirmed capability must be evaluated for:
 
-- The capability has one clear owner.
-- The capability has one permanent identity.
-- Its authority does not overlap with another participant.
-- Its runtime responsibility is not duplicated.
-- Its API responsibility is not duplicated.
-- Its event responsibility is not duplicated.
-- Its registry responsibility is not duplicated.
+- provider relationship;
+- consumer relationship;
+- runtime contract;
+- dependency contract;
+- API contract;
+- event contract;
+- SDK or attachment contract;
+- version;
+- compatibility;
+- failure behaviour;
+- evidence.
 
-Any identified overlap must be documented and resolved before certification.
-
----
-
-# 9. Repository Audit Record
-
-| Audit Item | Result | Evidence | Status |
-|---|---|---|---|
-| Existing Hydro capability documentation | TO BE VERIFIED | TO BE VERIFIED | Pending |
-| Existing Hydro runtime implementation | TO BE VERIFIED | TO BE VERIFIED | Pending |
-| Existing Hydro APIs | TO BE VERIFIED | TO BE VERIFIED | Pending |
-| Existing Hydro events | TO BE VERIFIED | TO BE VERIFIED | Pending |
-| Existing Hydro replay implementation | TO BE VERIFIED | TO BE VERIFIED | Pending |
-| Existing Hydro observability | TO BE VERIFIED | TO BE VERIFIED | Pending |
-| Existing Hydro health monitoring | TO BE VERIFIED | TO BE VERIFIED | Pending |
-| Existing registry participation | TO BE VERIFIED | TO BE VERIFIED | Pending |
-| Existing production evidence | TO BE VERIFIED | TO BE VERIFIED | Pending |
+Missing contracts must remain marked as Pending until verified.
 
 ---
 
-# 10. Inventory Completion Criteria
+# 13. Replay Requirements
 
-The capability inventory is considered complete only when:
+Every capability that participates in runtime execution must be evaluated for:
 
-- Every existing Hydro capability has been identified.
-- Every capability has a repository or authoritative documentation reference.
-- No new capability has been introduced.
-- Duplicate capabilities have been removed or documented.
-- Ownership is identified.
-- Runtime participation is identified.
-- Evidence availability is recorded.
-- Certification status is evidence-based.
+- replay participation;
+- deterministic execution;
+- deterministic Trace ID;
+- replay evidence;
+- replay output;
+- original-versus-replay comparison;
+- divergence handling.
 
----
-
-# 11. Current Status
-
-**Inventory Status:** Pending Repository Audit
-
-**Constitutional Runtime Convergence Status:** In Progress
-
-**Production Certification Status:** Not Yet Certified
+Replay certification requires executable evidence.
 
 ---
 
-# 12. Next Step
+# 14. Observability Requirements
 
-After this inventory is verified and finalized, the confirmed capabilities will be assigned permanent Constitutional Runtime identities and documented through individual Runtime Identity Cards.
+Every runtime participant must be evaluated for:
 
-No Runtime Identity Card should be finalized until the capability inventory has been verified.
+- structured runtime events;
+- logs;
+- traces;
+- metrics;
+- execution correlation;
+- Trace ID propagation;
+- runtime visibility;
+- failure visibility.
+
+Descriptive claims without runtime evidence are insufficient for certification.
+
+---
+
+# 15. Runtime Health Requirements
+
+Every runtime participant must be evaluated for:
+
+- health signal or endpoint;
+- dependency health;
+- execution health;
+- failure state;
+- recovery behaviour;
+- measurable runtime status;
+- supporting evidence.
+
+---
+
+# 16. Certification States
+
+The following certification states are permitted:
+
+### Verified
+
+The claim is independently supported by repository, runtime, test, or execution evidence.
+
+### Demonstrated
+
+The capability or interaction has been successfully demonstrated through reproducible execution evidence.
+
+### Pending
+
+The capability or claim has been identified but required validation or evidence is incomplete.
+
+### Not Yet Certified
+
+The available evidence is insufficient to support certification.
+
+No unsupported claim may be labelled as Verified or Certified.
+
+---
+
+# 17. Duplicate Responsibility Review
+
+The final capability inventory must verify that:
+
+- every capability has one permanent identity;
+- every capability has one owner;
+- no capability duplicates another capability;
+- no authority boundary overlaps without explicit governance;
+- no parallel implementation is introduced;
+- existing responsibilities owned elsewhere remain with their existing owners.
+
+---
+
+# 18. Inventory Audit Status
+
+**Repository:** NICAI validation-layer repository
+
+**Convergence Phase:** Constitutional Runtime Convergence
+
+**Inventory Status:** In Progress
+
+**Capability Identity Status:** Pending Capability Consolidation
+
+**Registry Status:** Pending Independent Verification
+
+**Replay Status:** Pending Independent Verification
+
+**Observability Status:** Pending Independent Verification
+
+**Runtime Health Status:** Pending Independent Verification
+
+**Production Certification:** Not Yet Certified
+
+---
+
+# 19. Completion Criteria
+
+This inventory is complete only when:
+
+1. Every existing Hydro capability has been identified.
+2. Every capability has a verified repository or authoritative source.
+3. Internal implementation details have been separated from actual capabilities.
+4. Duplicate responsibilities have been identified and resolved.
+5. Ownership is documented.
+6. Constitutional layer assignment is documented.
+7. Authority boundaries are documented.
+8. Runtime contracts are identified.
+9. API contracts are identified.
+10. Event contracts are identified.
+11. Registry participation is identified.
+12. Replay participation is identified.
+13. Observability is identified.
+14. Runtime health is identified.
+15. Evidence is linked.
+16. Certification status is evidence-backed.
+
+---
+
+# 20. Next Controlled Step
+
+After the capability inventory is independently verified and finalized, one Runtime Identity Card will be created for each confirmed Hydro capability.
+
+Each Runtime Identity Card must contain exactly one permanent constitutional identity.
+
+No new Hydro capability may be introduced as part of the identity-card process.
+
+No production certification claim may be made without independently verifiable evidence.
