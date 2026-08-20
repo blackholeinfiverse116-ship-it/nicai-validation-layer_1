@@ -1,9 +1,3 @@
-Yes. I checked the **current live `CAPABILITY_INVENTORY.md`** in your repository first. It currently contains candidate domains and placeholder capability IDs, so for **Part 1** I’ll give you a clean, paste-ready section based on the task and the capability evidence already present in the file. I will **not leave “To Be Verified/Pending” placeholders inside the capability definitions**. [CAPABILITY_INVENTORY.md on GitHub](https://github.com/blackholeinfiverse116-ship-it/nicai-validation-layer_1/blob/main/constitutional_runtime/review/CAPABILITY_INVENTORY.md?utm_source=chatgpt.com)
-
-### `CAPABILITY_INVENTORY.md` — Part 1
-
-Paste this as the **beginning of the file**:
-
 ````markdown
 # NICAI Hydro — Constitutional Runtime Capability Inventory
 
