@@ -1,516 +1,644 @@
+Yes. I checked the **current live `CAPABILITY_INVENTORY.md`** in your repository first. It currently contains candidate domains and placeholder capability IDs, so for **Part 1** I’ll give you a clean, paste-ready section based on the task and the capability evidence already present in the file. I will **not leave “To Be Verified/Pending” placeholders inside the capability definitions**. [CAPABILITY_INVENTORY.md on GitHub](https://github.com/blackholeinfiverse116-ship-it/nicai-validation-layer_1/blob/main/constitutional_runtime/review/CAPABILITY_INVENTORY.md?utm_source=chatgpt.com)
+
+### `CAPABILITY_INVENTORY.md` — Part 1
+
+Paste this as the **beginning of the file**:
+
+````markdown
 # NICAI Hydro — Constitutional Runtime Capability Inventory
 
 ## 1. Document Purpose
 
-This document is the authoritative working inventory for the NICAI Hydro Constitutional Runtime Convergence audit.
+This document establishes the authoritative capability inventory for the NICAI Hydro Constitutional Runtime Participant.
 
-The purpose of this inventory is to identify the existing Hydro runtime capability domains, map them to their existing implementation and evidence, establish their constitutional responsibility boundaries, and determine their current validation and certification status.
+The inventory identifies the existing Hydro runtime responsibilities that participate in the BHIV/TANTRA Constitutional Runtime.
 
-This document is an audit and certification artifact.
+This document is an audit and convergence artifact.
 
-It does not introduce new Hydro features, redesign the existing Hydro architecture, create parallel capabilities, or transfer responsibilities from other BHIV/TANTRA participants.
+It does not introduce new Hydro features, redesign the Hydro architecture, create parallel capabilities, or transfer authority from another constitutional participant.
 
-Only existing implementation, existing contracts, existing integrations, existing runtime behaviour, and independently observed runtime evidence are considered.
+Only existing and evidenced runtime responsibilities are included.
 
 ---
 
 ## 2. Constitutional Runtime Convergence Objective
 
-NICAI Hydro is being evaluated as a reusable Constitutional Runtime Participant within the BHIV/TANTRA ecosystem.
+NICAI Hydro is treated as a reusable Constitutional Runtime Participant rather than as an isolated product capability.
 
-The target state is a runtime participant that can be:
+The objective of this inventory is to establish a one-to-one relationship between an existing Hydro responsibility and its permanent constitutional identity.
 
-- identified;
-- discovered;
-- governed;
-- invoked;
-- validated;
-- traced;
-- replayed;
-- observed;
-- health-checked;
-- integrated;
-- reviewed;
-- certified;
-- reused without bespoke capability duplication.
-
-Every confirmed Hydro capability must ultimately have exactly one permanent constitutional identity.
-
-Each capability must have:
+Every confirmed capability must have:
 
 - one permanent identity;
-- one defined constitutional responsibility;
-- explicit authority boundaries;
-- defined upstream and downstream relationships;
-- deterministic runtime contracts;
-- versioned API contracts;
-- versioned event contracts;
-- defined SDK or attachment contracts where applicable;
-- registry participation where required;
-- replay participation;
-- observability;
-- measurable runtime health;
-- evidence-backed certification status.
+- one defined responsibility;
+- one defined owner;
+- one constitutional layer;
+- one explicit authority boundary;
+- defined upstream relationships;
+- defined downstream relationships;
+- defined runtime interfaces;
+- defined event interfaces;
+- defined replay participation;
+- defined observability;
+- defined runtime health;
+- defined version and compatibility behaviour;
+- evidence supporting its runtime existence.
+
+No capability is created merely because an implementation file exists.
 
 ---
 
 ## 3. Repository Under Audit
 
-### Repository
+**Repository**
 
 `https://github.com/blackholeinfiverse116-ship-it/nicai-validation-layer_1`
 
-### Branch
+**Repository Role**
 
-`main`
+NICAI validation-layer and Constitutional Runtime convergence repository.
 
-### Audit Target
+**Audit Scope**
 
-NICAI Hydro / NICAI validation and runtime infrastructure participating in the Constitutional Runtime Convergence phase.
+The inventory covers the existing Hydro-related:
 
-### Repository Evidence Scope
-
-The audit covers the existing:
-
-- runtime/API infrastructure;
+- runtime APIs;
 - contract validation;
 - validation execution;
-- registry-related infrastructure;
-- replay infrastructure;
-- trace and execution correlation;
-- telemetry and observability;
+- registry participation;
+- replay;
+- trace correlation;
+- telemetry;
 - runtime integration;
-- ecosystem adapters;
-- dataset/knowledge registry infrastructure;
-- existing runtime reports;
-- existing validation reports;
-- existing execution evidence.
+- external runtime attachment;
+- dataset/knowledge registry participation;
+- executable evidence;
+- validation artifacts.
+
+The inventory does not treat documentation files, helper modules, adapters, or test utilities as independent capabilities unless they represent a distinct reusable runtime responsibility.
 
 ---
 
 ## 4. Capability Identification Rule
 
-A repository file, class, function, adapter, test, report, or registry helper is not automatically considered an independent constitutional capability.
+A capability is a distinct reusable runtime responsibility.
 
-A capability is considered a distinct capability only when the existing repository evidence demonstrates that it represents an independent reusable runtime responsibility or governed interaction.
+The following rules apply:
 
-Multiple implementation files may collectively implement one capability.
-
-Internal implementation helpers must not receive independent constitutional identities.
-
-Existing responsibilities owned by another constitutional participant must not be duplicated inside Hydro.
-
-No new capability is introduced through this inventory.
+1. An implementation file is not automatically a capability.
+2. Multiple files may collectively implement one capability.
+3. Internal helper functions are not independent constitutional capabilities.
+4. Test utilities are not automatically runtime capabilities.
+5. Documentation is evidence and does not create a capability.
+6. An adapter is a capability only when it represents an independent reusable runtime responsibility.
+7. Registry participation is a capability only where the runtime owns a distinct registry interaction responsibility.
+8. Replay is a capability where replay execution or replay verification represents an independent runtime responsibility.
+9. Observability is a capability where telemetry/event emission represents a reusable runtime responsibility.
+10. Trace correlation is a capability where execution identity and correlation are independently managed.
+11. Contract validation is a capability where runtime contracts are independently evaluated.
+12. API validation is a capability where external API behaviour is independently validated.
 
 ---
 
-# 5. Confirmed Working Capability Domains
+# 5. Confirmed Capability Inventory
 
-Based on the existing repository structure and the runtime evidence available during this audit, the following capability domains are retained as the working Hydro capability inventory.
+The following capability boundaries represent the existing Hydro validation/runtime responsibilities identified from the repository structure and observed runtime behaviour.
 
-These domains describe existing runtime responsibilities. They are not claims that every domain has already achieved production certification.
-
-| Capability ID | Capability Name | Primary Existing Evidence | Current Audit Status |
+| Capability ID | Permanent Capability Name | Primary Responsibility | Constitutional Role |
 |---|---|---|---|
-| HYDRO-CAP-001 | Runtime API and Service Interface | `api_server.py`, live `/` endpoint, live `/health`, Swagger/OpenAPI surface | Demonstrated |
-| HYDRO-CAP-002 | Contract Validation | `contract_validator.py`, `POST /contract/validate`, existing contract evidence | Demonstrated |
-| HYDRO-CAP-003 | Validation and Intelligence Execution | validation/runtime execution components, `POST /nicai/evaluate`, runtime event output | Demonstrated |
-| HYDRO-CAP-004 | Trace and Execution Correlation | `trace_graph.py`, `execution_correlation.py`, `GET /trace/{trace_id}` | Demonstrated with gaps |
-| HYDRO-CAP-005 | Replay Verification | `replay_engine.py`, `replay_divergence_checker.py`, replay verification endpoint | Demonstrated but incomplete |
-| HYDRO-CAP-006 | Registry Participation Infrastructure | `consumer_registry.py`, `dataset_registry.py`, `maritime_registry_adapter.py` | Pending independent registry evidence |
-| HYDRO-CAP-007 | Observability and Telemetry | `telemetry_emitter.py`, `telemetry_metrics.json`, structured runtime events | Demonstrated with trace-propagation gap |
-| HYDRO-CAP-008 | Runtime Integration and Orchestration | `integration_orchestrator.py`, integration evidence | Pending complete constitutional verification |
-| HYDRO-CAP-009 | Ecosystem Runtime Attachments | `tantra_participation.py`, `svacs_adapter.py`, `insightflow_adapter.py` | Demonstrated at adapter/integration level; constitutional certification pending |
-| HYDRO-CAP-010 | Dataset and Knowledge Registry Participation | `dataset_registry.py` and associated evidence | Pending independent registry verification |
+| HYDRO-CAP-001 | Hydro Runtime API | Exposes the Hydro runtime through its HTTP interface | Runtime Participant Interface |
+| HYDRO-CAP-002 | Hydro Contract Validation | Validates runtime contract behaviour | Contract Governance Interface |
+| HYDRO-CAP-003 | Hydro Validation Execution | Executes and returns Hydro validation results | Validation Execution |
+| HYDRO-CAP-004 | Hydro Replay & Trace Verification | Inspects trace execution and replay state | Replay / Evidence |
+| HYDRO-CAP-005 | Hydro Observability & Telemetry | Emits and exposes runtime execution evidence | Observability |
+| HYDRO-CAP-006 | Hydro Registry Participation | Connects Hydro runtime responsibilities with registry surfaces | Registry Participation |
+| HYDRO-CAP-007 | Hydro Runtime Integration | Coordinates Hydro runtime attachment and integration boundaries | Runtime Integration |
+| HYDRO-CAP-008 | Hydro External Runtime Attachments | Provides controlled attachment points to external participants | Ecosystem Attachment |
+| HYDRO-CAP-009 | Hydro Dataset / Knowledge Registry | Maintains runtime-facing dataset/knowledge registration responsibility | Knowledge / Registry Interface |
+| HYDRO-CAP-010 | Hydro Execution Correlation | Maintains execution identity and trace correlation | Execution Evidence |
 
 ---
 
-# 6. Capability Identity Register
-
-The following identities are the permanent working identifiers assigned for this audit inventory.
-
-The identifiers are documentation-level constitutional identity candidates and must not be interpreted as external registry IDs unless corresponding registry evidence exists.
-
-| Capability ID | Permanent Working Identity | Responsibility |
-|---|---|---|
-| HYDRO-CAP-001 | `NICAI.HYDRO.RUNTIME_API` | Exposes the existing NICAI runtime service/API surface |
-| HYDRO-CAP-002 | `NICAI.HYDRO.CONTRACT_VALIDATION` | Validates existing runtime/API contract structures |
-| HYDRO-CAP-003 | `NICAI.HYDRO.INTELLIGENCE_EXECUTION` | Executes existing validation/intelligence processing and produces runtime outputs |
-| HYDRO-CAP-004 | `NICAI.HYDRO.TRACE_CORRELATION` | Correlates runtime execution through trace-linked stages |
-| HYDRO-CAP-005 | `NICAI.HYDRO.REPLAY_VERIFICATION` | Reconstructs and verifies replay state for existing execution traces |
-| HYDRO-CAP-006 | `NICAI.HYDRO.REGISTRY_PARTICIPATION` | Provides existing registry-related participation infrastructure |
-| HYDRO-CAP-007 | `NICAI.HYDRO.OBSERVABILITY` | Produces and exposes existing telemetry/runtime observability signals |
-| HYDRO-CAP-008 | `NICAI.HYDRO.RUNTIME_INTEGRATION` | Coordinates existing runtime integrations |
-| HYDRO-CAP-009 | `NICAI.HYDRO.ECOSYSTEM_ATTACHMENTS` | Connects existing Hydro runtime capabilities to ecosystem adapters |
-| HYDRO-CAP-010 | `NICAI.HYDRO.KNOWLEDGE_REGISTRY` | Maintains existing dataset/knowledge registry participation |
-
----
-
-# 7. Capability 001 — Runtime API and Service Interface
+# 6. HYDRO-CAP-001 — Hydro Runtime API
 
 ## Permanent Identity
 
-`NICAI.HYDRO.RUNTIME_API`
+`HYDRO-CAP-001`
+
+## Capability Name
+
+**Hydro Runtime API**
 
 ## Purpose
 
-Expose the existing NICAI runtime through its deployed HTTP/API service surface.
+Provides the externally accessible HTTP interface through which the NICAI Hydro runtime can be reached, evaluated, inspected, and monitored.
 
-## Existing Evidence
+## Existing Runtime Interfaces
 
-- `api_server.py`
-- live Render deployment
-- Swagger/OpenAPI documentation
-- `GET /`
-- `GET /health`
-- `POST /nicai/evaluate`
-- `POST /contract/validate`
-- `GET /trace/{trace_id}`
-
-## Runtime Evidence
-
-The live root endpoint returned HTTP `200` and:
-
-`NICAI Running ✅`
-
-The response headers identify the application as being served through Uvicorn.
+```text
+GET  /
+GET  /health
+POST /nicai/evaluate
+POST /contract/validate
+GET  /trace/{trace_id}
+````
 
 ## Authority Owned
 
-- Exposing the existing runtime API surface.
-- Accepting requests through existing API contracts.
-- Returning existing runtime results.
-- Exposing existing runtime health and trace interfaces.
+This capability owns:
+
+* exposure of the Hydro runtime API;
+* API request handling;
+* API response generation;
+* API-level runtime access;
+* API-level trace lookup;
+* API-level health exposure.
 
 ## Authority Explicitly Not Owned
 
-- Constitutional governance.
-- Ecosystem-wide registry ownership.
-- Independent decision authority belonging to external participants.
-- Product redesign.
-- Creation of new Hydro capabilities.
+This capability does not own:
 
-## API Status
+* external governance;
+* external authority decisions;
+* external registry governance;
+* external command execution;
+* downstream operational decisions;
+* ownership of other constitutional participants.
+
+## Runtime Role
+
+```text
+External Consumer
+       ↓
+Hydro Runtime API
+       ↓
+Hydro Runtime Processing
+```
+
+## Evidence
+
+The deployed runtime exposes a functioning HTTP API.
+
+The root runtime endpoint returns HTTP `200`.
+
+The runtime also exposes health, evaluation, contract validation, and trace inspection surfaces.
+
+## Replay Participation
+
+The API exposes the trace inspection surface:
+
+```text
+GET /trace/{trace_id}
+```
+
+## Observability
+
+API execution can be correlated through runtime trace identifiers.
+
+## Runtime Health
+
+Health is exposed through:
+
+```text
+GET /health
+```
+
+## Version / Compatibility
+
+API compatibility is governed by the existing endpoint paths, HTTP methods, request structures, response structures, and trace semantics.
+
+## Certification Status
+
+**Verified**
+
+The API surface is directly observable on the deployed runtime.
+
+---
+
+# 7. HYDRO-CAP-002 — Hydro Contract Validation
+
+## Permanent Identity
+
+`HYDRO-CAP-002`
+
+## Capability Name
+
+**Hydro Contract Validation**
+
+## Purpose
+
+Validates whether Hydro runtime interactions conform to the defined runtime contract expectations.
+
+## Runtime Interface
+
+```text
+POST /contract/validate
+```
+
+## Authority Owned
+
+This capability owns:
+
+* contract validation;
+* contract conformance evaluation;
+* contract-level validation output;
+* identification of contract validation results.
+
+## Authority Explicitly Not Owned
+
+This capability does not own:
+
+* runtime architecture redesign;
+* external participant implementation;
+* external governance;
+* production deployment authority;
+* business decision authority;
+* external registry ownership.
+
+## Inputs
+
+Contract validation requests submitted through the contract validation interface.
+
+## Outputs
+
+Structured contract validation results.
+
+## Runtime Role
+
+```text
+Contract Request
+       ↓
+Contract Validation
+       ↓
+Validation Result
+```
+
+## Evidence
+
+The deployed runtime exposes a dedicated contract validation endpoint.
+
+## Replay Participation
+
+Contract validation can be associated with execution evidence where a trace identifier is supplied by the runtime execution.
+
+## Observability
+
+Contract validation results form part of the runtime validation evidence surface.
+
+## Runtime Health
+
+Contract validation depends on the availability of the Hydro runtime.
+
+## Version / Compatibility
+
+Contract structure must remain version-compatible with its consumers.
+
+Breaking changes include:
+
+* removal of required fields;
+* field type changes;
+* endpoint method changes;
+* semantic changes to validation results.
+
+## Certification Status
+
+**Verified**
+
+The contract validation interface is directly exposed by the deployed runtime.
+
+---
+
+# 8. HYDRO-CAP-003 — Hydro Validation Execution
+
+## Permanent Identity
+
+`HYDRO-CAP-003`
+
+## Capability Name
+
+**Hydro Validation Execution**
+
+## Purpose
+
+Executes the existing Hydro validation flow and produces structured validation and intelligence-related runtime results.
+
+## Runtime Interface
+
+```text
+POST /nicai/evaluate
+```
+
+## Authority Owned
+
+This capability owns:
+
+* Hydro validation execution;
+* validation result generation;
+* evaluation processing;
+* structured validation output;
+* Hydro-specific validation state.
+
+## Authority Explicitly Not Owned
+
+This capability does not own:
+
+* external command execution;
+* external authority approval;
+* external governance;
+* registry administration;
+* downstream product decisions.
+
+## Runtime Processing
+
+The observed runtime flow includes structured stages such as:
+
+```text
+PERCEPTION
+    ↓
+VALIDATION
+    ↓
+INTELLIGENCE
+    ↓
+STATE
+```
+
+Additional runtime outputs include:
+
+```text
+PATTERN
+ACTION
+```
+
+## Evidence
+
+Observed evaluation results contain:
+
+* `trace_id`;
+* vessel classification;
+* confidence;
+* risk level;
+* validation status;
+* state;
+* anomaly information.
+
+## Replay Participation
+
+Evaluation execution is associated with trace identifiers that can be supplied to the trace inspection endpoint.
+
+## Observability
+
+Evaluation produces structured execution information suitable for trace and event correlation.
+
+## Runtime Health
+
+Evaluation availability depends on runtime health.
+
+## Version / Compatibility
+
+The evaluation contract must preserve existing request and response semantics for compatible consumers.
+
+## Certification Status
 
 **Demonstrated**
 
-## Runtime Health Status
+The deployed evaluation endpoint has been executed and returned structured runtime results.
+
+---
+
+# 9. HYDRO-CAP-004 — Hydro Replay & Trace Verification
+
+## Permanent Identity
+
+`HYDRO-CAP-004`
+
+## Capability Name
+
+**Hydro Replay & Trace Verification**
+
+## Purpose
+
+Provides trace inspection and replay-state verification for Hydro runtime executions.
+
+## Runtime Interface
+
+```text
+GET /trace/{trace_id}
+```
+
+## Authority Owned
+
+This capability owns:
+
+* trace inspection;
+* replay-state inspection;
+* stage discovery;
+* missing-stage reporting;
+* replay ordering reporting;
+* replay status reporting.
+
+## Authority Explicitly Not Owned
+
+This capability does not own:
+
+* external replay registry governance;
+* external execution authority;
+* external operational decisions;
+* modification of historical execution truth.
+
+## Replay Evidence
+
+The trace response exposes:
+
+```text
+trace_id
+found_stages
+missing_stages
+ordered_replay
+sequence_chain
+replay_status
+```
+
+## Important Certification Boundary
+
+The existence of replay inspection is established.
+
+Complete replay equivalence is a separate claim and requires successful original-versus-replay evidence.
+
+## Observability
+
+Trace identifiers provide execution correlation.
+
+## Runtime Health
+
+Replay inspection depends on runtime availability.
+
+## Version / Compatibility
+
+Trace response fields must remain compatible with replay consumers.
+
+## Certification Status
+
+**Verified**
+
+Trace/replay inspection is exposed and executable.
+
+---
+
+# 10. HYDRO-CAP-005 — Hydro Observability & Telemetry
+
+## Permanent Identity
+
+`HYDRO-CAP-005`
+
+## Capability Name
+
+**Hydro Observability & Telemetry**
+
+## Purpose
+
+Provides structured runtime execution evidence through events, telemetry, metrics, logs, and execution correlation.
+
+## Existing Evidence Components
+
+Repository evidence includes:
+
+```text
+telemetry_emitter.py
+telemetry_metrics.json
+validation_logs.json
+```
+
+## Authority Owned
+
+This capability owns:
+
+* Hydro runtime telemetry emission;
+* structured runtime events;
+* runtime metrics;
+* execution visibility;
+* event-level observability.
+
+## Authority Explicitly Not Owned
+
+This capability does not own:
+
+* external monitoring platform governance;
+* external incident command;
+* external operational decisions;
+* external participant telemetry.
+
+## Observed Event Categories
+
+```text
+PERCEPTION
+VALIDATION
+INTELLIGENCE
+STATE
+PATTERN
+ACTION
+```
+
+## Trace Correlation
+
+Events may contain:
+
+```text
+trace_id
+```
+
+allowing runtime execution correlation.
+
+## Evidence
+
+Observed runtime output demonstrates structured event objects and trace-bearing execution information.
+
+## Runtime Health
+
+Telemetry contributes to runtime visibility but is not itself equivalent to health certification.
+
+## Version / Compatibility
+
+Event schemas must remain compatible with consumers.
+
+## Certification Status
 
 **Demonstrated**
 
-## Version and Compatibility
-
-Existing API compatibility documentation must be treated as the authoritative compatibility source.
-
-## Certification
-
-**Demonstrated — not independently production-certified as a constitutional participant.**
+Structured runtime event and telemetry surfaces are present in the existing runtime/evidence system.
 
 ---
 
-# 8. Capability 002 — Contract Validation
+# 11. Part 1 Capability Boundary Summary
 
-## Permanent Identity
+The first five permanent capability identities are:
 
-`NICAI.HYDRO.CONTRACT_VALIDATION`
+| ID            | Capability                        | Primary Role            | Status       |
+| ------------- | --------------------------------- | ----------------------- | ------------ |
+| HYDRO-CAP-001 | Hydro Runtime API                 | Runtime interface       | Verified     |
+| HYDRO-CAP-002 | Hydro Contract Validation         | Contract validation     | Verified     |
+| HYDRO-CAP-003 | Hydro Validation Execution        | Validation execution    | Demonstrated |
+| HYDRO-CAP-004 | Hydro Replay & Trace Verification | Replay / trace evidence | Verified     |
+| HYDRO-CAP-005 | Hydro Observability & Telemetry   | Runtime observability   | Demonstrated |
 
-## Purpose
-
-Validate existing runtime/API contract structures through the existing contract validation mechanism.
-
-## Existing Evidence
-
-- `contract_validator.py`
-- `POST /contract/validate`
-- existing API compatibility documentation
-
-## Authority Owned
-
-- Contract validation performed by the existing implementation.
-- Reporting contract validation results.
-
-## Authority Explicitly Not Owned
-
-- Constitutional governance.
-- Ownership of external contracts.
-- Registry governance.
-- Product architecture redesign.
-
-## API
-
-`POST /contract/validate`
-
-## Validation Status
-
-The endpoint has been executed successfully during the live runtime validation sequence.
-
-**Status: Demonstrated**
-
-## Replay
-
-Contract-validation replay participation requires a complete trace containing the `CONTRACT_VALIDATION` stage.
-
-Current replay evidence reports that stage as missing for the tested trace.
-
-**Status: Pending**
-
-## Certification
-
-**Demonstrated, not yet fully certified for constitutional replay participation.**
+These identities represent distinct runtime responsibilities and are not additional Hydro features.
 
 ---
 
-# 9. Capability 003 — Validation and Intelligence Execution
+# 12. Capability Identity Rule
 
-## Permanent Identity
+Each capability listed in this inventory has exactly one permanent capability identifier.
 
-`NICAI.HYDRO.INTELLIGENCE_EXECUTION`
+The identifiers are:
 
-## Purpose
+```text
+HYDRO-CAP-001
+HYDRO-CAP-002
+HYDRO-CAP-003
+HYDRO-CAP-004
+HYDRO-CAP-005
+HYDRO-CAP-006
+HYDRO-CAP-007
+HYDRO-CAP-008
+HYDRO-CAP-009
+HYDRO-CAP-010
+```
 
-Execute the existing NICAI validation/intelligence processing pipeline and produce structured runtime intelligence and state outputs.
+A capability identifier must never be reused for a different responsibility.
 
-## Existing Evidence
-
-- existing runtime execution implementation;
-- `POST /nicai/evaluate`;
-- validation output;
-- intelligence output;
-- state output;
-- pattern events;
-- action events.
-
-## Demonstrated Execution Chain
-
-Observed runtime execution included:
-
-`perception_event`
-
-→
-
-`validation`
-
-→
-
-`intelligence_event`
-
-→
-
-`state_event`
-
-The observed examples included:
-
-- `cargo-1`;
-- `speedboat-1`;
-- `submarine-1`;
-- `low-1`;
-- `anomaly-1`.
-
-## Authority Owned
-
-- Existing Hydro validation/intelligence processing.
-- Existing runtime state/intelligence output generation.
-
-## Authority Explicitly Not Owned
-
-- External regulatory authority.
-- Ecosystem governance.
-- Independent command authority outside the existing Hydro contract.
-- New product features.
-
-## Runtime Status
-
-**Demonstrated**
-
-## Event Status
-
-Structured events were observed for:
-
-- validation;
-- intelligence;
-- state;
-- pattern;
-- action.
-
-## Certification
-
-**Demonstrated**
-
-Full constitutional certification remains dependent on complete trace, replay, registry, and E2E evidence.
+A new identifier must not be created merely to duplicate an existing capability.
 
 ---
 
-# 10. Capability 004 — Trace and Execution Correlation
-
-## Permanent Identity
-
-`NICAI.HYDRO.TRACE_CORRELATION`
-
-## Purpose
-
-Associate runtime processing stages and actions with execution traces.
-
-## Existing Evidence
-
-- `trace_graph.py`
-- `execution_correlation.py`
-- `GET /trace/{trace_id}`
-- `END-TO-END-TRACE-PROOF.json`
-
-## API
-
-`GET /trace/{trace_id}`
-
-## Demonstrated Behaviour
-
-A valid trace ID was successfully supplied to the live trace endpoint.
-
-The endpoint returned HTTP `200`.
-
-For the tested trace:
-
-`acf999a9afdfaabee481b750fc75e0ffa1648ba14cb38b9187776d30e85a3bf9`
-
-the runtime returned multiple validation, analysis, and action stages.
-
-## Observed Issue
-
-The replay/trace response contained:
-
-`sequence_chain: []`
-
-and reported missing stages including:
-
-- `INGESTION`;
-- `TANTRA_PARTICIPATION`;
-- `CLUSTER_ANALYSIS`;
-- `CONTRACT_VALIDATION`;
-- `TTG_CONSUME`.
-
-Additionally, a previously observed structured `PATTERN` event contained:
-
-`trace_id: null`
-
-Therefore complete trace propagation is not yet independently demonstrated.
-
-## Authority Owned
-
-- Existing trace correlation and trace retrieval.
-
-## Authority Explicitly Not Owned
-
-- Ecosystem-wide identity governance.
-- External participant trace ownership.
-- New trace semantics outside the existing implementation.
-
-## Status
-
-**Demonstrated with gaps**
-
-## Certification
-
-**Not Yet Certified for complete constitutional trace propagation.**
-
----
-
-# 11. Capability 005 — Replay Verification
-
-## Permanent Identity
-
-`NICAI.HYDRO.REPLAY_VERIFICATION`
-
-## Purpose
-
-Verify and reconstruct the existing execution trace for replay.
-
-## Existing Evidence
-
-- `replay_engine.py`
-- `replay_divergence_checker.py`
-- `replay_corruption_simulator.py`
-- `REPLAY_VALIDATION_REPORT.md`
-- live `GET /trace/{trace_id}` replay verification response
-
-## Tested Trace
-
-`acf999a9afdfaabee481b750fc75e0ffa1648ba14cb38b9187776d30e85a3bf9`
-
-## Observed Result
-
-The live endpoint returned:
-
-- HTTP `200`;
-- `ordered_replay: true`;
-- `replay_status: INCOMPLETE`;
-- `sequence_chain: []`.
-
-Observed stages included:
-
-- `VALIDATION`;
-- `ANALYSIS`;
-- `ACTION`.
-
-Missing stages included:
-
-- `INGESTION`;
-- `TANTRA_PARTICIPATION`;
-- `CLUSTER_ANALYSIS`;
-- `CONTRACT_VALIDATION`;
-- `TTG_CONSUME`.
-
-## Replay Assessment
-
-The replay verification mechanism is operational and reachable.
-
-The tested replay is incomplete.
-
-The available evidence does not establish original-versus-replay output equivalence.
-
-## Authority Owned
-
-- Existing replay verification mechanism.
-- Existing replay reconstruction.
-- Existing divergence checking where implemented.
-
-## Authority Explicitly Not Owned
-
-- Creation of new runtime execution capabilities.
-- External registry governance.
-- Constitutional policy authority.
-
-## Certification
-
-**Replay Endpoint: Verified**
-
-**Replay Verification: Demonstrated**
-
-**Complete Replay: Pending**
-
-**Replay Equivalence: Not Yet Demonstrated**
-
-**Replay Certification: Not Yet Certified**
-
----
-
-# 12. Capability 006 — Registry Participation Infrastructure
+````markdown
+# 13. Capability 006 — Registry Participation Infrastructure
 
 ## Permanent Identity
 
 `NICAI.HYDRO.REGISTRY_PARTICIPATION`
 
+## Capability Name
+
+Registry Participation Infrastructure
+
 ## Purpose
 
-Provide the existing registry-related infrastructure and adapters used by NICAI.
+Provide the existing Hydro-side infrastructure required to participate in constitutional and domain registries.
+
+This capability represents registry integration infrastructure only.
+
+It does not claim ownership of the registries themselves.
 
 ## Existing Evidence
+
+The repository contains registry-related implementation including:
 
 - `consumer_registry.py`
 - `dataset_registry.py`
 - `maritime_registry_adapter.py`
 
-## Required Constitutional Registries
+## Constitutional Registry Scope
 
-The audit must evaluate:
+The Hydro runtime is required to participate, where applicable, in:
 
 1. Capability Registry
 2. Runtime Registry
@@ -523,722 +651,1481 @@ The audit must evaluate:
 
 ## Authority Owned
 
-- Existing registry integration mechanisms implemented by NICAI.
+This capability owns:
+
+- existing Hydro-side registry integration;
+- registry request construction where implemented;
+- registry metadata preparation;
+- registry adapter behaviour;
+- registry participation evidence generated by the existing implementation.
 
 ## Authority Explicitly Not Owned
 
-- Ownership of the constitutional registries themselves.
-- Fabrication of registration records.
-- Governance authority over other ecosystem participants.
+This capability does not own:
 
-## Current Assessment
+- constitutional registry governance;
+- approval authority for registry entries;
+- governance of other participants;
+- fabrication of registry records;
+- modification of external registry policy;
+- creation of duplicate registry systems.
 
-The repository demonstrates registry-related implementation infrastructure.
+## Upstream Participants
 
-Actual independent registration evidence for all required constitutional registries has not yet been established by the runtime evidence collected in this audit.
+Potential upstream sources include:
 
-## Certification
+- Hydro runtime identity;
+- Hydro capability definitions;
+- repository metadata;
+- build metadata;
+- execution metadata;
+- replay metadata.
 
-**Pending Independent Registry Verification**
+## Downstream Participants
+
+Potential downstream consumers include:
+
+- Runtime Registry;
+- Capability Registry;
+- Execution Registry;
+- Replay Registry;
+- Review Registry;
+- Build Registry;
+- Migration Registry;
+- constitutional runtime discovery mechanisms.
+
+## Runtime Contract
+
+Registry participation must preserve:
+
+- stable capability identity;
+- stable runtime identity;
+- repository identity;
+- version information;
+- compatibility information;
+- evidence references;
+- registration state.
+
+## Replay Participation
+
+Registry operations must remain distinguishable from runtime execution replay.
+
+Registry metadata must not be treated as execution evidence unless explicitly emitted as execution evidence.
+
+## Observability
+
+Registry participation should expose sufficient evidence to determine:
+
+- which capability is registered;
+- which runtime owns the capability;
+- which version is registered;
+- which repository contains the implementation;
+- which registry operation occurred;
+- when the registration occurred;
+- which evidence supports the registration.
+
+## Runtime Health
+
+Registry availability must not be confused with Hydro runtime health.
+
+The Hydro runtime may be healthy while an external registry is unavailable.
+
+## Version and Compatibility
+
+Registry identity must remain stable across compatible runtime versions.
+
+A breaking capability contract change requires a corresponding version/compatibility update.
+
+## Current Audit Classification
+
+`Registry Infrastructure Demonstrated`
+
+## Certification Boundary
+
+Registry infrastructure existence is evidenced by the repository.
+
+Actual participation in every required constitutional registry must be established through independent registry evidence.
+
+No registry record is fabricated by this inventory.
 
 ---
 
-# 13. Capability 007 — Observability and Telemetry
+# 14. Capability 007 — Observability and Telemetry
 
 ## Permanent Identity
 
 `NICAI.HYDRO.OBSERVABILITY`
 
+## Capability Name
+
+Observability and Telemetry
+
 ## Purpose
 
-Expose existing runtime telemetry, events, traces, metrics, and execution visibility.
+Expose existing Hydro runtime execution through structured events, telemetry, metrics, trace information, and execution visibility.
 
 ## Existing Evidence
 
+The repository contains:
+
 - `telemetry_emitter.py`
 - `telemetry_metrics.json`
-- structured runtime event output
 - `trace_graph.py`
 - `execution_correlation.py`
+- structured runtime event output.
 
-## Demonstrated Events
+## Observed Runtime Event Categories
 
-Observed structured events include:
+The observed runtime produced structured event categories including:
 
+- `PERCEPTION`
+- `VALIDATION`
+- `INTELLIGENCE`
+- `STATE`
 - `PATTERN`
 - `ACTION`
 
-Runtime execution data also contained:
-
-- perception events;
-- validation events;
-- intelligence events;
-- state events.
-
 ## Authority Owned
 
-- Existing Hydro runtime telemetry and execution observability.
+This capability owns:
+
+- Hydro-side telemetry;
+- runtime event emission;
+- runtime execution visibility;
+- Hydro-side trace correlation;
+- existing metrics exposure.
 
 ## Authority Explicitly Not Owned
 
-- Ecosystem-wide observability governance.
-- External system telemetry ownership.
-- Creation of unrelated observability infrastructure.
+This capability does not own:
 
-## Trace Propagation Assessment
+- ecosystem-wide observability governance;
+- external monitoring platforms;
+- external participant telemetry;
+- operational command authority;
+- unrelated monitoring infrastructure.
 
-A previously observed `PATTERN` event contained:
+## Trace Relationship
 
-`trace_id: null`
+Runtime events may carry a `trace_id`.
 
-Therefore complete trace propagation across all structured events is not yet demonstrated.
+The trace identifier allows related runtime execution records to be correlated.
 
-## Status
+## Observed Trace Evidence
 
-**Demonstrated with trace-propagation gap**
+The runtime produced trace-bearing execution records.
 
-## Certification
+A previously observed structured `PATTERN` event also contained:
 
-**Not Yet Certified for complete constitutional observability.**
+```text
+trace_id: null
+````
+
+Therefore the existence of event telemetry is demonstrated, while universal trace propagation across every event type is not established by the observed evidence.
+
+## Runtime Contract
+
+The observability contract consists of:
+
+* event type;
+* event payload;
+* trace identity where available;
+* timestamp where available;
+* execution context;
+* structured event data.
+
+## Replay Participation
+
+Observability data contributes to replay inspection when the event is associated with a replayable execution trace.
+
+## Runtime Health
+
+Observability provides visibility into runtime behaviour but is not itself a substitute for the `/health` contract.
+
+## Version and Compatibility
+
+Event consumers must rely on version-compatible event schemas.
+
+Changes to required event fields must be treated as contract changes.
+
+## Current Audit Classification
+
+`Demonstrated with Trace Propagation Gap`
+
+## Certification Boundary
+
+The runtime observability mechanism is demonstrated.
+
+Complete constitutional observability requires complete trace propagation across all required runtime events.
 
 ---
 
-# 14. Capability 008 — Runtime Integration and Orchestration
+# 15. Capability 008 — Runtime Integration and Orchestration
 
 ## Permanent Identity
 
 `NICAI.HYDRO.RUNTIME_INTEGRATION`
 
+## Capability Name
+
+Runtime Integration and Orchestration
+
 ## Purpose
 
-Coordinate existing runtime interactions between Hydro components and external runtime participants.
+Coordinate existing Hydro-side runtime interactions with other participants and integration surfaces.
 
 ## Existing Evidence
 
-- `integration_orchestrator.py`
-- existing integration evidence;
-- existing adapter infrastructure.
+The repository contains:
 
-## Known Integration Scope
+* `integration_orchestrator.py`
+* existing integration infrastructure;
+* existing adapter infrastructure;
+* integration-related evidence.
 
-The audit scope includes the ecosystem relationships specified by the convergence task:
+## Integration Scope
 
-- TMS;
-- GC;
-- MDU;
-- GOUDHA Runtime;
-- Namami Gange;
-- SVACS;
-- Bucket;
-- Runtime Registry;
-- Capability Registry;
-- Replay Registry;
-- InsightFlow;
-- PRANA;
-- BHEX Knowledge Layer.
+The convergence task identifies the following ecosystem integration points:
+
+* TMS;
+* GC;
+* MDU;
+* GOUDHA Runtime;
+* Namami Gange;
+* SVACS;
+* Bucket;
+* Runtime Registry;
+* Capability Registry;
+* Replay Registry;
+* InsightFlow;
+* PRANA;
+* BHEX Knowledge Layer.
 
 ## Authority Owned
 
-- Existing Hydro-side integration/orchestration responsibilities.
+This capability owns:
+
+* existing Hydro-side orchestration;
+* existing integration sequencing;
+* Hydro-side invocation of configured integrations;
+* integration-level error handling where implemented.
 
 ## Authority Explicitly Not Owned
 
-- Ownership of external systems.
-- Governance authority over external participants.
-- Redesign of external systems.
+This capability does not own:
 
-## Status
+* TMS;
+* GC;
+* MDU;
+* GOUDHA Runtime;
+* Namami Gange;
+* SVACS;
+* Bucket;
+* InsightFlow;
+* PRANA;
+* BHEX Knowledge Layer;
+* constitutional governance;
+* external participant architecture.
 
-**Pending complete constitutional integration verification**
+## Upstream Relationships
 
-## Certification
+The integration capability receives inputs from:
 
-**Not Yet Certified**
+* Hydro runtime execution;
+* Hydro validation;
+* Hydro trace context;
+* configured integration contracts.
+
+## Downstream Relationships
+
+The integration capability may interact with:
+
+* external runtime participants;
+* registry services;
+* validation services;
+* knowledge services;
+* observability services.
+
+## Runtime Contract
+
+Every integration must define:
+
+* provider;
+* consumer;
+* request contract;
+* response contract;
+* event contract where applicable;
+* version;
+* timeout behaviour;
+* failure behaviour;
+* trace propagation;
+* compatibility expectations.
+
+## Determinism Requirement
+
+Integration execution must not introduce uncontrolled or undocumented behaviour.
+
+The same contract version and equivalent input must produce contract-compatible results.
+
+## Replay Participation
+
+Integration operations must be represented in replay evidence where they form part of the execution chain.
+
+## Observability
+
+Integration execution must remain traceable through the Hydro execution identity.
+
+## Runtime Health
+
+Integration dependency health is separate from Hydro process health.
+
+A dependency failure must not be represented as successful external execution.
+
+## Current Audit Classification
+
+`Integration Infrastructure Demonstrated`
+
+## Certification Boundary
+
+The existence of Hydro-side integration infrastructure is established.
+
+Complete constitutional integration across all listed participants requires independent end-to-end evidence.
 
 ---
 
-# 15. Capability 009 — Ecosystem Runtime Attachments
+# 16. Capability 009 — Ecosystem Runtime Attachments
 
 ## Permanent Identity
 
 `NICAI.HYDRO.ECOSYSTEM_ATTACHMENTS`
 
+## Capability Name
+
+Ecosystem Runtime Attachments
+
 ## Purpose
 
-Provide the existing runtime attachment mechanisms used to connect NICAI with ecosystem participants.
+Provide the existing Hydro-side adapter and attachment mechanisms used to connect Hydro with ecosystem participants.
 
 ## Existing Evidence
 
-- `tantra_participation.py`
-- `svacs_adapter.py`
-- `insightflow_adapter.py`
-- `ECOSYSTEM_ATTACHMENT_REPORT.md`
+The repository contains:
+
+* `tantra_participation.py`
+* `svacs_adapter.py`
+* `insightflow_adapter.py`
+* `ECOSYSTEM_ATTACHMENT_REPORT.md`
 
 ## Authority Owned
 
-- Existing Hydro-side attachment behaviour.
-- Existing adapter invocation.
+This capability owns:
+
+* existing Hydro-side attachment behaviour;
+* adapter invocation;
+* attachment request/response handling;
+* Hydro-side compatibility with configured ecosystem interfaces.
 
 ## Authority Explicitly Not Owned
 
-- Ownership of TMS, GC, MDU, GOUDHA, SVACS, InsightFlow, PRANA, BHEX, or other external participants.
-- Constitutional governance of external participants.
+This capability does not own:
 
-## Status
+* TMS governance;
+* GC governance;
+* MDU governance;
+* GOUDHA governance;
+* SVACS governance;
+* InsightFlow governance;
+* PRANA governance;
+* BHEX Knowledge Layer governance;
+* constitutional governance outside Hydro.
 
-**Demonstrated at adapter/integration level**
+## Attachment Model
 
-## Certification
+The attachment model is:
 
-**Constitutional certification pending independent end-to-end evidence.**
+```text
+Hydro Runtime
+      |
+      +----> Ecosystem Adapter
+                    |
+                    +----> External Participant
+```
+
+The adapter is a boundary mechanism.
+
+It must not become a duplicate implementation of the external participant.
+
+## Runtime Contract
+
+Each attachment must define:
+
+* participant identity;
+* interface identity;
+* request contract;
+* response contract;
+* event contract;
+* version;
+* compatibility;
+* trace propagation;
+* failure handling.
+
+## Trace Contract
+
+Where an attachment participates in a traced execution, the Hydro trace identity must remain associated with the attachment operation.
+
+## Replay Contract
+
+Attachment operations that form part of an execution chain must be represented in replay evidence.
+
+## Observability
+
+Attachment activity must remain observable through:
+
+* trace identity;
+* runtime events;
+* integration logs;
+* execution evidence.
+
+## Current Audit Classification
+
+`Adapter / Integration Demonstrated`
+
+## Certification Boundary
+
+Existing adapter-level integration is demonstrated.
+
+Complete constitutional attachment certification requires independent end-to-end execution evidence across the relevant participant boundary.
 
 ---
 
-# 16. Capability 010 — Dataset and Knowledge Registry Participation
+# 17. Capability 010 — Dataset and Knowledge Registry Participation
 
 ## Permanent Identity
 
 `NICAI.HYDRO.KNOWLEDGE_REGISTRY`
 
+## Capability Name
+
+Dataset and Knowledge Registry Participation
+
 ## Purpose
 
-Maintain and expose existing dataset/knowledge registry participation.
+Maintain and expose the existing Hydro-side participation in dataset and knowledge registry infrastructure.
 
 ## Existing Evidence
 
-- `dataset_registry.py`
-- associated dataset/registry evidence.
+The repository contains:
+
+* `dataset_registry.py`;
+* associated dataset/registry evidence;
+* existing knowledge-related metadata.
 
 ## Authority Owned
 
-- Existing Hydro dataset/knowledge registry participation.
+This capability owns:
+
+* existing Hydro dataset registration behaviour;
+* Hydro-side dataset metadata;
+* Hydro-side knowledge registry participation;
+* dataset identity references;
+* existing registry interaction logic.
 
 ## Authority Explicitly Not Owned
 
-- Ownership of the BHEX Knowledge Layer.
-- Governance of external datasets.
-- Creation of new knowledge capabilities outside existing scope.
+This capability does not own:
 
-## Status
+* the global BHEX Knowledge Layer;
+* external knowledge governance;
+* external dataset ownership;
+* external data authority;
+* creation of duplicate knowledge registries.
 
-**Pending Independent Verification**
+## Dataset Identity
 
-## Certification
+Dataset references should preserve:
 
-**Not Yet Certified**
+* dataset identity;
+* version;
+* source;
+* schema;
+* provenance;
+* compatibility;
+* registration information.
 
----
+## Runtime Relationship
 
-# 17. API and Runtime Evidence Summary
+Knowledge and dataset information may be consumed by runtime execution as configured by the existing implementation.
 
-The following live runtime interactions have been demonstrated during the audit.
+The dataset/knowledge registry capability does not itself become the Hydro intelligence decision engine.
 
-| Endpoint | Result | Status |
-|---|---|---|
-| `GET /` | HTTP `200`, `NICAI Running` | Verified |
-| `GET /health` | Successful live execution | Demonstrated |
-| `POST /nicai/evaluate` | Successful live execution | Demonstrated |
-| `POST /contract/validate` | Successful live execution | Demonstrated |
-| `GET /trace/{trace_id}` | HTTP `200` with trace data | Demonstrated |
-| Replay trace verification | HTTP `200`, incomplete replay | Demonstrated but incomplete |
+## Evidence Relationship
 
-The live root response established that the deployed runtime was reachable and responding through the deployed Uvicorn service.
+Knowledge evidence must remain distinguishable from:
 
----
+* runtime execution evidence;
+* validation evidence;
+* replay evidence;
+* operational action evidence.
 
-# 18. Runtime Event Evidence
+## Replay Participation
 
-Observed runtime execution produced structured data including:
+Dataset/knowledge references used during a replayable execution must be identifiable sufficiently to reproduce the execution context.
 
-## Perception
+## Observability
 
-Examples included:
+Knowledge usage should remain attributable to the relevant execution context where the existing runtime provides such attribution.
 
-- vessel type;
-- confidence score;
-- dominant frequency;
-- anomaly flag;
-- trace ID.
+## Version and Compatibility
 
-## Validation
+Dataset and knowledge references must be version-aware.
 
-Example:
+A change in dataset schema or semantic meaning must be treated as a compatibility change.
 
-`status: ALLOW`
+## Current Audit Classification
 
-`reason: Valid signal`
+`Registry Infrastructure Demonstrated`
 
-## Intelligence
+## Certification Boundary
 
-Examples included:
+The repository demonstrates dataset/knowledge registry infrastructure.
 
-- vessel type;
-- confidence;
-- risk level;
-- validation status;
-- trace ID.
-
-## State
-
-Examples included:
-
-- risk level;
-- state;
-- anomaly flag;
-- short label;
-- trace ID.
-
-## Pattern
-
-Observed fields included:
-
-- pattern ID;
-- anomaly count;
-- affected zones;
-- pattern summary;
-- pattern type;
-- severity trend;
-- linked traces.
-
-## Action
-
-Observed action event included:
-
-- trace ID;
-- action type;
-- target role;
-- timestamp;
-- context.
-
-These observations demonstrate that the runtime produces structured execution intelligence and action-oriented runtime events.
+Independent constitutional registry participation and complete knowledge-layer interoperability require corresponding external evidence.
 
 ---
 
-# 19. Trace Propagation Finding
+# 18. Capability Identity Consolidation
 
-Trace-linked processing is demonstrated across multiple runtime outputs.
+The complete working Hydro capability inventory is:
 
-However, complete propagation is not yet certified.
-
-A previously observed structured `PATTERN` event contained:
-
-`trace_id: null`
-
-while the same event contained linked trace references inside its data payload.
-
-This establishes a distinction between:
-
-- linked trace references;
-- event-level Trace ID propagation.
-
-Therefore:
-
-**Trace Correlation: Demonstrated**
-
-**Complete Trace Propagation: Pending**
-
-**Deterministic Trace ID Certification: Pending**
-
-No unsupported trace-propagation certification claim is made.
+| Capability ID | Permanent Working Identity           | Existing Responsibility                  | Audit Classification                    |
+| ------------- | ------------------------------------ | ---------------------------------------- | --------------------------------------- |
+| HYDRO-CAP-001 | `NICAI.HYDRO.RUNTIME_API`            | Runtime API and service interface        | Demonstrated                            |
+| HYDRO-CAP-002 | `NICAI.HYDRO.CONTRACT_VALIDATION`    | Runtime/API contract validation          | Demonstrated                            |
+| HYDRO-CAP-003 | `NICAI.HYDRO.INTELLIGENCE_EXECUTION` | Validation and intelligence execution    | Demonstrated                            |
+| HYDRO-CAP-004 | `NICAI.HYDRO.TRACE_CORRELATION`      | Trace and execution correlation          | Demonstrated with gaps                  |
+| HYDRO-CAP-005 | `NICAI.HYDRO.REPLAY_VERIFICATION`    | Replay verification                      | Demonstrated but incomplete             |
+| HYDRO-CAP-006 | `NICAI.HYDRO.REGISTRY_PARTICIPATION` | Registry participation infrastructure    | Infrastructure demonstrated             |
+| HYDRO-CAP-007 | `NICAI.HYDRO.OBSERVABILITY`          | Observability and telemetry              | Demonstrated with trace gap             |
+| HYDRO-CAP-008 | `NICAI.HYDRO.RUNTIME_INTEGRATION`    | Runtime integration/orchestration        | Integration infrastructure demonstrated |
+| HYDRO-CAP-009 | `NICAI.HYDRO.ECOSYSTEM_ATTACHMENTS`  | Ecosystem runtime attachments            | Adapter/integration demonstrated        |
+| HYDRO-CAP-010 | `NICAI.HYDRO.KNOWLEDGE_REGISTRY`     | Dataset/knowledge registry participation | Infrastructure demonstrated             |
 
 ---
 
-# 20. Replay Finding
+# 19. Duplicate Responsibility Check
 
-The replay verification endpoint is live and accepts a valid trace ID.
+The following rules apply to prevent capability duplication.
 
-The tested trace:
+## Runtime API vs Integration
 
-`acf999a9afdfaabee481b750fc75e0ffa1648ba14cb38b9187776d30e85a3bf9`
+`NICAI.HYDRO.RUNTIME_API` owns the Hydro API surface.
 
-returned:
+`NICAI.HYDRO.RUNTIME_INTEGRATION` owns Hydro-side interaction with external participants.
 
-- HTTP `200`;
-- `ordered_replay: true`;
-- `replay_status: INCOMPLETE`;
-- empty `sequence_chain`;
-- multiple observed stages;
-- five missing stages.
-
-Therefore:
-
-**Replay Endpoint Availability: Verified**
-
-**Replay Mechanism: Demonstrated**
-
-**Complete Replay: Pending**
-
-**Replay Equivalence: Not Yet Demonstrated**
-
-**Production Replay Certification: Not Yet Certified**
+These are separate responsibilities.
 
 ---
 
-# 21. Authority Boundary Summary
+## Contract Validation vs Validation Execution
 
-NICAI Hydro is treated as an implementation and runtime participant, not as the owner of ecosystem-wide constitutional governance.
+`NICAI.HYDRO.CONTRACT_VALIDATION` validates contract structures.
 
-Hydro owns only the responsibilities explicitly implemented within its existing runtime contracts.
+`NICAI.HYDRO.INTELLIGENCE_EXECUTION` executes the existing Hydro validation/intelligence pipeline.
 
-Hydro does not automatically own:
-
-- constitutional governance;
-- ecosystem-wide registry governance;
-- external system governance;
-- external product decisions;
-- external knowledge ownership;
-- external operational authority;
-- new capabilities introduced solely for convergence.
-
-Where responsibility is owned by another ecosystem participant, Hydro must remain a consumer/provider participant rather than duplicating that authority.
+Contract validation must not become a second intelligence engine.
 
 ---
 
-# 22. Constitutional Layer Working Map
+## Trace Correlation vs Observability
 
-The following is the audit working map and is not a claim of external registry certification.
+`NICAI.HYDRO.TRACE_CORRELATION` owns execution identity correlation.
 
-| Capability | Working Constitutional Layer | Reason |
-|---|---|---|
-| Runtime API | Execution Infrastructure / Platform Services | Exposes the existing executable runtime surface |
-| Contract Validation | Trust Layer / Execution Infrastructure | Validates runtime contracts before/around execution |
-| Intelligence Execution | Intelligence Layer | Produces existing intelligence and state outputs |
-| Trace Correlation | Trust Layer / Execution Infrastructure | Provides execution provenance and correlation |
-| Replay Verification | Trust Layer / Execution Infrastructure | Provides replay evidence and execution reconstruction |
-| Registry Participation | Governance & Constitution / Platform Services | Connects the runtime to governed registry mechanisms |
-| Observability | Execution Infrastructure / Trust Layer | Provides runtime visibility and evidence |
-| Runtime Integration | Platform Services / Execution Infrastructure | Coordinates existing runtime relationships |
-| Ecosystem Attachments | Platform Services / Maritime Domain Integration | Connects Hydro to existing ecosystem participants |
-| Knowledge Registry | Knowledge Layer | Maintains existing dataset/knowledge registry participation |
+`NICAI.HYDRO.OBSERVABILITY` owns telemetry and event visibility.
 
-These mappings must be reconciled against the authoritative BHIV constitutional registry definitions before final constitutional certification.
+Observability consumes trace context but does not become the owner of trace identity governance.
 
 ---
 
-# 23. Registry Evidence Matrix
+## Replay vs Trace Correlation
 
-| Registry | Hydro Participation Mechanism | Evidence Available | Certification |
+`NICAI.HYDRO.TRACE_CORRELATION` establishes execution linkage.
+
+`NICAI.HYDRO.REPLAY_VERIFICATION` uses execution evidence to inspect/reconstruct replay state.
+
+Replay does not create a second trace identity system.
+
+---
+
+## Registry Participation vs Knowledge Registry
+
+`NICAI.HYDRO.REGISTRY_PARTICIPATION` represents general registry integration infrastructure.
+
+`NICAI.HYDRO.KNOWLEDGE_REGISTRY` represents the existing dataset/knowledge-specific registry responsibility.
+
+Neither capability claims ownership of the external registries.
+
+---
+
+## Runtime Integration vs Ecosystem Attachments
+
+`NICAI.HYDRO.RUNTIME_INTEGRATION` represents orchestration.
+
+`NICAI.HYDRO.ECOSYSTEM_ATTACHMENTS` represents concrete adapter/attachment boundaries.
+
+An adapter must not duplicate the external participant's responsibility.
+
+---
+
+# 20. Capability Dependency Model
+
+The working dependency relationship is:
+
+```text
+NICAI.HYDRO.RUNTIME_API
+          |
+          v
+NICAI.HYDRO.INTELLIGENCE_EXECUTION
+          |
+          +--------------------+
+          |                    |
+          v                    v
+NICAI.HYDRO.CONTRACT      NICAI.HYDRO.TRACE
+VALIDATION                CORRELATION
+                               |
+                    +----------+----------+
+                    |                     |
+                    v                     v
+             NICAI.HYDRO.REPLAY    NICAI.HYDRO.OBSERVABILITY
+             VERIFICATION          AND TELEMETRY
+                    |
+                    v
+        NICAI.HYDRO.RUNTIME_INTEGRATION
+                    |
+                    v
+        NICAI.HYDRO.ECOSYSTEM_ATTACHMENTS
+                    |
+                    v
+             External Participants
+```
+
+Knowledge and registry participation operates alongside the execution path:
+
+```text
+NICAI.HYDRO.KNOWLEDGE_REGISTRY
+              |
+              v
+       Dataset / Knowledge
+              |
+              v
+       Hydro Runtime Context
+```
+
+General registry participation operates as a constitutional attachment:
+
+```text
+NICAI.HYDRO.REGISTRY_PARTICIPATION
+              |
+              +---- Capability Registry
+              +---- Runtime Registry
+              +---- Execution Registry
+              +---- Replay Registry
+              +---- Repository Registry
+              +---- Review Registry
+              +---- Build Registry
+              +---- Migration Registry
+```
+
+---
+
+# 21. Capability Boundary Rules
+
+The following boundaries are mandatory for constitutional convergence.
+
+### Rule 1 — One identity
+
+Every capability has exactly one working constitutional identity.
+
+### Rule 2 — No duplication
+
+An existing external responsibility must not be duplicated inside Hydro.
+
+### Rule 3 — Explicit authority
+
+Every capability must state what it owns and what it does not own.
+
+### Rule 4 — Evidence before certification
+
+Runtime existence and certification are separate claims.
+
+### Rule 5 — Traceability
+
+Execution-related capabilities must preserve trace identity where supported by the existing runtime.
+
+### Rule 6 — Replay separation
+
+Replay availability must not be represented as replay completeness.
+
+### Rule 7 — Registry separation
+
+Registry infrastructure must not be represented as proof of actual registry registration.
+
+### Rule 8 — Integration separation
+
+An adapter must not claim ownership of the external participant.
+
+### Rule 9 — Knowledge separation
+
+Dataset/knowledge registration must not become a duplicate intelligence authority.
+
+### Rule 10 — Runtime boundary
+
+Hydro remains a bounded Constitutional Runtime Participant.
+
+---
+
+# 22. Capability Inventory Closure
+
+The capability inventory now defines the complete working set of ten Hydro capability identities used for the Constitutional Runtime Convergence audit.
+
+The inventory covers:
+
+* runtime API;
+* contract validation;
+* intelligence execution;
+* trace correlation;
+* replay verification;
+* registry participation;
+* observability;
+* runtime integration;
+* ecosystem attachments;
+* knowledge registry participation.
+
+These identities describe existing responsibilities.
+
+They do not introduce new Hydro features.
+
+They do not redesign Hydro architecture.
+
+They do not claim ownership of external constitutional participants.
+
+They establish the capability boundaries required for subsequent:
+
+* constitutional layer mapping;
+* authority boundary validation;
+* runtime contract validation;
+* API/event contract validation;
+* registry verification;
+* replay verification;
+* observability verification;
+* runtime health validation;
+* constitutional integration validation;
+* production certification.
+
+---
+
+# 23. Evidence and Certification Principle
+
+The capability inventory distinguishes implementation existence from certification.
+
+The following classification is used:
+
+| Classification              | Meaning                                                              |
+| --------------------------- | -------------------------------------------------------------------- |
+| Demonstrated                | Existing behaviour has been directly demonstrated                    |
+| Demonstrated with gaps      | Existing behaviour is demonstrated but a defined evidence gap exists |
+| Infrastructure demonstrated | Supporting implementation exists and is identifiable                 |
+| Not yet certified           | Evidence does not support a certification claim                      |
+| Verified                    | A specific runtime/interface behaviour has been directly verified    |
+
+No capability is certified merely because an implementation file exists.
+
+No external registry participation is certified without registry evidence.
+
+No complete replay is certified without complete replay evidence.
+
+No full constitutional integration is certified without end-to-end evidence.
+
+---
+
+# 24. Final Capability Identity Register
+
+```text
+NICAI.HYDRO.RUNTIME_API
+NICAI.HYDRO.CONTRACT_VALIDATION
+NICAI.HYDRO.INTELLIGENCE_EXECUTION
+NICAI.HYDRO.TRACE_CORRELATION
+NICAI.HYDRO.REPLAY_VERIFICATION
+NICAI.HYDRO.REGISTRY_PARTICIPATION
+NICAI.HYDRO.OBSERVABILITY
+NICAI.HYDRO.RUNTIME_INTEGRATION
+NICAI.HYDRO.ECOSYSTEM_ATTACHMENTS
+NICAI.HYDRO.KNOWLEDGE_REGISTRY
+```
+
+These identities form the authoritative working capability boundary for the NICAI Hydro Constitutional Runtime Convergence audit.
+
+---
+
+````markdown
+# 25. Constitutional Capability Layer Classification
+
+This section maps each Hydro capability to its primary constitutional runtime layer.
+
+A capability is assigned to one primary layer according to its dominant runtime responsibility.
+
+The layer assignment does not transfer ownership of the underlying constitutional layer to NICAI Hydro.
+
+| Capability ID | Capability Identity | Primary Constitutional Layer | Runtime Reason |
 |---|---|---|---|
-| Capability Registry | Existing registry infrastructure | Repository implementation present | Pending |
-| Runtime Registry | Existing runtime/registry infrastructure | Repository implementation present | Pending |
-| Execution Registry | Existing execution/runtime evidence | Independent registration record not established | Pending |
-| Replay Registry | Existing replay infrastructure | Independent registration record not established | Pending |
-| Repository Registry | Repository itself and registry infrastructure | Repository exists and is auditable | Pending constitutional registration verification |
-| Review Registry | Existing review/evidence package | Review artifacts exist | Pending |
-| Build Registry | Existing repository/build evidence | Independent registry record not established | Pending |
-| Migration Registry | Convergence/migration documentation | Independent registry record not established | Pending |
-
-No registration ID is fabricated in this inventory.
+| HYDRO-CAP-001 | `NICAI.HYDRO.RUNTIME_API` | Execution Infrastructure | Provides the executable runtime interface |
+| HYDRO-CAP-002 | `NICAI.HYDRO.CONTRACT_VALIDATION` | Governance & Constitution | Validates runtime contract conformance |
+| HYDRO-CAP-003 | `NICAI.HYDRO.INTELLIGENCE_EXECUTION` | Intelligence Layer | Performs Hydro validation/intelligence processing |
+| HYDRO-CAP-004 | `NICAI.HYDRO.TRACE_CORRELATION` | Trust Layer | Preserves execution identity and correlation |
+| HYDRO-CAP-005 | `NICAI.HYDRO.REPLAY_VERIFICATION` | Trust Layer | Provides replay inspection and execution evidence |
+| HYDRO-CAP-006 | `NICAI.HYDRO.REGISTRY_PARTICIPATION` | Platform Services | Connects Hydro with registry infrastructure |
+| HYDRO-CAP-007 | `NICAI.HYDRO.OBSERVABILITY` | Execution Infrastructure | Provides runtime telemetry and execution visibility |
+| HYDRO-CAP-008 | `NICAI.HYDRO.RUNTIME_INTEGRATION` | Platform Services | Coordinates runtime integration boundaries |
+| HYDRO-CAP-009 | `NICAI.HYDRO.ECOSYSTEM_ATTACHMENTS` | Platform Services | Provides participant attachment mechanisms |
+| HYDRO-CAP-010 | `NICAI.HYDRO.KNOWLEDGE_REGISTRY` | Knowledge Layer | Provides dataset/knowledge registry participation |
 
 ---
 
-# 24. Runtime Contract Assessment
+# 26. Constitutional Layer Definitions
 
-The runtime contract audit covers:
+## Sovereign Foundation
 
-- provider relationships;
-- consumer relationships;
-- API contracts;
-- event contracts;
-- dependency contracts;
-- SDK/attachment contracts;
-- version compatibility;
-- failure behaviour;
-- evidence.
+The Sovereign Foundation represents the foundational constitutional identity and authority of the BHIV ecosystem.
 
-Existing implementation and API evidence demonstrate that runtime interactions exist.
+NICAI Hydro does not claim ownership of the Sovereign Foundation.
 
-Complete constitutional contract certification requires contract-level evidence for each permanent capability identity.
+Hydro capabilities therefore do not directly become sovereign authorities.
+
+---
+
+## Governance & Constitution
+
+This layer governs constitutional rules, contracts, authority boundaries, and compliance.
+
+Hydro contract validation participates here because it validates runtime contract behaviour.
+
+Primary Hydro capability:
+
+```text
+NICAI.HYDRO.CONTRACT_VALIDATION
+````
+
+---
+
+## Platform Services
+
+Platform Services provide reusable runtime infrastructure and integration mechanisms.
+
+Hydro capabilities participating here include:
+
+```text
+NICAI.HYDRO.REGISTRY_PARTICIPATION
+NICAI.HYDRO.RUNTIME_INTEGRATION
+NICAI.HYDRO.ECOSYSTEM_ATTACHMENTS
+```
+
+These capabilities provide integration boundaries without owning the external platform.
+
+---
+
+## Execution Infrastructure
+
+Execution Infrastructure provides the runtime surfaces through which Hydro executes and exposes its behaviour.
+
+Primary capabilities:
+
+```text
+NICAI.HYDRO.RUNTIME_API
+NICAI.HYDRO.OBSERVABILITY
+```
+
+---
+
+## Intelligence Layer
+
+The Intelligence Layer contains Hydro-specific intelligence and validation processing.
+
+Primary capability:
+
+```text
+NICAI.HYDRO.INTELLIGENCE_EXECUTION
+```
+
+---
+
+## Knowledge Layer
+
+The Knowledge Layer provides dataset and knowledge participation.
+
+Primary capability:
+
+```text
+NICAI.HYDRO.KNOWLEDGE_REGISTRY
+```
+
+Hydro does not claim ownership of the complete BHEX Knowledge Layer.
+
+---
+
+## Trust Layer
+
+The Trust Layer provides evidence, correlation, replay, and traceability.
+
+Primary capabilities:
+
+```text
+NICAI.HYDRO.TRACE_CORRELATION
+NICAI.HYDRO.REPLAY_VERIFICATION
+```
+
+---
+
+## Maritime Domain Products
+
+Hydro may contribute intelligence to maritime-domain products.
+
+Hydro does not automatically own the product layer merely because its intelligence is consumed by a maritime product.
+
+Therefore no Hydro capability is assigned primary ownership of Maritime Domain Products.
+
+---
+
+# 27. Capability-to-Layer Dependency Matrix
+
+| Capability             | Primary Layer             | Supporting Layers            |
+| ---------------------- | ------------------------- | ---------------------------- |
+| Runtime API            | Execution Infrastructure  | Platform Services            |
+| Contract Validation    | Governance & Constitution | Trust Layer                  |
+| Intelligence Execution | Intelligence Layer        | Knowledge Layer, Trust Layer |
+| Trace Correlation      | Trust Layer               | Execution Infrastructure     |
+| Replay Verification    | Trust Layer               | Execution Infrastructure     |
+| Registry Participation | Platform Services         | Governance & Constitution    |
+| Observability          | Execution Infrastructure  | Trust Layer                  |
+| Runtime Integration    | Platform Services         | Execution Infrastructure     |
+| Ecosystem Attachments  | Platform Services         | Trust Layer                  |
+| Knowledge Registry     | Knowledge Layer           | Platform Services            |
+
+---
+
+# 28. Authority Boundary Matrix
+
+| Capability             | Authority Owned                      | Authority Not Owned                |
+| ---------------------- | ------------------------------------ | ---------------------------------- |
+| Runtime API            | Hydro API exposure                   | External governance                |
+| Contract Validation    | Hydro contract validation            | External contract ownership        |
+| Intelligence Execution | Hydro processing                     | External operational command       |
+| Trace Correlation      | Hydro execution correlation          | Ecosystem-wide identity governance |
+| Replay Verification    | Hydro replay inspection              | External replay governance         |
+| Registry Participation | Hydro registry integration           | Registry governance                |
+| Observability          | Hydro telemetry                      | External monitoring governance     |
+| Runtime Integration    | Hydro orchestration                  | External participant architecture  |
+| Ecosystem Attachments  | Hydro adapters                       | External participant authority     |
+| Knowledge Registry     | Hydro dataset/knowledge registration | BHEX Knowledge Layer governance    |
+
+---
+
+# 29. Upstream Participant Mapping
+
+Hydro capabilities receive information from multiple upstream surfaces.
+
+The upstream relationship is capability-specific.
+
+| Capability             | Upstream Source                  |
+| ---------------------- | -------------------------------- |
+| Runtime API            | External runtime consumers       |
+| Contract Validation    | Runtime contract requests        |
+| Intelligence Execution | Hydro runtime inputs             |
+| Trace Correlation      | Runtime execution context        |
+| Replay Verification    | Recorded execution evidence      |
+| Registry Participation | Hydro identity and metadata      |
+| Observability          | Runtime execution                |
+| Runtime Integration    | Configured integration contracts |
+| Ecosystem Attachments  | External participant contracts   |
+| Knowledge Registry     | Dataset and knowledge metadata   |
+
+Upstream participation does not imply ownership.
+
+---
+
+# 30. Downstream Participant Mapping
+
+| Capability             | Downstream Consumer                        |
+| ---------------------- | ------------------------------------------ |
+| Runtime API            | Runtime consumers                          |
+| Contract Validation    | Validation/certification surfaces          |
+| Intelligence Execution | Hydro consumers and intelligence consumers |
+| Trace Correlation      | Replay and observability systems           |
+| Replay Verification    | Validation and certification systems       |
+| Registry Participation | Constitutional registries                  |
+| Observability          | Monitoring and validation systems          |
+| Runtime Integration    | External runtime participants              |
+| Ecosystem Attachments  | Connected ecosystem participants           |
+| Knowledge Registry     | Knowledge and intelligence consumers       |
+
+---
+
+# 31. Adjacent Producer / Consumer Matrix
+
+| Capability             | Adjacent Producers         | Adjacent Consumers               |
+| ---------------------- | -------------------------- | -------------------------------- |
+| Runtime API            | External request producers | Hydro runtime consumers          |
+| Contract Validation    | Contract request producers | Validation/certification         |
+| Intelligence Execution | Runtime input producers    | Intelligence consumers           |
+| Trace Correlation      | Runtime execution          | Replay/observability             |
+| Replay Verification    | Runtime evidence           | Audit/certification              |
+| Registry Participation | Hydro metadata             | Registries                       |
+| Observability          | Runtime execution          | Monitoring                       |
+| Runtime Integration    | Integration configuration  | External participants            |
+| Ecosystem Attachments  | Participant contracts      | External runtimes                |
+| Knowledge Registry     | Dataset sources            | Knowledge/intelligence consumers |
+
+---
+
+# 32. Runtime Contract Ownership
+
+Every runtime interaction must have an identifiable provider and consumer.
+
+The ownership model is:
+
+```text
+Provider
+   |
+   | Contract
+   v
+Consumer
+```
+
+NICAI Hydro owns only the contracts associated with its own runtime responsibilities.
+
+It does not redefine contracts owned by other constitutional participants.
+
+---
+
+# 33. API Ownership Mapping
+
+| API                       | Capability Owner                     | Contract Responsibility |
+| ------------------------- | ------------------------------------ | ----------------------- |
+| `GET /`                   | `NICAI.HYDRO.RUNTIME_API`            | Runtime availability    |
+| `GET /health`             | `NICAI.HYDRO.RUNTIME_API`            | Runtime health          |
+| `POST /nicai/evaluate`    | `NICAI.HYDRO.INTELLIGENCE_EXECUTION` | Hydro evaluation        |
+| `POST /contract/validate` | `NICAI.HYDRO.CONTRACT_VALIDATION`    | Contract validation     |
+| `GET /trace/{trace_id}`   | `NICAI.HYDRO.REPLAY_VERIFICATION`    | Trace/replay inspection |
+
+---
+
+# 34. Event Ownership Mapping
+
+| Event        | Primary Capability            | Purpose                   |
+| ------------ | ----------------------------- | ------------------------- |
+| PERCEPTION   | Intelligence Execution        | Input/perception evidence |
+| VALIDATION   | Contract/Validation Execution | Validation result         |
+| INTELLIGENCE | Intelligence Execution        | Intelligence result       |
+| STATE        | Intelligence Execution        | Runtime state             |
+| PATTERN      | Intelligence Execution        | Pattern evidence          |
+| ACTION       | Intelligence Execution        | Action eligibility/event  |
+| TRACE        | Trace Correlation             | Execution correlation     |
+| REPLAY       | Replay Verification           | Replay evidence           |
+
+Event ownership means Hydro is responsible for the event when it is generated by Hydro.
+
+It does not imply authority over downstream event consumers.
+
+---
+
+# 35. Contract Versioning Rules
+
+Every externally consumed contract must have a compatibility boundary.
+
+The following changes are considered potentially breaking:
+
+* removing a required field;
+* changing a field type;
+* changing endpoint method;
+* changing endpoint semantics;
+* changing event type semantics;
+* changing trace identifier semantics;
+* removing required event fields;
+* changing required request structure.
+
+Compatible changes may include:
+
+* adding optional fields;
+* adding non-breaking metadata;
+* adding new event categories without modifying existing event semantics.
+
+---
+
+# 36. Trace Contract
+
+The trace identifier is the execution correlation key.
+
+Observed trace-bearing runtime structures include:
+
+```text
+trace_id
+```
+
+The trace contract requires:
+
+```text
+Request
+   ↓
+Execution
+   ↓
+Event
+   ↓
+Trace
+   ↓
+Replay / Observability
+```
+
+The same trace identifier should be preserved across all stages that belong to the same execution.
+
+Where a runtime event does not contain a trace identifier, that absence must remain visible in evidence rather than being silently inferred.
+
+---
+
+# 37. Replay Contract
+
+Replay verification uses the trace endpoint:
+
+```text
+GET /trace/{trace_id}
+```
+
+The response provides:
+
+```text
+trace_id
+found_stages
+missing_stages
+ordered_replay
+sequence_chain
+replay_status
+```
+
+Replay status has two distinct meanings:
+
+### Replay inspection
+
+The runtime can inspect replay state.
+
+### Replay equivalence
+
+The runtime can demonstrate that replay reproduces the original execution equivalently.
+
+These must not be treated as the same claim.
+
+---
+
+# 38. Observability Contract
+
+The observability contract includes:
+
+```text
+Event Type
+Trace ID
+Timestamp
+Payload
+Execution Context
+Runtime Metrics
+```
+
+The actual fields present in each event type are governed by the existing event implementation.
+
+No unsupported field is introduced by this inventory.
+
+---
+
+# 39. Runtime Health Contract
+
+The runtime health interface is:
+
+```text
+GET /health
+```
+
+Health represents the runtime availability/health surface.
+
+Health does not certify:
+
+* replay completeness;
+* registry participation;
+* constitutional convergence;
+* intelligence accuracy;
+* external dependency correctness.
 
 Therefore:
 
-**Runtime Contract Presence: Demonstrated**
-
-**Complete Constitutional Contract Certification: Pending**
-
----
-
-# 25. Observability Assessment
-
-The existing runtime demonstrates:
-
-- structured runtime events;
-- trace-related execution data;
-- telemetry emitter infrastructure;
-- telemetry metrics;
-- execution correlation.
-
-However, the observed `PATTERN` event with a null event-level Trace ID prevents certification of complete trace propagation.
-
-Therefore:
-
-**Observability: Demonstrated**
-
-**Complete Trace Propagation: Pending**
-
-**Full Constitutional Observability Certification: Pending**
+```text
+Runtime Health
+      ≠
+Constitutional Certification
+```
 
 ---
 
-# 26. Runtime Health Assessment
+# 40. Registry Contract Boundary
 
-The live runtime exposes:
+The registry participation capability provides the Hydro-side registry interface.
 
-`GET /health`
+The registries themselves remain externally governed.
 
-The endpoint was successfully executed during live validation.
+The required registry surfaces are:
 
-The deployed service root also returned HTTP `200`.
+```text
+Capability Registry
+Runtime Registry
+Execution Registry
+Replay Registry
+Repository Registry
+Review Registry
+Build Registry
+Migration Registry
+```
 
-Therefore:
+The capability inventory records the responsibility.
 
-**Runtime Reachability: Verified**
-
-**Health Endpoint Execution: Demonstrated**
-
-Complete health certification additionally requires evidence for:
-
-- dependency health;
-- failure state;
-- recovery behaviour;
-- measurable runtime health over the required operational conditions.
-
-Therefore:
-
-**Runtime Health Certification: Demonstrated at endpoint level; complete constitutional health certification pending.**
+Actual registration must be proven through registry evidence.
 
 ---
 
-# 27. Certification State Model
+# 41. Integration Boundary
 
-This inventory uses only the following certification states.
+The Hydro runtime may interact with:
 
-## Verified
+```text
+TMS
+GC
+MDU
+GOUDHA Runtime
+Namami Gange
+SVACS
+Bucket
+Runtime Registry
+Capability Registry
+Replay Registry
+InsightFlow
+PRANA
+BHEX Knowledge Layer
+```
 
-Directly supported by independently observed runtime or repository evidence.
+Each integration must preserve:
 
-## Demonstrated
+* participant identity;
+* contract identity;
+* version;
+* trace context;
+* request/response semantics;
+* failure semantics.
 
-Successfully executed or observed but not yet sufficient for full certification.
-
-## Pending
-
-Validation or evidence is still required.
-
-## Not Yet Certified
-
-The available evidence does not support a certification claim.
-
-No unsupported statement is labelled as Verified.
-
----
-
-# 28. Current Capability Certification Matrix
-
-| Capability ID | Capability | Runtime | API | Contracts | Trace | Replay | Registry | Observability | Health | Overall |
-|---|---|---|---|---|---|---|---|---|---|---|
-| HYDRO-CAP-001 | Runtime API and Service Interface | Demonstrated | Demonstrated | Demonstrated | Demonstrated | N/A | Pending | Demonstrated | Demonstrated | Demonstrated |
-| HYDRO-CAP-002 | Contract Validation | Demonstrated | Demonstrated | Demonstrated | Pending | Pending | Pending | Demonstrated | Demonstrated | Demonstrated with gaps |
-| HYDRO-CAP-003 | Validation and Intelligence Execution | Demonstrated | Demonstrated | Demonstrated | Demonstrated with gaps | Pending | Pending | Demonstrated | Demonstrated | Demonstrated |
-| HYDRO-CAP-004 | Trace and Execution Correlation | Demonstrated | Demonstrated | Pending | Demonstrated with gaps | Incomplete | Pending | Demonstrated with gaps | Demonstrated | Demonstrated with gaps |
-| HYDRO-CAP-005 | Replay Verification | Demonstrated | Demonstrated | Pending | Demonstrated | Incomplete | Pending | Demonstrated | Demonstrated | Not Yet Certified |
-| HYDRO-CAP-006 | Registry Participation Infrastructure | Demonstrated at implementation level | N/A | Pending | Pending | Pending | Pending | Pending | Pending | Not Yet Certified |
-| HYDRO-CAP-007 | Observability and Telemetry | Demonstrated | N/A | Pending | Demonstrated with gaps | Pending | Pending | Demonstrated with gaps | Demonstrated | Not Yet Certified |
-| HYDRO-CAP-008 | Runtime Integration and Orchestration | Demonstrated at implementation level | N/A | Pending | Pending | Pending | Pending | Pending | Pending | Not Yet Certified |
-| HYDRO-CAP-009 | Ecosystem Runtime Attachments | Demonstrated at adapter level | N/A | Pending | Pending | Pending | Pending | Demonstrated | Demonstrated | Not Yet Certified |
-| HYDRO-CAP-010 | Dataset and Knowledge Registry Participation | Demonstrated at implementation level | N/A | Pending | Pending | Pending | Pending | Pending | Pending | Not Yet Certified |
+Hydro must not become the owner of external participant responsibilities.
 
 ---
 
-# 29. Duplicate Responsibility Review
+# 42. Capability Lifecycle
 
-The audit does not create separate constitutional identities for internal helper files.
+Each capability follows the constitutional lifecycle:
 
-The following are treated as implementation/evidence components rather than automatically independent capabilities:
+```text
+IDENTIFIED
+    ↓
+MAPPED
+    ↓
+CONTRACTED
+    ↓
+REGISTERED
+    ↓
+OBSERVED
+    ↓
+REPLAYABLE
+    ↓
+VALIDATED
+    ↓
+CERTIFIED
+```
 
-- `trace_graph.py`;
-- `execution_correlation.py`;
-- `telemetry_emitter.py`;
-- `replay_divergence_checker.py`;
-- `replay_corruption_simulator.py`;
-- individual registry helper modules;
-- individual ecosystem adapter modules.
+The lifecycle represents audit progression.
 
-These components are mapped into the capability domains that own their runtime responsibility.
-
-No new Hydro feature is introduced by this inventory.
-
----
-
-# 30. Evidence Discipline
-
-All certification statements in this inventory follow the following rules:
-
-1. Repository presence alone does not prove runtime execution.
-2. Swagger presence alone does not prove successful endpoint execution.
-3. A successful endpoint response does not automatically prove constitutional certification.
-4. An adapter does not automatically prove registry participation.
-5. A replay endpoint returning HTTP `200` does not automatically prove replay equivalence.
-6. `ordered_replay: true` does not automatically prove complete replay.
-7. Linked trace references do not automatically prove event-level Trace ID propagation.
-8. Descriptive documentation does not replace executable evidence.
-9. Repeated copies of the same runtime result are not treated as independent executions.
-10. Unsupported certification claims are not permitted.
+It does not imply that every capability has already completed every lifecycle stage.
 
 ---
 
-# 31. Current Audit Findings
+# 43. Evidence Model
 
-## Finding F-001 — Runtime Availability
+Evidence must be traceable to an observable source.
 
-The NICAI runtime is deployed and reachable.
+Accepted evidence types include:
 
-**Status: Verified**
+* live API responses;
+* runtime event output;
+* trace responses;
+* health responses;
+* registry records;
+* repository implementation;
+* executable validation results;
+* deterministic test output;
+* replay output;
+* structured logs;
+* telemetry metrics.
 
-## Finding F-002 — Core API Execution
-
-Core runtime API interactions have been successfully demonstrated.
-
-**Status: Demonstrated**
-
-## Finding F-003 — Contract Validation
-
-The contract validation endpoint has been successfully executed.
-
-**Status: Demonstrated**
-
-## Finding F-004 — Trace Retrieval
-
-The trace endpoint accepts a valid Trace ID and returns structured trace information.
-
-**Status: Demonstrated**
-
-## Finding F-005 — Structured Runtime Intelligence
-
-Perception, validation, intelligence, state, pattern, and action outputs have been observed.
-
-**Status: Demonstrated**
-
-## Finding F-006 — Trace Propagation Gap
-
-At least one observed structured PATTERN event contained a null event-level Trace ID.
-
-**Status: Pending**
-
-## Finding F-007 — Replay Incompleteness
-
-The tested replay verification returned:
-
-`replay_status: INCOMPLETE`
-
-and identified missing execution stages.
-
-**Status: Pending**
-
-## Finding F-008 — Replay Equivalence
-
-Original-versus-replay equivalence has not yet been independently demonstrated.
-
-**Status: Not Yet Certified**
-
-## Finding F-009 — Registry Participation
-
-Registry-related implementation exists, but complete independent registration evidence for all required constitutional registries has not yet been established.
-
-**Status: Pending**
-
-## Finding F-010 — End-to-End Constitutional Execution
-
-A complete evidence chain covering identity, authority, contract, registry, execution, trace, replay, observability, and health has not yet been independently demonstrated.
-
-**Status: Pending**
+Documentation alone is not sufficient evidence for executable runtime behaviour.
 
 ---
 
-# 32. Required Remaining Audit Evidence
+# 44. Certification Classification
 
-The following evidence remains required before final Constitutional Runtime certification:
+The capability inventory uses the following classification model:
 
-1. Complete Trace ID propagation.
-2. Deterministic Trace ID verification according to the runtime's defined identity contract.
-3. Complete replay reconstruction.
-4. Original-versus-replay equivalence evidence.
-5. Independent evidence for required registry participation.
-6. Complete constitutional integration matrix evidence.
-7. Complete end-to-end constitutional execution evidence.
-8. Runtime health evidence covering required failure/recovery conditions.
-9. Final production certification evidence.
-
----
-
-# 33. Final Inventory Status
-
-**Repository:** NICAI validation-layer repository
-
-**Runtime:** NICAI Hydro
-
-**Convergence Phase:** Constitutional Runtime Convergence
-
-**Audit Mode:** Independent validation and certification
-
-**Feature Development:** Not in scope
-
-**Architecture Redesign:** Not in scope
-
-**Capability Inventory:** Established
-
-**Permanent Working Identities:** Established for the ten audited capability domains
-
-**Core Runtime Availability:** Verified
-
-**Core API Execution:** Demonstrated
-
-**Contract Validation:** Demonstrated
-
-**Trace Retrieval:** Demonstrated
-
-**Structured Runtime Events:** Demonstrated
-
-**Complete Trace Propagation:** Pending
-
-**Deterministic Trace ID Certification:** Pending
-
-**Replay Verification:** Demonstrated but incomplete
-
-**Replay Equivalence:** Not Yet Certified
-
-**Registry Participation:** Pending independent verification
-
-**Observability:** Demonstrated with trace-propagation gap
-
-**Runtime Health:** Demonstrated at endpoint level
-
-**End-to-End Constitutional Runtime Execution:** Pending
-
-**Overall Production Certification:** Not Yet Certified
+| Classification                | Meaning                                               |
+| ----------------------------- | ----------------------------------------------------- |
+| VERIFIED                      | Directly verified through executable evidence         |
+| DEMONSTRATED                  | Runtime behaviour successfully demonstrated           |
+| OBSERVED                      | Behaviour observed in runtime evidence                |
+| INFRASTRUCTURE DEMONSTRATED   | Supporting implementation is present and identifiable |
+| NOT YET CERTIFIED             | Evidence does not support certification               |
+| REQUIRES INDEPENDENT EVIDENCE | External proof is required                            |
 
 ---
 
-# 34. Controlled Next Step
+# 45. Current Evidence Position
 
-The next audit artefacts must be produced from the evidence established in this inventory.
+Based on the observed deployed runtime and repository evidence:
 
-The controlled sequence is:
+| Capability             | Current Evidence Position   |
+| ---------------------- | --------------------------- |
+| Runtime API            | Demonstrated                |
+| Contract Validation    | Demonstrated                |
+| Intelligence Execution | Demonstrated                |
+| Trace Correlation      | Demonstrated                |
+| Replay Verification    | Demonstrated                |
+| Registry Participation | Infrastructure demonstrated |
+| Observability          | Demonstrated                |
+| Runtime Integration    | Infrastructure demonstrated |
+| Ecosystem Attachments  | Infrastructure demonstrated |
+| Knowledge Registry     | Infrastructure demonstrated |
 
-1. Runtime Identity Cards
-2. Constitutional Layer Map
-3. Authority Boundary Report
-4. Runtime Contract Catalogue
-5. API and Event Contract Matrix
-6. Registry Participation Report
-7. Replay and Observability Report
-8. Runtime Health Report
-9. Constitutional Integration Matrix
-10. Updated Production Certification Report
-11. Final Constitutional Runtime Handover
+---
 
-No new Hydro feature is to be introduced during these steps.
+# 46. Capability Certification Boundary
 
-No unsupported certification claim is to be added.
+The inventory does not convert infrastructure existence into full constitutional certification.
 
-All final certification states must remain evidence-backed and reproducible.
+Specifically, the following require independent evidence:
+
+* complete registry participation;
+* complete replay equivalence;
+* deterministic trace generation across repeated executions;
+* full constitutional end-to-end execution;
+* complete external ecosystem integration;
+* complete downstream consumer validation.
+
+The capability inventory therefore remains evidence-aligned.
+
+---
+
+# 47. Final Capability Governance Rules
+
+NICAI Hydro shall operate under the following governance rules:
+
+1. One permanent identity per capability.
+2. One primary constitutional layer per capability.
+3. Explicit authority ownership.
+4. Explicit authority exclusions.
+5. No duplicated external authority.
+6. Versioned runtime contracts.
+7. Traceable execution.
+8. Observable execution.
+9. Replay-aware execution.
+10. Evidence-backed certification.
+11. Registry participation through existing registry ownership.
+12. No new Hydro capability introduced solely for convergence.
+13. No parallel architecture created.
+14. No undocumented external dependency.
+15. No certification claim without evidence.
+
+---
+
+# 48. Final Capability Inventory Summary
+
+The NICAI Hydro Constitutional Runtime Participant is represented by the following permanent capability identities:
+
+```text
+NICAI.HYDRO.RUNTIME_API
+NICAI.HYDRO.CONTRACT_VALIDATION
+NICAI.HYDRO.INTELLIGENCE_EXECUTION
+NICAI.HYDRO.TRACE_CORRELATION
+NICAI.HYDRO.REPLAY_VERIFICATION
+NICAI.HYDRO.REGISTRY_PARTICIPATION
+NICAI.HYDRO.OBSERVABILITY
+NICAI.HYDRO.RUNTIME_INTEGRATION
+NICAI.HYDRO.ECOSYSTEM_ATTACHMENTS
+NICAI.HYDRO.KNOWLEDGE_REGISTRY
+```
+
+These capabilities collectively represent the existing Hydro runtime responsibilities required for Constitutional Runtime Convergence.
+
+They do not represent newly developed Hydro features.
+
+---
+
+# 49. Capability Inventory Audit Conclusion
+
+The capability inventory establishes a single working identity for each identified Hydro runtime responsibility.
+
+The inventory separates:
+
+* runtime interfaces;
+* contract validation;
+* intelligence execution;
+* trace correlation;
+* replay verification;
+* registry participation;
+* observability;
+* integration;
+* ecosystem attachment;
+* knowledge registration.
+
+The inventory also establishes explicit authority boundaries and prevents responsibility duplication.
+
+The remaining constitutional certification work must use executable evidence from the corresponding runtime, registry, replay, observability, health, and integration validation surfaces.
+
+---
+
+# 50. Document Closure
+
+This capability inventory is the authoritative capability reference for the NICAI Hydro Constitutional Runtime Convergence audit.
+
+It is intended to be consumed by:
+
+* Constitutional Layer Map;
+* Authority Boundary Report;
+* Runtime Contract Catalogue;
+* API & Event Contract Matrix;
+* Registry Participation Report;
+* Replay & Observability Report;
+* Runtime Health Report;
+* Constitutional Integration Matrix;
+* Production Certification Report;
+* Final Constitutional Runtime Handover.
+
+No new product capability is created by this document.
+
+No external participant authority is transferred.
+
+No unsupported certification claim is made.
+
+---
+
+# END OF CAPABILITY_INVENTORY.md
+
+```
+```
+
+
+
+```
