@@ -1,1 +1,972 @@
+# NICAI Constitutional Runtime — Registry Evidence
 
+## 1. Purpose
+
+This directory contains evidence related to registry participation and registry integration for the NICAI Constitutional Runtime.
+
+The purpose of this evidence is to document:
+
+* registry-related capabilities present in NICAI,
+* local registry participation,
+* registry adapter boundaries,
+* contract preparation,
+* trace propagation,
+* replay expectations,
+* ownership boundaries,
+* external registry dependencies,
+* evidence status.
+
+This document does **not** invent or assume an external registry service where a canonical external service contract has not been provided.
+
+---
+
+# 2. Registry Evidence Boundary
+
+The NICAI registry boundary is:
+
+```text
+NICAI Runtime
+      ↓
+Registry Adapter / Registry Contract Preparation
+      ↓
+Bounded Registry Payload
+      ↓
+External Registry
+```
+
+NICAI may prepare registry-compatible information.
+
+The external registry owns its own:
+
+```text
+storage
+indexing
+search
+persistence
+knowledge management
+external lifecycle
+external governance
+```
+
+NICAI must not claim ownership of those external functions without explicit evidence.
+
+---
+
+# 3. Existing NICAI Registry Components
+
+The NICAI repository contains registry-related implementation components.
+
+Relevant components include:
+
+```text
+consumer_registry.py
+dataset_registry.py
+maritime_registry_adapter.py
+```
+
+These components serve different purposes and must not be treated as one canonical external Capability Registry.
+
+---
+
+# 4. Local Consumer Registry
+
+NICAI contains a local consumer registry mechanism.
+
+The implementation uses:
+
+```text
+contracts/consumer_registry.json
+```
+
+The consumer registry is loaded by:
+
+```python
+REGISTRY_FILE = "contracts/consumer_registry.json"
+```
+
+The registry provides local lookup and validation of registered consumers.
+
+---
+
+# 5. Consumer Registry Functions
+
+The local consumer registry implementation provides functions equivalent to:
+
+```text
+load_registry()
+lookup_consumer()
+validate_consumer()
+get_allowed_contracts()
+```
+
+The registry can therefore be used to determine:
+
+```text
+whether a consumer is known
+whether a consumer is active
+which contracts are allowed for a consumer
+```
+
+---
+
+# 6. Consumer Validation
+
+The local consumer validation model is:
+
+```text
+Consumer Name
+      ↓
+Registry Lookup
+      ↓
+Consumer Found?
+      ↓
+ACTIVE?
+      ↓
+Allowed
+```
+
+Unknown consumers produce:
+
+```json
+{
+  "consumer_valid": false,
+  "reason": "UNKNOWN_CONSUMER"
+}
+```
+
+Inactive consumers produce:
+
+```json
+{
+  "consumer_valid": false,
+  "reason": "INACTIVE_CONSUMER"
+}
+```
+
+A valid active consumer produces a result containing:
+
+```json
+{
+  "consumer_valid": true,
+  "consumer": {}
+}
+```
+
+---
+
+# 7. Allowed Contract Lookup
+
+The local registry supports contract lookup through:
+
+```text
+get_allowed_contracts(consumer_name)
+```
+
+The expected result is the consumer's:
+
+```text
+allowed_contracts
+```
+
+This provides local contract authorization information.
+
+It does not constitute an external capability discovery API.
+
+---
+
+# 8. Dataset Registry
+
+NICAI also contains a dataset registry component.
+
+The dataset registry uses:
+
+```text
+datasets.json
+```
+
+The dataset registry provides:
+
+```text
+dataset lookup
+trust score lookup
+active/inactive status checking
+```
+
+These capabilities are related to dataset governance and are separate from an external Capability Registry.
+
+---
+
+# 9. Dataset Registry Functions
+
+The dataset registry provides functions equivalent to:
+
+```text
+load_datasets()
+get_dataset()
+get_trust_score()
+is_dataset_active()
+```
+
+The registry validates that dataset records are represented as dictionaries and safely handles missing or invalid dataset registry data.
+
+---
+
+# 10. Maritime Registry Adapter
+
+NICAI contains:
+
+```text
+maritime_registry_adapter.py
+```
+
+The adapter is an ecosystem integration boundary.
+
+Its stated purpose is to prepare NICAI outputs for a Maritime Knowledge Registry.
+
+The adapter explicitly separates:
+
+```text
+NICAI payload preparation
+```
+
+from:
+
+```text
+external registry persistence
+knowledge management
+```
+
+---
+
+# 11. Maritime Registry Ownership Boundary
+
+The registry adapter establishes the following conceptual ownership boundary:
+
+```text
+NICAI
+  |
+  | prepares registry payload
+  ↓
+Maritime Knowledge Registry
+  |
+  | owns persistence
+  | owns indexing
+  | owns search
+  | owns knowledge management
+  ↓
+External Registry
+```
+
+NICAI does not claim ownership of external registry persistence.
+
+---
+
+# 12. Registry Payload Validation
+
+The maritime registry adapter validates a minimum registry payload requirement.
+
+The required field is:
+
+```text
+trace_id
+```
+
+A payload without a `trace_id` is rejected by the adapter's payload-preparation validation.
+
+Expected failure shape:
+
+```json
+{
+  "status": "ERROR",
+  "reason": "Missing trace_id"
+}
+```
+
+---
+
+# 13. Registry Payload Preparation
+
+For a valid payload, the adapter prepares a registry-compatible structure containing concepts equivalent to:
+
+```text
+status
+contract_version
+trace_id
+knowledge_record
+replay_expected
+ownership_boundary
+```
+
+Example evidence shape:
+
+```json
+{
+  "status": "READY",
+  "contract_version": "1.0",
+  "trace_id": "TRACE_EXAMPLE",
+  "knowledge_record": {},
+  "replay_expected": true,
+  "ownership_boundary": "Maritime Knowledge Registry owns persistence and knowledge management. NICAI owns payload preparation only."
+}
+```
+
+This example describes the adapter contract shape.
+
+It is not a claim that `TRACE_EXAMPLE` exists in production.
+
+---
+
+# 14. Registry Contract Version
+
+The maritime registry adapter currently defines:
+
+```text
+CONTRACT_VERSION = "1.0"
+```
+
+This represents the adapter's registry payload contract version.
+
+It must not be interpreted as the version of an external registry service unless the external registry owner confirms that mapping.
+
+---
+
+# 15. Traceability
+
+Registry-related payload preparation requires:
+
+```text
+trace_id
+```
+
+Expected flow:
+
+```text
+NICAI Execution
+      ↓
+trace_id
+      ↓
+Registry Adapter
+      ↓
+Registry Payload
+      ↓
+External Registry
+```
+
+The `trace_id` provides correlation between the NICAI execution and the prepared registry payload.
+
+---
+
+# 16. Replay Relationship
+
+Registry payload preparation includes the expectation:
+
+```text
+replay_expected = true
+```
+
+This indicates that registry-related payload preparation is expected to remain associated with replayable execution evidence.
+
+It does not by itself prove that an external registry can replay the record.
+
+External registry replay capability requires independent evidence from the external registry owner.
+
+---
+
+# 17. Registry Evidence and Replay
+
+The expected relationship is:
+
+```text
+NICAI Input
+    ↓
+NICAI Processing
+    ↓
+Registry Payload Preparation
+    ↓
+Registry Evidence
+    ↓
+Replay
+```
+
+Replay certification requires actual runtime evidence.
+
+The existence of an adapter alone is insufficient to certify external registry replay.
+
+---
+
+# 18. Registry Observability
+
+Registry-related runtime evidence should preserve, where applicable:
+
+```text
+trace_id
+contract_version
+component
+status
+ownership_boundary
+```
+
+Example:
+
+```json
+{
+  "trace_id": "TRACE_EXAMPLE",
+  "component": "maritime_registry_adapter",
+  "contract_version": "1.0",
+  "status": "READY"
+}
+```
+
+This is an evidence-shape example only.
+
+---
+
+# 19. Registry Integration Boundary
+
+The constitutional registry integration boundary is:
+
+```text
+NICAI
+   ↓
+Registry Adapter
+   ↓
+Bounded Payload
+   ↓
+External Registry
+```
+
+The adapter prevents NICAI from assuming external registry ownership.
+
+---
+
+# 20. External Registry Ownership
+
+The following functions are external responsibilities unless explicitly implemented inside NICAI:
+
+```text
+registry persistence
+registry indexing
+registry search
+registry storage
+registry knowledge management
+external registry lifecycle
+external registry governance
+external registry availability
+```
+
+NICAI should only claim the functions directly supported by its implementation and evidence.
+
+---
+
+# 21. Capability Registry Distinction
+
+A critical distinction must be maintained between:
+
+```text
+Local Consumer Registry
+```
+
+and:
+
+```text
+External Capability Registry
+```
+
+The local consumer registry exists inside the NICAI implementation.
+
+It does not automatically provide:
+
+```text
+Capability Registry base URL
+Capability registration API
+Capability discovery API
+Capability authentication
+Capability lifecycle service
+Capability service discovery
+Capability Registry OpenAPI
+```
+
+Those details must come from the canonical Capability Registry owner/specification.
+
+---
+
+# 22. Canonical Capability Registry Status
+
+Based on the available NICAI implementation evidence:
+
+```text
+Standalone canonical Capability Registry service:
+NOT IDENTIFIED
+```
+
+Therefore NICAI must not invent:
+
+```text
+Capability Registry Base URL
+Registration Endpoint
+Discovery Endpoint
+Authentication Headers
+Tenant Identifier
+Project Identifier
+Capability ID Scheme
+Capability Version Scheme
+External Lifecycle Model
+External Health Endpoint
+OpenAPI Specification
+```
+
+---
+
+# 23. GOUDHA Integration Boundary
+
+For GOUDHA integration, NICAI can provide:
+
+```text
+NICAI integration expectations
+trace propagation requirements
+contract-version expectations
+bounded registry adapter behaviour
+ownership boundaries
+local consumer registry behaviour
+registry payload preparation behaviour
+```
+
+The canonical Capability Registry contract must be supplied by the platform/registry owner.
+
+---
+
+# 24. Required External Capability Registry Information
+
+Before Capability Registry integration is certified, the following must be provided by the responsible registry owner:
+
+```text
+1. Capability Registry base URL
+2. Capability registration API
+3. Capability discovery/query API
+4. Request schema
+5. Response schema
+6. Authentication requirements
+7. Required headers
+8. Capability ID format
+9. Capability name format
+10. Capability version format
+11. Required metadata fields
+12. Tenant identifier
+13. Project/context identifier
+14. Capability lifecycle model
+15. Permission/authorization model
+16. API version
+17. Health endpoint
+18. Readiness endpoint
+19. Timeout requirements
+20. Retry requirements
+21. Service discovery details
+22. OpenAPI specification
+23. Canonical request examples
+24. Canonical response examples
+```
+
+---
+
+# 25. External Registry Evidence Requirement
+
+The following evidence is required before an external registry can be marked verified:
+
+```text
+[ ] Canonical registry repository identified
+[ ] Canonical registry owner identified
+[ ] Base URL verified
+[ ] Registration endpoint verified
+[ ] Discovery endpoint verified
+[ ] Request schema verified
+[ ] Response schema verified
+[ ] Authentication verified
+[ ] Headers verified
+[ ] Capability ID format verified
+[ ] Capability version verified
+[ ] Lifecycle verified
+[ ] Authorization verified
+[ ] API version verified
+[ ] Health endpoint verified
+[ ] Readiness endpoint verified
+[ ] Timeout verified
+[ ] Retry policy verified
+[ ] Service discovery verified
+[ ] OpenAPI verified
+[ ] Example request verified
+[ ] Example response verified
+```
+
+---
+
+# 26. Current Evidence Classification
+
+| Registry Area                        | Status                     |
+| ------------------------------------ | -------------------------- |
+| Local consumer registry              | IMPLEMENTED                |
+| Consumer lookup                      | IMPLEMENTED                |
+| Consumer validation                  | IMPLEMENTED                |
+| Allowed contract lookup              | IMPLEMENTED                |
+| Dataset registry                     | IMPLEMENTED                |
+| Dataset lookup                       | IMPLEMENTED                |
+| Maritime registry adapter            | IMPLEMENTED                |
+| Registry payload preparation         | IMPLEMENTED                |
+| Registry trace requirement           | IMPLEMENTED                |
+| Registry contract version            | IMPLEMENTED                |
+| External registry persistence        | EXTERNAL                   |
+| External registry indexing           | EXTERNAL                   |
+| External registry search             | EXTERNAL                   |
+| Canonical Capability Registry        | NOT IDENTIFIED             |
+| External Capability registration API | REQUIRES EXTERNAL CONTRACT |
+| External Capability discovery API    | REQUIRES EXTERNAL CONTRACT |
+| External Capability authentication   | REQUIRES EXTERNAL CONTRACT |
+| External Capability lifecycle        | REQUIRES EXTERNAL CONTRACT |
+| External Capability OpenAPI          | REQUIRES EXTERNAL CONTRACT |
+
+---
+
+# 27. Evidence Classification Rules
+
+Registry evidence uses the following classifications.
+
+## IMPLEMENTED
+
+The capability exists in the NICAI implementation.
+
+## OBSERVED
+
+The capability has been observed during runtime execution.
+
+## VERIFIED
+
+Direct evidence confirms the capability and its expected behaviour.
+
+## EXTERNAL
+
+The capability belongs to an external system.
+
+## REQUIRES EXTERNAL CONTRACT
+
+The capability cannot be certified until the canonical external contract is supplied.
+
+## PENDING
+
+Required evidence has not yet been produced.
+
+## NOT YET CERTIFIED
+
+Implementation or integration preparation may exist, but independent certification has not occurred.
+
+---
+
+# 28. No Fabricated Registry Evidence
+
+This evidence package must not invent:
+
+```text
+external registry URLs
+external API endpoints
+external authentication tokens
+external API keys
+external tenant IDs
+external project IDs
+external capability IDs
+external production responses
+external health responses
+external registration records
+external discovery records
+```
+
+Examples in this document are illustrative only unless explicitly backed by runtime evidence.
+
+---
+
+# 29. Registry Security Boundary
+
+NICAI must not store or expose:
+
+```text
+production API keys
+passwords
+authentication tokens
+private credentials
+secrets
+```
+
+Registry authentication details should be supplied through the approved integration/security mechanism.
+
+---
+
+# 30. Registry Contract Compatibility
+
+The registry integration should maintain:
+
+```text
+Producer
+   ↓
+Contract Version
+   ↓
+Payload
+   ↓
+Consumer
+```
+
+A breaking registry contract change must be explicitly versioned.
+
+NICAI must not silently assume compatibility with an unknown external registry version.
+
+---
+
+# 31. Registry Failure Handling
+
+A registry integration failure should remain observable.
+
+Expected conceptual flow:
+
+```text
+Registry Payload
+      ↓
+Integration Attempt
+      ↓
+Success / Failure
+      ↓
+Trace Preservation
+      ↓
+Evidence
+```
+
+A failed external registry operation must not be represented as successful merely because payload preparation succeeded.
+
+---
+
+# 32. Important Distinction
+
+These two states are different:
+
+```text
+PAYLOAD_READY
+```
+
+and:
+
+```text
+REGISTRY_ACCEPTED
+```
+
+`PAYLOAD_READY` means NICAI successfully prepared the registry payload.
+
+`REGISTRY_ACCEPTED` would require actual evidence from the external registry showing that the external system accepted the payload.
+
+NICAI must not convert the first state into the second without evidence.
+
+---
+
+# 33. Registry Health Boundary
+
+NICAI adapter readiness does not prove external registry health.
+
+The following are separate:
+
+```text
+NICAI Adapter Ready
+```
+
+```text
+External Registry Reachable
+```
+
+```text
+External Registry Healthy
+```
+
+```text
+External Registry Accepting Requests
+```
+
+Each requires its own evidence.
+
+---
+
+# 34. Registry Certification Checklist
+
+Before marking registry integration certified:
+
+```text
+[ ] NICAI registry adapter verified
+[ ] Payload validation verified
+[ ] trace_id propagation verified
+[ ] contract version verified
+[ ] ownership boundary verified
+[ ] runtime registry event captured
+[ ] external registry contract received
+[ ] external registry endpoint verified
+[ ] authentication verified
+[ ] request accepted by external registry
+[ ] response captured
+[ ] response linked to trace_id
+[ ] replay relationship verified
+[ ] failure handling verified
+[ ] health/readiness verified
+[ ] independent acceptance completed
+```
+
+---
+
+# 35. Current NICAI Registry Conclusion
+
+The NICAI repository demonstrates registry-related integration capability through:
+
+```text
+Local Consumer Registry
++
+Dataset Registry
++
+Maritime Registry Adapter
++
+Registry Payload Preparation
++
+Trace Propagation
++
+Contract Versioning
++
+Ownership Boundary
++
+Replay Expectation
+```
+
+These capabilities establish the NICAI-side registry integration boundary.
+
+They do not establish ownership or implementation of an external canonical Capability Registry.
+
+---
+
+# 36. Current GOUDHA Integration Conclusion
+
+For GOUDHA integration:
+
+```text
+NICAI SIDE
+    ↓
+Registry Adapter / Contract Preparation
+    ↓
+External Capability Registry
+```
+
+The NICAI side can provide its existing integration expectations.
+
+The external Capability Registry details must be supplied by the canonical registry/platform owner.
+
+Until that contract is available:
+
+```text
+CAPABILITY REGISTRY INTEGRATION
+STATUS: REQUIRES EXTERNAL CONTRACT
+```
+
+---
+
+# 37. Final Registry Evidence Statement
+
+NICAI provides bounded registry participation through local registry mechanisms and ecosystem registry adapters.
+
+NICAI can:
+
+```text
+identify consumers
+validate consumers
+identify allowed contracts
+identify datasets
+prepare registry payloads
+preserve trace identifiers
+preserve contract versions
+define ownership boundaries
+prepare replay-compatible registry evidence
+```
+
+NICAI does not claim:
+
+```text
+external registry ownership
+external registry persistence
+external registry search
+external capability registration
+external capability discovery
+external capability authentication
+external capability lifecycle management
+```
+
+unless independently supported by canonical external evidence.
+
+---
+
+# 38. Final Status
+
+```text
+LOCAL CONSUMER REGISTRY
+IMPLEMENTED
+
+DATASET REGISTRY
+IMPLEMENTED
+
+MARITIME REGISTRY ADAPTER
+IMPLEMENTED
+
+REGISTRY PAYLOAD PREPARATION
+IMPLEMENTED
+
+TRACEABILITY
+IMPLEMENTED
+
+CONTRACT VERSIONING
+IMPLEMENTED
+
+OWNERSHIP BOUNDARY
+DEFINED
+
+EXTERNAL CAPABILITY REGISTRY
+NOT IDENTIFIED IN NICAI
+
+EXTERNAL CAPABILITY REGISTRATION API
+REQUIRES EXTERNAL CONTRACT
+
+EXTERNAL CAPABILITY DISCOVERY API
+REQUIRES EXTERNAL CONTRACT
+
+EXTERNAL REGISTRY CERTIFICATION
+NOT YET CERTIFIED
+```
+
+---
+
+# 39. Evidence Integrity Rule
+
+The registry evidence package follows one governing rule:
+
+```text
+Only directly supported implementation or runtime evidence
+may be presented as verified.
+```
+
+Where evidence is missing:
+
+```text
+PENDING
+```
+
+Where an external contract is required:
+
+```text
+REQUIRES EXTERNAL CONTRACT
+```
+
+Where implementation exists but independent certification is absent:
+
+```text
+NOT YET CERTIFIED
+```
+
+No unsupported registry claim should be presented as production truth.
+
+---
+
+# END OF REGISTRY EVIDENCE
