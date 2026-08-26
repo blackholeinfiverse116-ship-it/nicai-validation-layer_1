@@ -1,0 +1,75 @@
+{
+  "identity_type": "CONSTITUTIONAL_RUNTIME_PARTICIPANT",
+  "identity_version": "1.0",
+
+  "participant": {
+    "name": "NICAI",
+    "full_name": "Networked Intelligence & Context Analysis Interface",
+    "participant_role": "INTELLIGENCE_PROVIDER",
+    "participant_class": "DETERMINISTIC_RUNTIME"
+  },
+
+  "constitutional_permissions": {
+    "observe": true,
+    "validate": true,
+    "analyze": true,
+    "generate_intelligence": true,
+    "generate_recommendation_signal": true,
+    "emit_trace": true,
+    "emit_evidence": true,
+    "support_replay": true,
+
+    "execute_action": false,
+    "authorize_action": false,
+    "override_authority": false,
+    "modify_external_registry": false,
+    "claim_external_registry_ownership": false
+  },
+
+  "required_context": {
+    "trace_id": true,
+    "timestamp": true,
+    "source_or_dataset_identity": true,
+    "input_context": true
+  },
+
+  "output_contract": {
+    "intelligence_output": true,
+    "explanation": true,
+    "confidence": true,
+    "trace_id": true,
+    "recommendation_signal": true,
+    "direct_action": false
+  },
+
+  "evidence_requirements": {
+    "input_evidence": true,
+    "processing_evidence": true,
+    "output_evidence": true,
+    "trace_evidence": true,
+    "replay_evidence": true,
+    "observability_evidence": true
+  },
+
+  "integration_rules": {
+    "integration_style": "BOUNDED_INTERFACE",
+    "external_system_authority_preserved": true,
+    "external_registry_contract_must_be_canonical": true,
+    "guessed_external_contracts_forbidden": true,
+    "fake_registration_proof_forbidden": true
+  },
+
+  "governance": {
+    "operator_remains_in_control": true,
+    "decision_support_only": true,
+    "automatic_decision_execution": false,
+    "external_governance_acceptance": "NOT_YET_CERTIFIED"
+  },
+
+  "participant_status": {
+    "runtime_identity": "DECLARED",
+    "engineering_validation": "COMPLETE",
+    "external_registry_registration": "NOT_REGISTERED",
+    "external_capability_certification": "NOT_YET_CERTIFIED"
+  }
+}
