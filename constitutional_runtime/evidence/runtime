@@ -1,1 +1,904 @@
+# NICAI Constitutional Runtime — Runtime Evidence
 
+## 1. Purpose
+
+This directory contains evidence describing the execution state and runtime behaviour of the NICAI Constitutional Runtime.
+
+The purpose of this evidence is to establish that the runtime:
+
+* starts through a defined runtime entrypoint;
+* executes within the NICAI runtime boundary;
+* preserves `trace_id` across execution;
+* exposes defined runtime contracts;
+* produces observable execution state;
+* supports deterministic execution;
+* supports replay and audit evidence;
+* maintains explicit ownership boundaries;
+* does not silently execute external decisions.
+
+This evidence is intended for engineering review, integration review, constitutional review, and production handover.
+
+---
+
+# 2. Runtime Identity
+
+| Field                   | Value                                                |
+| ----------------------- | ---------------------------------------------------- |
+| System                  | NICAI                                                |
+| Runtime                 | Constitutional Runtime                               |
+| Repository              | `nicai-validation-layer_1`                           |
+| Runtime boundary        | `constitutional_runtime/`                            |
+| Evidence category       | Runtime                                              |
+| Execution model         | Deterministic                                        |
+| Decision authority      | External / authorised operator                       |
+| Runtime responsibility  | Intelligence processing and contract-bound execution |
+| Evidence responsibility | Preserve observable execution and traceability       |
+
+---
+
+# 3. Runtime Execution Boundary
+
+The runtime execution boundary is:
+
+```text
+INPUT
+  ↓
+CONTRACT VALIDATION
+  ↓
+CONSTITUTIONAL RUNTIME
+  ↓
+INTELLIGENCE / PARTICIPANT PROCESSING
+  ↓
+OUTPUT CONTRACT
+  ↓
+OBSERVABILITY
+  ↓
+EVIDENCE
+  ↓
+REPLAY
+```
+
+The runtime must not bypass the contract-validation boundary.
+
+External participants must interact through defined integration contracts.
+
+---
+
+# 4. Runtime Entrypoint
+
+The NICAI repository contains runtime/application entrypoints including:
+
+```text
+main.py
+api_server.py
+run_demo.py
+run_demo_full.py
+live_pipeline.py
+pipeline.py
+integration_orchestrator.py
+```
+
+The exact entrypoint used for a particular deployment must be established from the deployment configuration and execution command.
+
+The runtime evidence therefore records the runtime entrypoint as an implementation-controlled property rather than inventing a separate canonical entrypoint.
+
+---
+
+# 5. Runtime Startup
+
+A valid runtime startup sequence is:
+
+```text
+PROCESS START
+    ↓
+CONFIGURATION LOAD
+    ↓
+DEPENDENCY INITIALISATION
+    ↓
+REGISTRY / CONTRACT INITIALISATION
+    ↓
+RUNTIME INITIALISATION
+    ↓
+API / SERVICE INITIALISATION
+    ↓
+READY
+```
+
+A runtime must not be considered ready merely because the process has started.
+
+Readiness requires successful initialisation of the components required for the declared runtime contract.
+
+---
+
+# 6. Runtime State Model
+
+The runtime lifecycle is represented conceptually as:
+
+```text
+CREATED
+   ↓
+INITIALISING
+   ↓
+READY
+   ↓
+PROCESSING
+   ↓
+COMPLETED
+```
+
+Failure states are:
+
+```text
+INITIALISING
+      ↓
+   FAILED
+```
+
+and:
+
+```text
+PROCESSING
+      ↓
+   FAILED
+```
+
+Recovery may return the runtime to:
+
+```text
+FAILED
+  ↓
+RECOVERING
+  ↓
+READY
+```
+
+A runtime must not report `READY` while required runtime dependencies are unavailable.
+
+---
+
+# 7. Runtime Execution Record
+
+A runtime execution record should contain the following minimum information:
+
+```json
+{
+  "trace_id": "TRACE_xxx",
+  "runtime": "NICAI",
+  "runtime_state": "PROCESSING",
+  "timestamp": "2026-08-26T00:00:00Z",
+  "event_type": "RUNTIME_EXECUTION",
+  "status": "SUCCESS",
+  "contract_version": "1.0",
+  "execution_result": {},
+  "evidence_reference": null
+}
+```
+
+The `trace_id` is the primary correlation identifier.
+
+---
+
+# 8. Trace Propagation
+
+The runtime preserves the originating `trace_id`.
+
+The expected trace flow is:
+
+```text
+INPUT
+  ↓
+VALIDATION
+  ↓
+RUNTIME
+  ↓
+PARTICIPANT
+  ↓
+OUTPUT
+  ↓
+EVENT
+  ↓
+LOG
+  ↓
+REPLAY
+```
+
+The same trace identity must remain recoverable across the execution chain.
+
+If a downstream participant creates a child execution identifier, the relationship must remain traceable to the originating `trace_id`.
+
+---
+
+# 9. Runtime Contract Boundary
+
+The runtime accepts only contract-compliant inputs.
+
+Conceptually:
+
+```text
+External Input
+      ↓
+Contract Validation
+      ↓
+Accepted Runtime Input
+      ↓
+Runtime Processing
+```
+
+Invalid input must not silently enter the runtime.
+
+Expected validation outcomes include:
+
+```text
+ACCEPTED
+REJECTED
+FLAGGED
+```
+
+The exact status values must follow the applicable canonical runtime contract.
+
+---
+
+# 10. Runtime Output Boundary
+
+Runtime output must be produced through a defined output contract.
+
+Conceptually:
+
+```text
+Runtime Processing
+      ↓
+Output Construction
+      ↓
+Output Validation
+      ↓
+Observable Output
+```
+
+The runtime must not silently modify or discard contract-relevant information.
+
+---
+
+# 11. Deterministic Execution
+
+NICAI follows the deterministic execution principle:
+
+```text
+Same Input
+    +
+Same Configuration
+    +
+Same Contract Version
+    +
+Same Runtime Version
+    =
+Same Expected Output
+```
+
+Deterministic behaviour is required for replayability and auditability.
+
+Runtime-generated timestamps, identifiers, telemetry values, or environment-dependent fields must be treated as runtime metadata rather than evidence of nondeterministic intelligence logic.
+
+---
+
+# 12. Failure Handling
+
+Runtime failures must be observable.
+
+A failure record should contain:
+
+```json
+{
+  "trace_id": "TRACE_xxx",
+  "runtime": "NICAI",
+  "event_type": "RUNTIME_FAILURE",
+  "status": "FAILED",
+  "timestamp": "2026-08-26T00:00:00Z",
+  "reason": "RUNTIME_ERROR",
+  "recoverable": false
+}
+```
+
+The runtime must not convert an execution failure into an apparent successful result.
+
+---
+
+# 13. Runtime Error Categories
+
+Runtime errors may include:
+
+```text
+CONFIGURATION_ERROR
+DEPENDENCY_ERROR
+CONTRACT_ERROR
+VALIDATION_ERROR
+PROCESSING_ERROR
+TIMEOUT
+EXTERNAL_SERVICE_ERROR
+SERIALISATION_ERROR
+REPLAY_ERROR
+UNKNOWN_RUNTIME_ERROR
+```
+
+The actual implementation may expose more specific error codes.
+
+---
+
+# 14. Runtime Observability
+
+Runtime observability must make the following information recoverable:
+
+* runtime start;
+* runtime readiness;
+* runtime processing;
+* runtime completion;
+* runtime failure;
+* trace identity;
+* contract version;
+* participant interaction;
+* execution duration;
+* replay information;
+* health/readiness state.
+
+The runtime should not depend exclusively on dashboard visibility for operational observability.
+
+---
+
+# 15. Runtime Evidence Sources
+
+Relevant runtime evidence may originate from:
+
+```text
+logs/
+proof/
+constitutional_runtime/evidence/runtime/
+constitutional_runtime/evidence/events/
+constitutional_runtime/evidence/observability/
+constitutional_runtime/evidence/replay/
+constitutional_runtime/evidence/health/
+```
+
+Existing NICAI runtime artefacts may include:
+
+```text
+validation_logs.json
+anomaly_logs.json
+pattern_logs.json
+action_logs.json
+telemetry_metrics.json
+trace_proof.txt
+END-TO-END-TRACE-PROOF.json
+```
+
+These artefacts provide supporting execution evidence where applicable.
+
+---
+
+# 16. Runtime Health
+
+Runtime health and readiness are separate concepts.
+
+### Liveness
+
+Liveness answers:
+
+```text
+Is the process running?
+```
+
+### Readiness
+
+Readiness answers:
+
+```text
+Can the runtime currently perform its declared responsibility?
+```
+
+A process being reachable does not automatically prove that the runtime is ready.
+
+The production NICAI deployment has previously been observed without a dedicated `/health` endpoint. Therefore, HTTP reachability must not be represented as equivalent to a certified health contract.
+
+---
+
+# 17. Runtime Dependency Boundary
+
+The runtime may depend on:
+
+* configuration;
+* local datasets;
+* contract definitions;
+* registries;
+* APIs;
+* participant adapters;
+* logging infrastructure;
+* replay infrastructure.
+
+Dependencies must remain within their declared ownership boundaries.
+
+The runtime must not claim ownership of an external registry merely because it prepares data for that registry.
+
+---
+
+# 18. External Participant Boundary
+
+External participants are connected through bounded interfaces.
+
+The expected model is:
+
+```text
+NICAI
+  ↓
+Adapter / Contract Boundary
+  ↓
+External Participant
+```
+
+NICAI owns its own output and integration payload preparation.
+
+The external participant owns its own service, persistence, registry, or knowledge-management responsibilities unless a separate canonical contract explicitly states otherwise.
+
+---
+
+# 19. Registry Boundary
+
+NICAI may prepare registry-compatible payloads.
+
+Example:
+
+```json
+{
+  "status": "READY",
+  "contract_version": "1.0",
+  "trace_id": "TRACE_xxx",
+  "knowledge_record": {},
+  "replay_expected": true,
+  "ownership_boundary": "External registry owns persistence and knowledge management."
+}
+```
+
+This does **not** establish that NICAI owns a canonical external Capability Registry.
+
+The actual registry service, registration API, discovery API, authentication mechanism, lifecycle model, and OpenAPI contract must originate from the registry owner.
+
+---
+
+# 20. Runtime Replay Relationship
+
+Runtime evidence must be replay-compatible.
+
+The relationship is:
+
+```text
+ORIGINAL EXECUTION
+       ↓
+RUNTIME LOG
+       ↓
+TRACE
+       ↓
+REPLAY ENGINE
+       ↓
+RECONSTRUCTED EXECUTION
+       ↓
+COMPARISON
+```
+
+Replay evidence must distinguish between:
+
+```text
+ORIGINAL RUNTIME DATA
+```
+
+and:
+
+```text
+RECONSTRUCTED REPLAY DATA
+```
+
+---
+
+# 21. Replay Requirements
+
+A replayable runtime execution should preserve:
+
+* input identity;
+* trace identity;
+* contract version;
+* relevant configuration;
+* execution sequence;
+* participant interaction;
+* output;
+* error state;
+* timestamps where required for reconstruction;
+* evidence references.
+
+Replay must not silently invent missing execution data.
+
+---
+
+# 22. Evidence Integrity
+
+Runtime evidence should be:
+
+```text
+TRACEABLE
+AUDITABLE
+REPLAYABLE
+VERSIONED
+EXPLAINABLE
+```
+
+Evidence should identify:
+
+```text
+WHAT happened
+WHEN it happened
+UNDER which trace
+UNDER which contract
+WHICH component produced it
+WHAT output resulted
+```
+
+---
+
+# 23. Ownership Model
+
+NICAI ownership:
+
+```text
+NICAI
+├── Input processing
+├── Validation
+├── Intelligence processing
+├── Output preparation
+├── Trace propagation
+├── Runtime observability
+└── Runtime evidence
+```
+
+External ownership:
+
+```text
+External Participant
+├── External service
+├── External persistence
+├── External registry
+├── External discovery
+└── External governance
+```
+
+Ownership must not be inferred merely from an adapter existing in the NICAI repository.
+
+---
+
+# 24. Runtime Security Boundary
+
+Credentials, API keys, tokens, passwords, and private secrets must not be stored in runtime evidence files.
+
+Evidence must contain references to security configuration rather than secret values.
+
+Example:
+
+```json
+{
+  "authentication": {
+    "configured": true,
+    "mechanism": "environment-managed",
+    "secret_value_exposed": false
+  }
+}
+```
+
+---
+
+# 25. Runtime Versioning
+
+Runtime evidence should identify the version context when available:
+
+```json
+{
+  "runtime": "NICAI",
+  "runtime_version": "IMPLEMENTATION_VERSION",
+  "contract_version": "1.0"
+}
+```
+
+If an implementation version is not explicitly exposed by the runtime, the repository commit/tag should be used as the authoritative engineering reference.
+
+No version should be invented.
+
+---
+
+# 26. Runtime Evidence Classification
+
+Runtime evidence is classified as:
+
+### DIRECT
+
+Evidence directly produced by the running system.
+
+Examples:
+
+```text
+runtime logs
+API responses
+execution records
+trace records
+health responses
+```
+
+### DERIVED
+
+Evidence generated by analysing direct runtime evidence.
+
+Examples:
+
+```text
+trace continuity reports
+replay comparison reports
+runtime summaries
+```
+
+### DOCUMENTARY
+
+Evidence describing implementation or architecture.
+
+Examples:
+
+```text
+README
+runtime contract documentation
+handover documents
+architecture documentation
+```
+
+The three categories must not be presented as equivalent.
+
+---
+
+# 27. Certification Boundary
+
+Runtime evidence supports certification but does not independently constitute certification.
+
+Certification requires:
+
+```text
+IMPLEMENTATION
++
+EXECUTION EVIDENCE
++
+TRACEABILITY
++
+REPLAY
++
+OBSERVABILITY
++
+HEALTH / READINESS
++
+INDEPENDENT REVIEW
+```
+
+Where an external certification authority is required, NICAI cannot self-certify that external boundary.
+
+---
+
+# 28. Integration Readiness
+
+NICAI runtime integration readiness requires:
+
+```text
+[✓] Runtime boundary identified
+[✓] Contract boundary identified
+[✓] Trace propagation defined
+[✓] Evidence structure defined
+[✓] Replay relationship defined
+[✓] Ownership boundaries defined
+[✓] External participant boundary defined
+[✓] Deterministic execution principle defined
+[✓] Failure handling defined
+[✓] Observability requirements defined
+```
+
+Actual external integration remains dependent on the canonical contract supplied by the external participant.
+
+---
+
+# 29. GOUDHA Integration Context
+
+For GOUDHA integration, the expected architecture is:
+
+```text
+NICAI
+   ↓
+NICAI Integration Contract
+   ↓
+GOUDHA Runtime Adapter / Contract
+   ↓
+GOUDHA Runtime
+```
+
+The GOUDHA runtime must provide its own canonical integration details, including where applicable:
+
+```text
+Runtime entrypoint
+API endpoints
+Events
+Schemas
+Trace propagation
+Health/readiness
+Replay support
+Dependencies
+Environment variables
+Build/run commands
+Version/tag
+```
+
+NICAI should not invent missing GOUDHA runtime details.
+
+---
+
+# 30. Capability Registry Boundary
+
+NICAI does not claim ownership of a standalone canonical Capability Registry unless such a service is explicitly implemented and documented.
+
+The existing local consumer registry pattern is an integration-support mechanism.
+
+It must not automatically be described as:
+
+```text
+Canonical Capability Registry
+```
+
+without authoritative evidence.
+
+Therefore:
+
+```text
+LOCAL CONSUMER REGISTRY
+≠
+CANONICAL CAPABILITY REGISTRY
+```
+
+This distinction is mandatory for integration accuracy.
+
+---
+
+# 31. Runtime Evidence Acceptance Criteria
+
+Runtime evidence is considered sufficient for engineering review when the reviewer can establish:
+
+1. The runtime exists.
+2. The runtime has a defined execution boundary.
+3. Input reaches the runtime through a contract boundary.
+4. Output leaves through a contract boundary.
+5. Trace identity is preserved.
+6. Runtime failures are observable.
+7. Runtime execution can be reconstructed where replay is supported.
+8. External ownership is not falsely claimed.
+9. Runtime evidence is distinguishable from documentary claims.
+10. Production claims are supported by actual deployment evidence.
+
+---
+
+# 32. Evidence Relationship
+
+The runtime evidence connects with the other evidence categories as follows:
+
+```text
+RUNTIME
+  │
+  ├── API
+  │
+  ├── EVENTS
+  │
+  ├── REGISTRY
+  │
+  ├── OBSERVABILITY
+  │
+  ├── REPLAY
+  │
+  ├── HEALTH
+  │
+  └── END_TO_END
+```
+
+Together these categories establish the runtime evidence chain.
+
+---
+
+# 33. End-to-End Evidence Chain
+
+The complete evidence relationship is:
+
+```text
+INPUT
+  ↓
+CONTRACT
+  ↓
+RUNTIME
+  ↓
+EVENT
+  ↓
+OBSERVABILITY
+  ↓
+OUTPUT
+  ↓
+REPLAY
+  ↓
+VALIDATION
+  ↓
+HANDOVER
+```
+
+Each stage must remain traceable to the originating execution where applicable.
+
+---
+
+# 34. Review Principle
+
+The runtime evidence package follows one rule:
+
+> No runtime capability should be claimed solely because documentation says it exists.
+
+Where possible, claims must be supported by:
+
+```text
+CODE
++
+CONFIGURATION
++
+EXECUTION
++
+LOG
++
+TRACE
++
+REPLAY
+```
+
+---
+
+# 35. Final Runtime Evidence Statement
+
+NICAI provides a deterministic runtime boundary designed to process intelligence through explicit contracts, preserve traceability, expose execution state, support replay, and maintain clear ownership boundaries.
+
+NICAI does not claim ownership of external services or registries merely because integration adapters exist.
+
+External integration contracts must be supplied by the authoritative owner of the external service.
+
+The runtime evidence therefore establishes the NICAI-side execution and integration boundary without inventing unsupported external infrastructure details.
+
+---
+
+# 36. Evidence Status
+
+```text
+NICAI RUNTIME BOUNDARY              = IMPLEMENTED
+TRACEABILITY                         = IMPLEMENTED
+DETERMINISTIC EXECUTION PRINCIPLE   = IMPLEMENTED
+RUNTIME OBSERVABILITY                = IMPLEMENTED / EVIDENCE-DEPENDENT
+REPLAY SUPPORT                       = IMPLEMENTED / EVIDENCE-DEPENDENT
+EXTERNAL REGISTRY OWNERSHIP          = NOT CLAIMED
+EXTERNAL CAPABILITY REGISTRY         = NOT CLAIMED WITHOUT CANONICAL PROOF
+EXTERNAL SERVICE CONTRACTS           = OWNER-SUPPLIED
+```
+
+---
+
+# 37. Review Conclusion
+
+The NICAI Constitutional Runtime evidence package establishes the runtime-side contract and evidence boundary required for integration review.
+
+The runtime remains:
+
+```text
+DETERMINISTIC
+EXPLAINABLE
+TRACEABLE
+REPLAY-AWARE
+OBSERVABLE
+CONTRACT-BOUND
+OWNERSHIP-AWARE
+```
+
+No unsupported external capability or service is represented as canonical.
+
+**End of Runtime Evidence**
