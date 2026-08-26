@@ -1,1 +1,645 @@
+# NICAI Constitutional Runtime — Observability Evidence
 
+## 1. Purpose
+
+This directory contains evidence related to **runtime observability** for the NICAI Constitutional Runtime.
+
+The purpose of this evidence is to demonstrate that runtime activity can be:
+
+* identified,
+* traced,
+* correlated,
+* inspected,
+* replayed where applicable,
+* associated with a runtime execution,
+* associated with a `trace_id`,
+* distinguished by event type,
+* reviewed after execution.
+
+Observability evidence does **not** imply that NICAI owns external monitoring infrastructure.
+
+NICAI is responsible for producing and preserving the runtime information required for traceability within its defined boundary.
+
+---
+
+## 2. Observability Boundary
+
+The NICAI runtime observability boundary is:
+
+```text
+Runtime Input
+     ↓
+Execution
+     ↓
+Validation
+     ↓
+Intelligence Processing
+     ↓
+Output
+     ↓
+Event / Log Evidence
+     ↓
+Trace Correlation
+     ↓
+Review / Replay
+```
+
+The runtime should expose enough information to reconstruct what happened during an execution without requiring undocumented internal assumptions.
+
+---
+
+## 3. Primary Correlation Identifier
+
+The primary runtime correlation identifier is:
+
+```text
+trace_id
+```
+
+The same `trace_id` should be preserved across all applicable stages of a single execution.
+
+Example:
+
+```text
+INPUT
+  trace_id = TRACE_001
+      ↓
+VALIDATION
+  trace_id = TRACE_001
+      ↓
+ANALYSIS
+  trace_id = TRACE_001
+      ↓
+PATTERN
+  trace_id = TRACE_001
+      ↓
+OUTPUT
+  trace_id = TRACE_001
+      ↓
+ACTION / OBSERVABILITY
+  trace_id = TRACE_001
+```
+
+This provides end-to-end correlation.
+
+---
+
+## 4. Required Observability Fields
+
+Where applicable, runtime evidence should contain:
+
+```json
+{
+  "trace_id": "TRACE_xxx",
+  "timestamp": "2026-04-14T04:21:32Z",
+  "event_type": "VALIDATION",
+  "component": "nicai-runtime",
+  "status": "SUCCESS",
+  "data": {}
+}
+```
+
+Minimum expected fields:
+
+| Field        | Purpose                                    |
+| ------------ | ------------------------------------------ |
+| `trace_id`   | Correlates the execution                   |
+| `timestamp`  | Identifies when the event occurred         |
+| `event_type` | Identifies the event category              |
+| `component`  | Identifies the producing runtime component |
+| `status`     | Identifies execution state                 |
+| `data`       | Contains event-specific information        |
+
+---
+
+## 5. Supported Event Categories
+
+The runtime may produce observability evidence for the following event categories:
+
+```text
+INPUT
+VALIDATION
+ANALYSIS
+PATTERN
+OUTPUT
+ACTION
+ERROR
+HEALTH
+REPLAY
+INTEGRATION
+```
+
+These categories allow an execution to be understood from input through downstream integration.
+
+---
+
+## 6. Validation Observability
+
+Validation events should make it possible to determine:
+
+* which input was processed,
+* whether validation succeeded,
+* whether the input was flagged,
+* whether the input was rejected,
+* why validation produced that result,
+* which `trace_id` was associated with the operation.
+
+Example:
+
+```json
+{
+  "trace_id": "TRACE_001",
+  "event_type": "VALIDATION",
+  "status": "SUCCESS",
+  "validation_status": "ALLOW",
+  "reason": "VALID_SIGNAL"
+}
+```
+
+---
+
+## 7. Intelligence Observability
+
+Intelligence-processing evidence should identify:
+
+* the execution trace,
+* risk classification,
+* anomaly classification,
+* explanation,
+* confidence,
+* recommendation signal where applicable.
+
+Example:
+
+```json
+{
+  "trace_id": "TRACE_001",
+  "event_type": "ANALYSIS",
+  "status": "SUCCESS",
+  "risk_level": "HIGH",
+  "anomaly_type": "TEMPERATURE_SPIKE",
+  "confidence": 0.95,
+  "explanation": "Extreme temperature detected"
+}
+```
+
+---
+
+## 8. Pattern Observability
+
+Pattern detection evidence should identify:
+
+* pattern identifier,
+* trace identifier,
+* pattern type,
+* affected area,
+* anomaly count,
+* severity trend.
+
+Example:
+
+```json
+{
+  "trace_id": "TRACE_001",
+  "event_type": "PATTERN",
+  "status": "SUCCESS",
+  "pattern_id": "PATTERN_001",
+  "pattern_type": "CLUSTER_ANOMALY",
+  "anomaly_count": 15,
+  "severity_trend": "INCREASING"
+}
+```
+
+---
+
+## 9. Output Observability
+
+Output evidence should make the final intelligence result traceable back to its execution.
+
+Example:
+
+```json
+{
+  "trace_id": "TRACE_001",
+  "event_type": "OUTPUT",
+  "status": "SUCCESS",
+  "risk_level": "HIGH",
+  "recommendation_signal": "eligible_for_escalation"
+}
+```
+
+The output must not silently lose the originating `trace_id`.
+
+---
+
+## 10. Action Observability
+
+NICAI action outputs are **simulation / logging outputs**, not direct operational execution.
+
+Example:
+
+```json
+{
+  "trace_id": "TRACE_001",
+  "event_type": "ACTION",
+  "status": "SUCCESS",
+  "action_type": "eligible_for_escalation",
+  "target_role": "authority"
+}
+```
+
+The observability record demonstrates that an action signal was generated or logged.
+
+It does not demonstrate execution of an external operational action.
+
+---
+
+## 11. Error Observability
+
+Errors should remain associated with the execution whenever a valid `trace_id` exists.
+
+Example:
+
+```json
+{
+  "trace_id": "TRACE_001",
+  "event_type": "ERROR",
+  "status": "ERROR",
+  "error_type": "VALIDATION_ERROR",
+  "reason": "Missing required field"
+}
+```
+
+The objective is to avoid an untraceable failure.
+
+---
+
+## 12. Runtime Logs
+
+Relevant runtime evidence may be represented by existing runtime artifacts such as:
+
+```text
+validation_logs.json
+anomaly_logs.json
+pattern_logs.json
+action_logs.json
+telemetry_metrics.json
+trace_proof.txt
+END-TO-END-TRACE-PROOF.json
+```
+
+These artifacts provide supporting evidence for runtime execution and trace continuity.
+
+---
+
+## 13. JSONL Observability
+
+Where runtime events are stored as JSONL, each line represents an independently observable event.
+
+Example:
+
+```json
+{"trace_id":"TRACE_001","event_type":"INPUT","status":"SUCCESS"}
+{"trace_id":"TRACE_001","event_type":"VALIDATION","status":"SUCCESS"}
+{"trace_id":"TRACE_001","event_type":"ANALYSIS","status":"SUCCESS"}
+{"trace_id":"TRACE_001","event_type":"PATTERN","status":"SUCCESS"}
+{"trace_id":"TRACE_001","event_type":"OUTPUT","status":"SUCCESS"}
+```
+
+This format supports sequential inspection and deterministic replay workflows.
+
+---
+
+## 14. Trace Continuity
+
+A valid execution should preserve trace continuity.
+
+Expected condition:
+
+```text
+trace_id(INPUT)
+=
+trace_id(VALIDATION)
+=
+trace_id(ANALYSIS)
+=
+trace_id(PATTERN)
+=
+trace_id(OUTPUT)
+```
+
+Where an action or integration event belongs to the same execution:
+
+```text
+trace_id(ACTION)
+=
+trace_id(INTEGRATION)
+=
+trace_id(OUTPUT)
+```
+
+Any unexplained trace break should be treated as an observability issue requiring investigation.
+
+---
+
+## 15. Component Identification
+
+Observability records should identify the producing component where practical.
+
+Examples:
+
+```text
+samachar-input-adapter
+validation-layer
+sanskar-engine
+pattern-analysis
+fastapi-layer
+action-router
+replay-engine
+ecosystem-adapter
+```
+
+Component naming should remain stable enough to support operational review.
+
+---
+
+## 16. Timestamp Requirements
+
+Runtime events should contain timestamps in a machine-readable format.
+
+Preferred representation:
+
+```text
+ISO-8601
+```
+
+Example:
+
+```text
+2026-04-14T04:21:32Z
+```
+
+Timestamps support:
+
+* event ordering,
+* incident investigation,
+* replay analysis,
+* execution reconstruction,
+* operational review.
+
+---
+
+## 17. Health Observability
+
+Health information is separate from business intelligence.
+
+A health observation may contain:
+
+```json
+{
+  "event_type": "HEALTH",
+  "component": "nicai-runtime",
+  "status": "READY",
+  "timestamp": "2026-04-14T04:21:32Z"
+}
+```
+
+Health evidence should not be interpreted as proof that all downstream ecosystem services are healthy.
+
+It only describes the observed health state within the applicable runtime boundary.
+
+---
+
+## 18. Integration Observability
+
+For ecosystem integration, the runtime should preserve:
+
+```text
+trace_id
+contract_version
+component
+event_type
+status
+ownership_boundary
+```
+
+Example:
+
+```json
+{
+  "trace_id": "TRACE_001",
+  "event_type": "INTEGRATION",
+  "component": "maritime_registry_adapter",
+  "status": "READY",
+  "contract_version": "1.0",
+  "ownership_boundary": "NICAI prepares payload only"
+}
+```
+
+This prevents integration evidence from being confused with external registry persistence or ownership.
+
+---
+
+## 19. Replay Observability
+
+Replay evidence should allow an operator to determine:
+
+1. which execution was replayed,
+2. which `trace_id` was involved,
+3. which runtime events were reconstructed,
+4. whether the reconstructed sequence remained consistent.
+
+Expected flow:
+
+```text
+Original Execution
+       ↓
+Runtime Evidence
+       ↓
+Replay Engine
+       ↓
+Reconstructed Execution
+       ↓
+Trace Comparison
+       ↓
+Replay Result
+```
+
+---
+
+## 20. Deterministic Observability
+
+NICAI follows a deterministic execution model.
+
+Therefore:
+
+```text
+Same Input
+     +
+Same Rules
+     +
+Same Runtime Conditions
+     ↓
+Same Expected Output
+```
+
+Observability evidence should make it possible to compare executions without relying on hidden model state.
+
+---
+
+## 21. Evidence Classification
+
+Observability evidence can be classified as:
+
+### VERIFIED
+
+Direct runtime evidence demonstrates the capability.
+
+### OBSERVED
+
+The behavior was observed in the available runtime but does not constitute independent certification.
+
+### DOCUMENTED
+
+The behavior is described by implementation or documentation.
+
+### PENDING
+
+Required evidence has not yet been produced or independently verified.
+
+### NOT YET CERTIFIED
+
+The capability may exist, but formal external certification or independent acceptance has not yet occurred.
+
+---
+
+## 22. Current Evidence Boundary
+
+The available NICAI repository provides runtime evidence for:
+
+```text
+Input processing
+Validation
+Intelligence processing
+Pattern analysis
+Output generation
+Trace propagation
+Action logging
+Replay support
+Integration preparation
+Runtime logging
+```
+
+The evidence should not be interpreted as independent certification of external ecosystem systems.
+
+---
+
+## 23. External Ownership Boundary
+
+NICAI does not claim ownership of:
+
+```text
+External monitoring platforms
+External capability registries
+External service discovery
+External authentication infrastructure
+External persistence systems
+External governance approval
+External production acceptance
+```
+
+Where such evidence is required, it must be supplied by the responsible external owner.
+
+---
+
+## 24. Observability Review Checklist
+
+| Check                                 | Expected Result |
+| ------------------------------------- | --------------- |
+| Trace ID present                      | YES             |
+| Timestamp present                     | YES             |
+| Event type identifiable               | YES             |
+| Runtime component identifiable        | YES             |
+| Validation observable                 | YES             |
+| Intelligence processing observable    | YES             |
+| Pattern processing observable         | YES             |
+| Output observable                     | YES             |
+| Action logging observable             | YES             |
+| Error state observable                | YES             |
+| Replay evidence available             | YES             |
+| External monitoring ownership claimed | NO              |
+| External registry ownership claimed   | NO              |
+
+---
+
+## 25. Evidence Interpretation
+
+The presence of observability evidence means:
+
+```text
+Runtime activity can be inspected and correlated.
+```
+
+It does not automatically mean:
+
+```text
+External system certified
+```
+
+or:
+
+```text
+Production governance accepted
+```
+
+or:
+
+```text
+External service availability guaranteed
+```
+
+Those conclusions require separate evidence.
+
+---
+
+## 26. Final Observability Statement
+
+NICAI provides bounded runtime observability through trace identifiers, timestamped runtime events, structured logs, execution evidence, and replay-compatible records.
+
+The observability layer supports:
+
+```text
+TRACEABILITY
++
+CORRELATION
++
+EXECUTION REVIEW
++
+FAILURE INVESTIGATION
++
+REPLAY ANALYSIS
++
+INTEGRATION AUDITABILITY
+```
+
+without claiming ownership of external monitoring, registry, governance, or production acceptance systems.
+
+---
+
+## 27. Certification Boundary
+
+Final certification remains subject to the applicable review authority.
+
+Where evidence is not available:
+
+```text
+PENDING
+```
+
+Where implementation exists but independent certification has not occurred:
+
+```text
+NOT YET CERTIFIED
+```
+
+These statuses are intentional and prevent undocumented assumptions from being presented as verified facts.
