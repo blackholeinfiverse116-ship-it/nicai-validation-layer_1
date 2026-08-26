@@ -1,1 +1,1094 @@
+# NICAI Constitutional Runtime — End-to-End Evidence
 
+## 1. Document Purpose
+
+This document provides the end-to-end runtime evidence for the NICAI Constitutional Runtime.
+
+The purpose of this evidence package is to demonstrate that the NICAI runtime can maintain a traceable execution path from input through validation, intelligence processing, output generation, replay, and ecosystem integration boundaries.
+
+The evidence model is based on the following principle:
+
+```text
+INPUT
+  ↓
+VALIDATION
+  ↓
+INTELLIGENCE
+  ↓
+PATTERN ANALYSIS
+  ↓
+OUTPUT
+  ↓
+TRACE
+  ↓
+LOGGING
+  ↓
+REPLAY
+  ↓
+ECOSYSTEM BOUNDARY
+```
+
+NICAI remains a deterministic decision-support system.
+
+It does not execute external decisions.
+
+---
+
+# 2. Runtime Identity
+
+| Field                        | Value                                         |
+| ---------------------------- | --------------------------------------------- |
+| Runtime                      | NICAI                                         |
+| System Type                  | Deterministic Intelligence / Decision Support |
+| Primary Repository           | `nicai-validation-layer_1`                    |
+| Runtime Boundary             | `constitutional_runtime/`                     |
+| Evidence Boundary            | `constitutional_runtime/evidence/`            |
+| Review Boundary              | `constitutional_runtime/review/`              |
+| Trace Mechanism              | `trace_id`                                    |
+| Execution Model              | Deterministic                                 |
+| Decision Execution           | Not owned by NICAI                            |
+| Replay Model                 | JSON/JSONL based runtime evidence             |
+| External Ecosystem Ownership | External participant / registry owner         |
+
+---
+
+# 3. Constitutional Runtime Principle
+
+NICAI produces intelligence and evidence.
+
+NICAI does not claim ownership of external ecosystem systems unless an explicit contract establishes that ownership.
+
+Therefore:
+
+```text
+NICAI
+  |
+  +-- validates inputs
+  |
+  +-- generates intelligence
+  |
+  +-- generates traceable outputs
+  |
+  +-- records runtime evidence
+  |
+  +-- supports replay
+  |
+  +-- prepares bounded integration payloads
+  |
+  +-- preserves ownership boundaries
+  |
+  X-- does not execute external authority decisions
+```
+
+---
+
+# 4. End-to-End Runtime Flow
+
+The canonical runtime flow is:
+
+```text
+Dataset
+   ↓
+Samachar Input Adapter
+   ↓
+Signal Conversion
+   ↓
+Validation Layer
+   ↓
+Sanskar Intelligence Engine
+   ↓
+Multi-Signal Pattern Analysis
+   ↓
+FastAPI Runtime
+   ↓
+Dashboard / Consumer
+   ↓
+Action Simulation
+   ↓
+Logging
+   ↓
+Replay
+   ↓
+Ecosystem Adapters
+```
+
+Each stage must preserve the execution trace where applicable.
+
+---
+
+# 5. Evidence Chain
+
+The end-to-end evidence chain is represented as:
+
+```text
+INPUT
+  ↓
+INPUT_VALIDATION
+  ↓
+INTELLIGENCE_PROCESSING
+  ↓
+PATTERN_ANALYSIS
+  ↓
+OUTPUT_GENERATION
+  ↓
+TRACE_CONTINUITY
+  ↓
+RUNTIME_LOGGING
+  ↓
+REPLAY
+  ↓
+ECOSYSTEM_ATTACHMENT
+```
+
+The evidence chain is not intended to imply that every external ecosystem participant is owned by NICAI.
+
+It demonstrates that NICAI can prepare and expose bounded outputs for integration.
+
+---
+
+# 6. Input Evidence
+
+## 6.1 Input Source
+
+NICAI accepts structured environmental/runtime signals.
+
+Example:
+
+```json
+{
+  "signal_id": "W_2",
+  "timestamp": "2026-04-14T04:21:32",
+  "latitude": 19.07,
+  "longitude": 72.87,
+  "value": 48.7,
+  "dataset_id": "weather",
+  "feature_type": "temperature"
+}
+```
+
+---
+
+## 6.2 Input Requirements
+
+The input must contain the fields required by the active runtime contract.
+
+Typical fields include:
+
+```text
+signal_id
+timestamp
+latitude
+longitude
+value
+dataset_id
+feature_type
+```
+
+Invalid or incomplete inputs are handled by the validation boundary.
+
+---
+
+## 6.3 Input Evidence Objective
+
+Input evidence demonstrates:
+
+```text
+SOURCE DATA
+    ↓
+STRUCTURED SIGNAL
+```
+
+The input must be identifiable and traceable to the subsequent validation and processing stages.
+
+---
+
+# 7. Validation Evidence
+
+The validation layer evaluates incoming signals before intelligence processing.
+
+Typical validation outcomes are:
+
+```text
+ALLOW
+FLAG
+REJECT
+```
+
+Example:
+
+```json
+{
+  "signal_id": "W_2",
+  "status": "ALLOW",
+  "confidence_score": 0.9,
+  "trace_id": "TRACE_xxx",
+  "reason": "VALID_SIGNAL"
+}
+```
+
+---
+
+## 7.1 Validation Responsibilities
+
+The validation boundary checks conditions such as:
+
+* required fields
+* dataset validity
+* data type validity
+* empty input
+* malformed input
+* contract compatibility
+* signal integrity
+
+---
+
+## 7.2 Validation Evidence Objective
+
+Validation evidence demonstrates:
+
+```text
+SIGNAL
+  ↓
+VALIDATION
+  ↓
+VALIDATED SIGNAL
+```
+
+The validation result must remain associated with the runtime trace.
+
+---
+
+# 8. Intelligence Processing Evidence
+
+After validation, accepted signals may be processed by the NICAI intelligence layer.
+
+The intelligence layer applies deterministic rules.
+
+Example:
+
+```json
+{
+  "trace_id": "TRACE_xxx",
+  "risk_level": "HIGH",
+  "anomaly_type": "TEMPERATURE_SPIKE",
+  "explanation": "Extreme temperature detected",
+  "anomaly_score": 0.9,
+  "confidence": 0.95,
+  "recommendation_signal": "eligible_for_escalation"
+}
+```
+
+---
+
+# 9. Intelligence Evidence Objective
+
+The processing evidence demonstrates:
+
+```text
+VALIDATED SIGNAL
+      ↓
+INTELLIGENCE ENGINE
+      ↓
+EXPLAINABLE INTELLIGENCE
+```
+
+The output must explain why the intelligence state was produced.
+
+NICAI does not depend on an opaque probabilistic decision model for this runtime path.
+
+---
+
+# 10. Pattern Analysis Evidence
+
+NICAI can process multiple signals to identify patterns.
+
+Example:
+
+```json
+{
+  "pattern_id": "PATTERN_xxx",
+  "anomaly_count": 15,
+  "affected_zones": [
+    "North",
+    "Central",
+    "South"
+  ],
+  "pattern_type": "CLUSTER_ANOMALY",
+  "severity_trend": "INCREASING",
+  "pattern_summary": "Anomalies concentrated in North"
+}
+```
+
+---
+
+## 10.1 Pattern Evidence Objective
+
+Pattern evidence demonstrates:
+
+```text
+MULTIPLE SIGNALS
+      ↓
+ANOMALY ANALYSIS
+      ↓
+PATTERN DETECTION
+      ↓
+PATTERN OUTPUT
+```
+
+Pattern detection remains part of intelligence generation.
+
+It does not constitute external decision execution.
+
+---
+
+# 11. Output Evidence
+
+The final intelligence output is prepared for downstream consumers such as the dashboard or bounded ecosystem adapters.
+
+A representative output contains:
+
+```json
+{
+  "trace_id": "TRACE_xxx",
+  "risk_level": "HIGH",
+  "anomaly_type": "TEMPERATURE_SPIKE",
+  "explanation": "Extreme temperature detected",
+  "confidence": 0.95,
+  "recommendation_signal": "eligible_for_escalation"
+}
+```
+
+---
+
+# 12. Output Boundary
+
+NICAI may produce recommendation signals such as:
+
+```text
+eligible_for_escalation
+requires_review
+monitor
+```
+
+These are intelligence signals.
+
+They are not external commands.
+
+The distinction is:
+
+```text
+NICAI
+  ↓
+Recommendation Signal
+  ↓
+External Authority / Operator
+  ↓
+Decision
+```
+
+NICAI does not own the final authority decision.
+
+---
+
+# 13. Trace Evidence
+
+The primary trace mechanism is:
+
+```text
+trace_id
+```
+
+The trace identifies the execution chain across runtime stages.
+
+Representative flow:
+
+```text
+TRACE_xxx
+   ↓
+INPUT
+   ↓
+VALIDATION
+   ↓
+INTELLIGENCE
+   ↓
+PATTERN
+   ↓
+OUTPUT
+   ↓
+ACTION LOG
+```
+
+---
+
+# 14. Trace Continuity Requirement
+
+Where the runtime propagates the trace identifier, the same trace identifier must be preserved across the corresponding execution stages.
+
+Expected relationship:
+
+```text
+input.trace_id
+      =
+validation.trace_id
+      =
+intelligence.trace_id
+      =
+output.trace_id
+      =
+action.trace_id
+```
+
+Any stage that intentionally generates a new correlation identifier must document that relationship explicitly.
+
+---
+
+# 15. Runtime Logging Evidence
+
+NICAI maintains runtime evidence through structured logs.
+
+Relevant runtime artifacts include:
+
+```text
+validation_logs.json
+anomaly_logs.json
+pattern_logs.json
+action_logs.json
+telemetry_metrics.json
+trace_proof.txt
+END-TO-END-TRACE-PROOF.json
+```
+
+These artifacts provide evidence for different stages of execution.
+
+---
+
+# 16. Validation Log
+
+Validation evidence is associated with:
+
+```text
+validation_logs.json
+```
+
+It is used to demonstrate validation-stage execution.
+
+Expected logical flow:
+
+```text
+INPUT
+  ↓
+VALIDATION
+  ↓
+VALIDATION LOG
+```
+
+---
+
+# 17. Intelligence Log
+
+Anomaly/intelligence evidence is associated with:
+
+```text
+anomaly_logs.json
+```
+
+Expected logical flow:
+
+```text
+VALIDATED INPUT
+  ↓
+INTELLIGENCE PROCESSING
+  ↓
+ANOMALY LOG
+```
+
+---
+
+# 18. Pattern Log
+
+Pattern evidence is associated with:
+
+```text
+pattern_logs.json
+```
+
+Expected logical flow:
+
+```text
+MULTIPLE SIGNALS
+  ↓
+PATTERN ANALYSIS
+  ↓
+PATTERN LOG
+```
+
+---
+
+# 19. Action Log
+
+The action layer is simulation-only.
+
+Evidence is associated with:
+
+```text
+action_logs.json
+```
+
+Expected logical flow:
+
+```text
+INTELLIGENCE OUTPUT
+  ↓
+ACTION SIGNAL
+  ↓
+ACTION LOG
+```
+
+The action log does not establish that NICAI executed an external authority action.
+
+---
+
+# 20. Telemetry Evidence
+
+Runtime telemetry is represented through:
+
+```text
+telemetry_metrics.json
+```
+
+Telemetry can be used to establish runtime observability such as:
+
+* execution activity
+* runtime events
+* processing metrics
+* operational state
+* correlation information
+
+Telemetry must not be interpreted as a substitute for functional evidence.
+
+---
+
+# 21. Replay Evidence
+
+NICAI supports deterministic replay using stored runtime evidence.
+
+The replay model is:
+
+```text
+Recorded Runtime Evidence
+          ↓
+       Replay
+          ↓
+Reconstructed Execution
+          ↓
+Trace Comparison
+          ↓
+Replay Result
+```
+
+---
+
+# 22. Replay Requirements
+
+Replay evidence should establish:
+
+1. source runtime evidence was available;
+2. the relevant execution trace can be reconstructed;
+3. the sequence of events can be replayed;
+4. the resulting execution remains compatible with the recorded execution;
+5. trace continuity can be inspected.
+
+---
+
+# 23. Replay Evidence Location
+
+Replay-related evidence belongs under:
+
+```text
+constitutional_runtime/evidence/replay/
+```
+
+Existing project-level replay artifacts may also include:
+
+```text
+REPLAY_VALIDATION_REPORT.md
+END-TO-END-TRACE-PROOF.json
+trace_proof.txt
+```
+
+These artifacts should be treated as evidence sources rather than as new runtime contracts.
+
+---
+
+# 24. Determinism Evidence
+
+NICAI's deterministic principle is:
+
+```text
+Same Input
+    ↓
+Same Rules
+    ↓
+Same Output
+```
+
+The runtime should not depend on uncontrolled randomness for the demonstrated intelligence path.
+
+The determinism claim applies to the implemented deterministic execution path and must be supported by runtime/replay evidence.
+
+---
+
+# 25. Ecosystem Adapter Evidence
+
+NICAI contains bounded ecosystem adapters.
+
+Referenced adapters include:
+
+```text
+SVACS
+Bucket
+InsightFlow
+Maritime Knowledge Registry
+Fleet History Registry
+Vessel Lineage Registry
+```
+
+These adapters do not automatically transfer ownership of the external system to NICAI.
+
+---
+
+# 26. Adapter Boundary
+
+The integration model is:
+
+```text
+NICAI
+  ↓
+Adapter
+  ↓
+Contract Payload
+  ↓
+External Ecosystem
+```
+
+NICAI prepares the payload according to the available integration contract.
+
+The external ecosystem remains responsible for its own persistence, registration, indexing, authorization, or knowledge-management responsibilities unless a separate contract states otherwise.
+
+---
+
+# 27. Registry Boundary
+
+The NICAI repository contains local registry-related implementation such as:
+
+```text
+contracts/consumer_registry.json
+consumer_registry.py
+```
+
+This local consumer registry must not be represented as proof of ownership of an external canonical Capability Registry.
+
+The distinction is:
+
+```text
+NICAI Local Consumer Registry
+        ≠
+External Canonical Capability Registry
+```
+
+If an external Capability Registry is required, its canonical API and ownership must come from the platform/registry owner or its authoritative specification.
+
+---
+
+# 28. Maritime Registry Boundary
+
+NICAI may prepare a registry payload through its maritime registry adapter.
+
+The adapter's ownership principle is:
+
+```text
+NICAI
+  ↓
+Prepare Registry Payload
+  ↓
+Maritime Knowledge Registry
+  ↓
+External Persistence / Knowledge Management
+```
+
+NICAI does not claim ownership of external registry storage unless explicitly contracted.
+
+---
+
+# 29. Health and Runtime Evidence
+
+The runtime exposes operational endpoints documented by the deployed implementation.
+
+The current repository documentation identifies production endpoints including:
+
+```text
+GET /
+GET /docs
+GET /dashboard
+GET /run
+POST /nicai/evaluate
+POST /action
+```
+
+The repository documentation also records that a dedicated:
+
+```text
+GET /health
+```
+
+endpoint is not currently available on the deployed backend.
+
+Therefore:
+
+```text
+HEALTH ENDPOINT
+= NOT CURRENTLY EXPOSED
+```
+
+This is an operational observation and must not be converted into an invented health contract.
+
+---
+
+# 30. API Evidence
+
+The production API documentation is available through the deployed FastAPI documentation endpoint where accessible.
+
+The API evidence should establish:
+
+```text
+REQUEST
+  ↓
+API
+  ↓
+RUNTIME
+  ↓
+RESPONSE
+```
+
+Relevant production API paths include:
+
+```text
+POST /nicai/evaluate
+POST /action
+```
+
+and the documented read/dashboard paths.
+
+---
+
+# 31. Failure Handling Evidence
+
+NICAI includes failure-handling components intended to prevent uncontrolled runtime crashes and preserve diagnosability.
+
+Failure evidence should establish:
+
+```text
+INVALID / FAILED INPUT
+        ↓
+FAILURE HANDLING
+        ↓
+CONTROLLED RESULT
+        ↓
+LOG / TRACE
+```
+
+The exact failure state must follow the active implementation contract.
+
+---
+
+# 32. Evidence Classification
+
+The evidence package should distinguish between:
+
+### VERIFIED
+
+Evidence is directly available from implementation, runtime output, logs, tests, or deployment artifacts.
+
+### OBSERVED
+
+A behaviour has been observed in the current implementation but is not necessarily a formal contractual guarantee.
+
+### DECLARED
+
+A capability is documented as part of the system design or implementation documentation.
+
+### EXTERNAL
+
+The evidence or contract is owned by an external system or participant.
+
+### NOT ESTABLISHED
+
+The repository does not currently provide sufficient evidence to make the claim.
+
+---
+
+# 33. No Invented Evidence Rule
+
+The following must not be fabricated:
+
+```text
+External service URLs
+Authentication credentials
+Tenant identifiers
+External registry ownership
+External API contracts
+External registration APIs
+External discovery APIs
+External lifecycle contracts
+External OpenAPI specifications
+External production acceptance
+```
+
+If such information is not present in authoritative evidence, it must remain explicitly unestablished.
+
+---
+
+# 34. Evidence Provenance
+
+Every evidence claim should be traceable to one or more of:
+
+```text
+Source Code
+Runtime Output
+Runtime Log
+Test Result
+Deployment Evidence
+Replay Evidence
+API Documentation
+Authoritative External Contract
+```
+
+Unsupported claims must not be promoted to certified facts.
+
+---
+
+# 35. End-to-End Evidence Matrix
+
+| Stage        | Evidence              | Primary Purpose                   |
+| ------------ | --------------------- | --------------------------------- |
+| Input        | Input proof           | Establish input signal            |
+| Validation   | Validation logs/proof | Establish validation              |
+| Intelligence | Processing proof      | Establish intelligence generation |
+| Pattern      | Pattern logs          | Establish multi-signal analysis   |
+| Output       | Output proof          | Establish final intelligence      |
+| Trace        | Trace proof           | Establish correlation             |
+| Action       | Action logs           | Establish simulation/audit event  |
+| Telemetry    | Telemetry metrics     | Establish observability           |
+| Replay       | Replay evidence       | Establish reconstructability      |
+| Ecosystem    | Adapter evidence      | Establish bounded integration     |
+| API          | API documentation     | Establish API surface             |
+| Deployment   | Deployment evidence   | Establish deployed runtime        |
+
+---
+
+# 36. Constitutional Boundary Matrix
+
+| Boundary            | NICAI Responsibility                                                         | External Responsibility                         |
+| ------------------- | ---------------------------------------------------------------------------- | ----------------------------------------------- |
+| Input               | Receive/process input                                                        | Provide source data                             |
+| Validation          | Validate signals                                                             | Maintain source correctness                     |
+| Intelligence        | Generate deterministic intelligence                                          | Consume intelligence                            |
+| Pattern             | Detect patterns                                                              | Interpret according to authority                |
+| Output              | Produce explainable output                                                   | Use output operationally                        |
+| Action              | Simulate/log action signal                                                   | Execute actual authority action                 |
+| Replay              | Provide replayable runtime evidence                                          | Replay external systems where applicable        |
+| Registry            | Prepare bounded payload where contracted                                     | Own external registry                           |
+| Capability Registry | Consume/provide integration contract only when authoritative contract exists | Own canonical registry service where applicable |
+| Governance          | Preserve runtime boundaries                                                  | Provide governance/acceptance                   |
+| Decision            | Decision-support only                                                        | Final decision authority                        |
+
+---
+
+# 37. Evidence Integrity Rules
+
+The evidence package must preserve:
+
+```text
+TRACEABILITY
+DETERMINISM
+PROVENANCE
+OWNERSHIP
+CONTRACT BOUNDARIES
+REPLAYABILITY
+OBSERVABILITY
+```
+
+Evidence must not be modified merely to make a runtime state appear compliant.
+
+---
+
+# 38. End-to-End Trace Model
+
+The canonical conceptual trace is:
+
+```text
+TRACE_ID
+   │
+   ├── INPUT
+   │
+   ├── VALIDATION
+   │
+   ├── INTELLIGENCE
+   │
+   ├── PATTERN
+   │
+   ├── OUTPUT
+   │
+   ├── ACTION_SIMULATION
+   │
+   ├── TELEMETRY
+   │
+   └── REPLAY
+```
+
+This model provides a unified audit view of the NICAI execution path.
+
+---
+
+# 39. Evidence Completion Criteria
+
+The end-to-end evidence package is considered structurally complete when the following evidence classes are available:
+
+```text
+[ ] Input Evidence
+[ ] Validation Evidence
+[ ] Intelligence Evidence
+[ ] Pattern Evidence
+[ ] Output Evidence
+[ ] Trace Evidence
+[ ] Runtime Log Evidence
+[ ] Replay Evidence
+[ ] API Evidence
+[ ] Observability Evidence
+[ ] Ecosystem Adapter Evidence
+[ ] Deployment Evidence
+```
+
+A checkbox represents the evidence category required by the package.
+
+It does not by itself claim that the evidence has been independently certified.
+
+---
+
+# 40. External Certification Boundary
+
+External validation remains outside the NICAI runtime unless explicitly performed and recorded.
+
+Examples include:
+
+```text
+Independent Testing
+Governance Acceptance
+Production Acceptance
+External Capability Registry Certification
+External Ecosystem Acceptance
+```
+
+These must not be marked as completed solely because NICAI's internal runtime is operational.
+
+---
+
+# 41. Current Runtime Position
+
+Based on the available NICAI repository and runtime documentation:
+
+```text
+NICAI INTERNAL RUNTIME
+        ↓
+IMPLEMENTED
+        ↓
+DOCUMENTED
+        ↓
+TRACEABLE
+        ↓
+REPLAY-CAPABLE
+        ↓
+BOUNDED ECOSYSTEM ADAPTERS
+```
+
+External system ownership remains outside this boundary unless explicitly established by an authoritative contract.
+
+---
+
+# 42. Final Evidence Statement
+
+The NICAI Constitutional Runtime evidence model establishes an end-to-end structure for demonstrating:
+
+```text
+INPUT
+  ↓
+VALIDATION
+  ↓
+INTELLIGENCE
+  ↓
+PATTERN
+  ↓
+OUTPUT
+  ↓
+TRACE
+  ↓
+LOGGING
+  ↓
+REPLAY
+  ↓
+ECOSYSTEM INTEGRATION
+```
+
+The system is designed as a deterministic, explainable, traceable decision-support layer.
+
+NICAI does not claim authority over external decision systems, registries, or governance systems without an explicit authoritative contract.
+
+The purpose of this evidence package is therefore to establish the NICAI-side runtime evidence and integration boundary while preserving the ownership and certification boundaries of external participants.
+
+---
+
+# 43. Evidence Status
+
+```text
+NICAI INPUT PROCESSING        — DOCUMENTED
+NICAI VALIDATION              — DOCUMENTED
+NICAI INTELLIGENCE            — DOCUMENTED
+NICAI PATTERN ANALYSIS        — DOCUMENTED
+NICAI OUTPUT                  — DOCUMENTED
+TRACEABILITY                  — DOCUMENTED
+RUNTIME LOGGING               — DOCUMENTED
+REPLAY                        — DOCUMENTED
+ECOSYSTEM ADAPTERS            — DOCUMENTED
+API SURFACE                   — DOCUMENTED
+EXTERNAL CAPABILITY REGISTRY  — EXTERNAL CONTRACT REQUIRED
+EXTERNAL GOVERNANCE           — EXTERNAL ACCEPTANCE REQUIRED
+EXTERNAL PRODUCTION ACCEPTANCE — EXTERNAL ACCEPTANCE REQUIRED
+```
+
+---
+
+# 44. Ownership Statement
+
+NICAI owns the intelligence processing performed inside the NICAI runtime boundary.
+
+External participants own their respective external services and authority boundaries.
+
+Therefore:
+
+```text
+NICAI owns NICAI runtime processing.
+
+External systems own their external services.
+
+Integration does not automatically transfer ownership.
+
+Evidence does not automatically establish external certification.
+```
+
+---
+
+# 45. Final Constitutional Principle
+
+> **NICAI produces explainable intelligence, preserves traceability, supports replay, and exposes bounded integration contracts without assuming authority over external systems.**
+
+This principle governs interpretation of the end-to-end evidence contained in this directory.
