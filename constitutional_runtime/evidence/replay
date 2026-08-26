@@ -1,1 +1,1326 @@
+# NICAI Constitutional Runtime — Replay Evidence
 
+## 1. Purpose
+
+This directory contains evidence related to **deterministic replay** for the NICAI Constitutional Runtime.
+
+The purpose of replay evidence is to demonstrate that a previously recorded runtime execution can be:
+
+* identified,
+* reconstructed,
+* correlated using `trace_id`,
+* inspected,
+* compared with the original execution,
+* checked for divergence,
+* reviewed for deterministic consistency.
+
+Replay is an evidence and verification mechanism.
+
+Replay does not create a second source of truth and does not replace the original runtime execution.
+
+---
+
+# 2. Replay Principle
+
+NICAI follows the deterministic execution principle:
+
+```text
+Same Input
++
+Same Rules
++
+Same Relevant Runtime Conditions
+↓
+Same Expected Output
+```
+
+Replay therefore attempts to reconstruct an earlier execution using the recorded execution evidence.
+
+The objective is:
+
+```text
+Original Execution
+        ↓
+Recorded Evidence
+        ↓
+Replay Reconstruction
+        ↓
+Comparison
+        ↓
+Replay Result
+```
+
+---
+
+# 3. Replay Boundary
+
+The NICAI replay boundary is:
+
+```text
+Recorded Runtime Evidence
+        ↓
+Replay Engine
+        ↓
+Input Reconstruction
+        ↓
+Runtime Processing
+        ↓
+Output Reconstruction
+        ↓
+Original vs Replay Comparison
+        ↓
+Replay Result
+```
+
+Replay must remain within the applicable NICAI runtime boundary.
+
+It must not be interpreted as proof of the behaviour of external systems that are not replayed.
+
+---
+
+# 4. Primary Replay Identifier
+
+The primary correlation identifier is:
+
+```text
+trace_id
+```
+
+A replay operation should preserve the original execution identity where the replay contract requires it and should clearly distinguish the replay execution from the original execution where necessary.
+
+Conceptually:
+
+```text
+Original:
+trace_id = TRACE_001
+
+Replay:
+source_trace_id = TRACE_001
+replay_trace_id = REPLAY_TRACE_001
+```
+
+The exact identifier structure must follow the implemented replay contract.
+
+This document does not create a new production identifier scheme.
+
+---
+
+# 5. Replay Evidence Requirements
+
+A replay-capable execution should preserve enough information to reconstruct the relevant runtime execution.
+
+Required evidence may include:
+
+```text
+Input
+Trace ID
+Timestamp
+Event history
+Runtime state
+Contract version
+Processing result
+Output
+Validation result
+Relevant configuration
+Replay result
+```
+
+Not every execution necessarily requires every field.
+
+The actual replay contract determines the required evidence.
+
+---
+
+# 6. Runtime Evidence Sources
+
+Existing NICAI runtime artifacts that may support replay analysis include:
+
+```text
+validation_logs.json
+anomaly_logs.json
+pattern_logs.json
+action_logs.json
+telemetry_metrics.json
+trace_proof.txt
+END-TO-END-TRACE-PROOF.json
+```
+
+These artifacts must be treated as evidence only to the extent that their contents directly demonstrate the claimed behaviour.
+
+---
+
+# 7. JSONL Replay Source
+
+NICAI supports replay workflows based on structured runtime records.
+
+Where JSONL is used:
+
+```text
+One line
+=
+One runtime event
+```
+
+Example:
+
+```json
+{"trace_id":"TRACE_001","event_type":"INPUT","status":"SUCCESS"}
+{"trace_id":"TRACE_001","event_type":"VALIDATION","status":"SUCCESS"}
+{"trace_id":"TRACE_001","event_type":"ANALYSIS","status":"SUCCESS"}
+{"trace_id":"TRACE_001","event_type":"PATTERN","status":"SUCCESS"}
+{"trace_id":"TRACE_001","event_type":"OUTPUT","status":"SUCCESS"}
+```
+
+The records can be ordered and associated with the same execution using `trace_id`.
+
+The example above is illustrative and is not itself production evidence.
+
+---
+
+# 8. Replay Reconstruction
+
+Replay reconstruction should follow:
+
+```text
+Recorded Input
+      ↓
+Recorded Execution Context
+      ↓
+Replay Engine
+      ↓
+Runtime Processing
+      ↓
+Reconstructed Output
+```
+
+The replay engine should not silently invent missing runtime information.
+
+If required information is missing:
+
+```text
+REPLAY INCOMPLETE
+```
+
+or:
+
+```text
+REQUIRES DIRECT VERIFICATION
+```
+
+should be used instead of claiming successful replay.
+
+---
+
+# 9. Replay Execution Flow
+
+The expected replay sequence is:
+
+```text
+1. Identify execution
+2. Load evidence
+3. Validate evidence
+4. Reconstruct input
+5. Reconstruct applicable runtime context
+6. Execute replay
+7. Capture replay output
+8. Compare original and replay
+9. Check trace continuity
+10. Record replay result
+```
+
+---
+
+# 10. Execution Identification
+
+Before replay begins, the target execution must be identifiable.
+
+Minimum conceptual information:
+
+```text
+trace_id
+execution timestamp
+execution source
+available runtime evidence
+```
+
+Example:
+
+```json
+{
+  "trace_id": "TRACE_001",
+  "execution_timestamp": "2026-04-14T04:21:32Z",
+  "source": "NICAI"
+}
+```
+
+This is an evidence-shape example only.
+
+---
+
+# 11. Evidence Validation Before Replay
+
+Replay evidence should be checked before replay execution.
+
+Checks may include:
+
+```text
+[ ] Trace ID exists
+[ ] Input evidence exists
+[ ] Event records are readable
+[ ] Required event ordering is available
+[ ] Contract version is identifiable
+[ ] Required output evidence exists
+[ ] Evidence is not corrupted
+```
+
+If required evidence cannot be loaded, replay should not be marked successful.
+
+---
+
+# 12. Input Reconstruction
+
+The replay engine should reconstruct the original input from the recorded evidence.
+
+Expected relationship:
+
+```text
+Original Input
+      ↓
+Recorded Input Evidence
+      ↓
+Replay Input
+```
+
+The replay input should match the original input for the fields relevant to deterministic execution.
+
+---
+
+# 13. Input Integrity
+
+Input integrity should be checked before replay.
+
+Conceptually:
+
+```text
+Original Input
+      =
+Replay Input
+```
+
+for all fields required by the replay contract.
+
+If the inputs differ:
+
+```text
+REPLAY INPUT MISMATCH
+```
+
+must be reported.
+
+A replay performed with materially different input must not be represented as an exact deterministic replay of the original execution.
+
+---
+
+# 14. Runtime Context
+
+Some runtime behaviour may depend on execution context.
+
+Where required, replay evidence should identify relevant:
+
+```text
+runtime version
+contract version
+configuration
+rules
+dataset version
+input version
+```
+
+Only context required by the actual runtime should be treated as mandatory.
+
+This document does not invent additional runtime dependencies.
+
+---
+
+# 15. Dataset Replay
+
+If an execution depends on datasets, replay must use the appropriate dataset version or recorded dataset state.
+
+Expected relationship:
+
+```text
+Original Dataset
+        ↓
+Recorded Dataset Reference
+        ↓
+Replay Dataset
+```
+
+If the dataset has changed and the original dataset cannot be reconstructed, the replay may no longer represent an exact reproduction.
+
+The correct status is then:
+
+```text
+REPLAY CONTEXT DIFFERENCE
+```
+
+rather than:
+
+```text
+DETERMINISTIC REPLAY VERIFIED
+```
+
+---
+
+# 16. Contract Version
+
+Replay should preserve the contract version relevant to the original execution.
+
+Example:
+
+```json
+{
+  "contract_version": "1.0"
+}
+```
+
+The purpose is to prevent a replay from silently interpreting historical evidence under an incompatible contract.
+
+---
+
+# 17. Event Reconstruction
+
+Runtime events should be reconstructed in their recorded order.
+
+Expected model:
+
+```text
+EVENT 1
+  ↓
+EVENT 2
+  ↓
+EVENT 3
+  ↓
+EVENT 4
+  ↓
+EVENT 5
+```
+
+Each event should remain associated with the applicable trace.
+
+---
+
+# 18. Trace Continuity During Replay
+
+Trace continuity is a core replay invariant.
+
+Expected:
+
+```text
+Original Event 1 → TRACE_001
+Original Event 2 → TRACE_001
+Original Event 3 → TRACE_001
+Original Event 4 → TRACE_001
+```
+
+Replay should preserve the relationship to the original trace.
+
+Conceptually:
+
+```text
+source_trace_id = TRACE_001
+```
+
+The replay execution may use a separate replay identifier if required by the implementation.
+
+---
+
+# 19. Replay Output
+
+The replay engine should produce an output that can be compared with the original output.
+
+Conceptual structure:
+
+```json
+{
+  "source_trace_id": "TRACE_001",
+  "replay_status": "COMPLETED",
+  "comparison_status": "MATCH"
+}
+```
+
+This is an example evidence structure only.
+
+Actual production fields must follow the implemented replay contract.
+
+---
+
+# 20. Original vs Replay Comparison
+
+Replay verification requires comparison.
+
+Expected:
+
+```text
+Original Output
+       ↓
+       Compare
+       ↑
+Replay Output
+```
+
+Comparison may include:
+
+```text
+validation status
+risk level
+anomaly classification
+pattern classification
+recommendation signal
+confidence
+explanation
+trace relationship
+```
+
+The comparison must use the fields relevant to the runtime contract.
+
+---
+
+# 21. Replay Match
+
+A replay may be considered matching when the required deterministic outputs are equivalent.
+
+Conceptually:
+
+```text
+Original Output
+      =
+Replay Output
+```
+
+for the fields defined by the replay comparison contract.
+
+A matching result does not automatically certify external ecosystem behaviour.
+
+---
+
+# 22. Replay Divergence
+
+A replay divergence occurs when the replay result differs from the original result in a field that is expected to remain deterministic.
+
+Example:
+
+```text
+Original:
+risk_level = HIGH
+
+Replay:
+risk_level = MEDIUM
+```
+
+This should produce:
+
+```text
+REPLAY_DIVERGENCE
+```
+
+The divergence should remain associated with the relevant `trace_id`.
+
+---
+
+# 23. Divergence Evidence
+
+A divergence record should identify:
+
+```text
+source trace
+replay trace where applicable
+field
+original value
+replay value
+reason if known
+runtime context
+timestamp
+```
+
+Example:
+
+```json
+{
+  "source_trace_id": "TRACE_001",
+  "comparison_status": "DIVERGENCE",
+  "field": "risk_level",
+  "original_value": "HIGH",
+  "replay_value": "MEDIUM"
+}
+```
+
+This is an illustrative evidence structure.
+
+---
+
+# 24. Replay Corruption
+
+Replay evidence may become unusable when the underlying evidence is corrupted.
+
+Examples:
+
+```text
+Malformed JSON
+Missing event
+Invalid event ordering
+Missing trace_id
+Missing required input
+Incomplete output
+Corrupted runtime record
+```
+
+Such cases must be classified as replay evidence failures.
+
+They must not be classified as successful deterministic replay.
+
+---
+
+# 25. Replay Corruption Simulation
+
+If a replay corruption simulator exists in the runtime, it may be used to test the ability of the replay system to detect corrupted evidence.
+
+Conceptual flow:
+
+```text
+Valid Evidence
+      ↓
+Controlled Corruption
+      ↓
+Replay
+      ↓
+Corruption Detection
+      ↓
+Failure Result
+```
+
+The simulator must not be confused with a production corruption incident.
+
+---
+
+# 26. Replay Divergence Detection
+
+Where a replay divergence checker exists, its purpose is to compare original and replayed runtime results.
+
+Expected model:
+
+```text
+Original Execution
+       ↓
+Original Evidence
+       ↓
+Replay Execution
+       ↓
+Replay Evidence
+       ↓
+Divergence Checker
+       ↓
+MATCH / DIVERGENCE
+```
+
+The result should remain traceable.
+
+---
+
+# 27. Replay Engine Boundary
+
+The replay engine is responsible for:
+
+```text
+Evidence loading
+Input reconstruction
+Replay execution
+Result capture
+Comparison
+Divergence identification
+Replay status
+```
+
+It is not responsible for:
+
+```text
+External operational decisions
+External registry ownership
+External governance approval
+External production acceptance
+```
+
+---
+
+# 28. Replay and Validation
+
+Replay validation should remain separate from ordinary runtime validation.
+
+Runtime validation answers:
+
+```text
+Is this current input/output valid?
+```
+
+Replay validation answers:
+
+```text
+Does reconstructed execution remain consistent with the original execution?
+```
+
+Therefore:
+
+```text
+Runtime Validation
+≠
+Replay Validation
+```
+
+Both may contribute to the overall evidence package.
+
+---
+
+# 29. Replay and Observability
+
+Replay depends on sufficient observability.
+
+Expected relationship:
+
+```text
+Runtime
+  ↓
+Events
+  ↓
+Logs
+  ↓
+Trace
+  ↓
+Replay
+```
+
+If runtime events are not sufficiently observable, replay completeness may be limited.
+
+---
+
+# 30. Replay and Trace Proof
+
+Trace proof provides evidence that the execution remained associated with the expected `trace_id`.
+
+Replay uses this relationship to reconstruct the relevant execution.
+
+Expected:
+
+```text
+Input
+  trace_id = X
+       ↓
+Validation
+  trace_id = X
+       ↓
+Analysis
+  trace_id = X
+       ↓
+Output
+  trace_id = X
+```
+
+The replay comparison should preserve this relationship.
+
+---
+
+# 31. Replay Evidence Record
+
+A replay evidence record may contain:
+
+```json
+{
+  "replay_id": "REPLAY_EXAMPLE",
+  "source_trace_id": "TRACE_EXAMPLE",
+  "replay_timestamp": "2026-04-14T05:00:00Z",
+  "replay_status": "COMPLETED",
+  "comparison_status": "MATCH",
+  "divergences": []
+}
+```
+
+This is an evidence-shape example.
+
+It is not a claim that the example identifiers exist in production.
+
+---
+
+# 32. Replay Status Model
+
+Replay status should distinguish different outcomes.
+
+Recommended evidence statuses:
+
+```text
+NOT_STARTED
+EVIDENCE_LOADING
+EVIDENCE_INVALID
+RECONSTRUCTION_STARTED
+RECONSTRUCTION_COMPLETED
+REPLAY_STARTED
+REPLAY_COMPLETED
+MATCH
+DIVERGENCE
+INCOMPLETE
+FAILED
+```
+
+The actual runtime may use a different canonical status vocabulary.
+
+The implemented vocabulary should take precedence.
+
+---
+
+# 33. Replay Evidence Classification
+
+Replay evidence can be classified as:
+
+## VERIFIED
+
+Direct evidence demonstrates successful replay and comparison.
+
+## OBSERVED
+
+Replay behaviour was observed but independent verification is incomplete.
+
+## DOCUMENTED
+
+Replay behaviour is described in implementation/documentation.
+
+## PENDING
+
+Required replay evidence has not yet been captured.
+
+## NOT YET CERTIFIED
+
+Replay functionality exists or is demonstrated, but formal independent certification has not occurred.
+
+---
+
+# 34. Deterministic Replay Guarantee
+
+A deterministic replay claim requires:
+
+```text
+Same Relevant Input
++
+Same Relevant Rules
++
+Same Relevant Runtime Context
++
+Same Contract
+↓
+Equivalent Required Output
+```
+
+Without these conditions, exact deterministic equivalence cannot be assumed.
+
+---
+
+# 35. Replay Limitations
+
+Replay may be limited when:
+
+```text
+Original input is missing
+Dataset version is missing
+Runtime configuration is missing
+Contract version is unknown
+Event history is incomplete
+External state is unavailable
+External service response is unavailable
+Evidence is corrupted
+```
+
+In such cases, replay must be classified according to the actual evidence available.
+
+---
+
+# 36. External System Replay Boundary
+
+NICAI replay does not automatically replay external ecosystem systems.
+
+For example:
+
+```text
+NICAI Replay
+    ↓
+NICAI Runtime
+```
+
+does not prove:
+
+```text
+External Registry Replay
+External Service Replay
+External Governance Replay
+External Operational Replay
+```
+
+Those require separate evidence from the responsible system.
+
+---
+
+# 37. Registry Replay Boundary
+
+For registry integrations, NICAI can replay its own registry payload preparation where supported.
+
+Conceptually:
+
+```text
+NICAI Output
+    ↓
+Registry Adapter
+    ↓
+Prepared Registry Payload
+    ↓
+Replay
+```
+
+This does not prove that an external registry stored the payload or reproduced its external state.
+
+External registry persistence remains outside the NICAI ownership boundary.
+
+---
+
+# 38. GOUDHA Replay Boundary
+
+For GOUDHA integration, replay certification requires the canonical GOUDHA contract.
+
+Required information includes:
+
+```text
+Input schema
+Output schema
+Event schema
+Trace propagation
+Contract version
+Runtime context
+Replay semantics
+Error semantics
+Authentication requirements
+```
+
+Until the canonical contract is supplied:
+
+```text
+GOUDHA REPLAY
+STATUS: REQUIRES CONTRACT VERIFICATION
+```
+
+No assumed GOUDHA replay behaviour should be treated as certified.
+
+---
+
+# 39. Replay Audit Questions
+
+An auditor should be able to answer:
+
+```text
+Which execution was replayed?
+Which trace_id identifies it?
+What input was replayed?
+Which dataset version was used?
+Which runtime rules were used?
+Which contract version was used?
+What output was produced?
+Did the output match?
+Were any divergences found?
+Can the replay be reproduced?
+What evidence supports the result?
+Who owns any external dependency?
+```
+
+If an answer cannot be supported by evidence, the corresponding item remains unverified.
+
+---
+
+# 40. Replay Verification Checklist
+
+For each replay certification:
+
+```text
+[ ] Source trace identified
+[ ] Original input available
+[ ] Input integrity verified
+[ ] Runtime evidence available
+[ ] Event history available
+[ ] Contract version identified
+[ ] Dataset version identified where required
+[ ] Replay executed
+[ ] Replay output captured
+[ ] Original/replay comparison performed
+[ ] Trace continuity checked
+[ ] Divergence check performed
+[ ] Replay result recorded
+[ ] Evidence reference recorded
+```
+
+---
+
+# 41. Replay Certification Rule
+
+Do not mark:
+
+```text
+REPLAY VERIFIED
+```
+
+based only on:
+
+* source code,
+* architecture documentation,
+* README statements,
+* example JSON,
+* replay function names,
+* expected output definitions.
+
+Successful certification requires actual replay evidence and comparison.
+
+---
+
+# 42. No Fabricated Replay Evidence
+
+This evidence package must never invent:
+
+```text
+production replay IDs
+production trace IDs
+replay timestamps
+match results
+divergence results
+event counts
+dataset versions
+runtime versions
+certification results
+```
+
+Where direct evidence is unavailable, use:
+
+```text
+PENDING
+```
+
+or:
+
+```text
+NOT YET CERTIFIED
+```
+
+as appropriate.
+
+---
+
+# 43. Replay Review Matrix
+
+| Replay Area                | Evidence Requirement      | Status                         |
+| -------------------------- | ------------------------- | ------------------------------ |
+| Replay engine exists       | Runtime/source evidence   | DOCUMENTED / OBSERVED          |
+| JSONL evidence ingestion   | Runtime evidence          | REQUIRES DIRECT VERIFICATION   |
+| Trace reconstruction       | Trace evidence            | REQUIRES DIRECT VERIFICATION   |
+| Input reconstruction       | Replay evidence           | REQUIRES DIRECT VERIFICATION   |
+| Output reconstruction      | Replay evidence           | REQUIRES DIRECT VERIFICATION   |
+| Original/replay comparison | Comparison evidence       | REQUIRES DIRECT VERIFICATION   |
+| Divergence detection       | Divergence evidence       | REQUIRES DIRECT VERIFICATION   |
+| Corruption detection       | Corruption evidence       | REQUIRES DIRECT VERIFICATION   |
+| External system replay     | External evidence         | NOT OWNED BY NICAI             |
+| GOUDHA replay              | Canonical GOUDHA contract | REQUIRES CONTRACT VERIFICATION |
+
+---
+
+# 44. Replay Evidence Package
+
+The replay evidence package should contain, where available:
+
+```text
+Original execution evidence
+Replay execution evidence
+Trace evidence
+Input evidence
+Output evidence
+Comparison evidence
+Divergence evidence
+Corruption evidence
+Runtime logs
+Replay result
+```
+
+The package should be sufficient for an independent reviewer to understand what was replayed and what result was obtained.
+
+---
+
+# 45. Replay Failure Handling
+
+Replay failure must remain observable.
+
+Expected:
+
+```text
+Replay Attempt
+     ↓
+Failure
+     ↓
+Failure Evidence
+     ↓
+Trace Association
+     ↓
+Review
+```
+
+The system should not silently convert replay failure into success.
+
+---
+
+# 46. Replay Result Interpretation
+
+A replay result of:
+
+```text
+MATCH
+```
+
+means that the required comparison fields matched according to the replay contract.
+
+It does not automatically mean:
+
+```text
+Entire ecosystem state matched
+```
+
+It also does not mean:
+
+```text
+External systems were replayed
+```
+
+or:
+
+```text
+Production certification is complete
+```
+
+---
+
+# 47. Replay Observability
+
+Replay operations should themselves be observable.
+
+Example:
+
+```json
+{
+  "trace_id": "TRACE_001",
+  "event_type": "REPLAY",
+  "status": "COMPLETED",
+  "comparison_status": "MATCH"
+}
+```
+
+The actual event schema must follow the implemented runtime contract.
+
+---
+
+# 48. Replay Security Boundary
+
+Replay evidence may contain runtime information.
+
+Therefore:
+
+```text
+Replay evidence
+      ↓
+Controlled access
+      ↓
+Authorized review
+```
+
+Sensitive credentials, authentication secrets, or private infrastructure credentials must not be stored inside replay evidence.
+
+---
+
+# 49. Replay Reproducibility
+
+A replay is reproducible when the required evidence and runtime conditions can be reconstructed consistently.
+
+Conceptually:
+
+```text
+Evidence Set
++
+Runtime Contract
++
+Runtime Conditions
+↓
+Repeatable Replay
+```
+
+If required information is unavailable, reproducibility remains unverified.
+
+---
+
+# 50. Replay Evidence Integrity
+
+Replay evidence should itself remain protected from silent modification.
+
+Where integrity mechanisms exist, the evidence should retain:
+
+```text
+record identity
+timestamp
+trace relationship
+source
+contract version
+integrity information
+```
+
+The exact integrity mechanism depends on the implemented runtime.
+
+This document does not invent a cryptographic mechanism that is not already implemented.
+
+---
+
+# 51. Replay and Governance
+
+Replay provides evidence for governance review.
+
+It can help answer:
+
+```text
+What happened?
+Can we reconstruct it?
+Did the same rules produce the same result?
+Was the output traceable?
+Was there divergence?
+```
+
+Replay does not itself grant governance approval.
+
+---
+
+# 52. Replay and Production Acceptance
+
+Production acceptance requires more than replay.
+
+A production acceptance decision may additionally require:
+
+```text
+Runtime health
+API validation
+Security validation
+Contract validation
+Integration validation
+Independent testing
+Governance approval
+Operational acceptance
+```
+
+Replay evidence is one part of the broader certification package.
+
+---
+
+# 53. Current Replay Evidence Boundary
+
+The NICAI repository contains implementation and runtime artifacts related to replay, including replay-oriented components and runtime evidence.
+
+However, the following must be supported by direct evidence before being described as fully certified:
+
+```text
+Complete production replay execution
+Complete original/replay equivalence
+Complete replay corruption certification
+Complete replay divergence certification
+Independent replay acceptance
+```
+
+---
+
+# 54. Current Replay Status
+
+Current evidence should be interpreted as:
+
+```text
+REPLAY CAPABILITY
+IMPLEMENTED / DOCUMENTED
+
+REPLAY EVIDENCE
+AVAILABLE WHERE CAPTURED
+
+DETERMINISTIC REPLAY
+REQUIRES DIRECT EXECUTION EVIDENCE FOR CERTIFICATION
+
+REPLAY EQUIVALENCE
+REQUIRES DIRECT COMPARISON EVIDENCE
+
+EXTERNAL SYSTEM REPLAY
+OUTSIDE NICAI OWNERSHIP
+```
+
+---
+
+# 55. Final Replay Statement
+
+NICAI provides a bounded deterministic replay capability intended to reconstruct and inspect previously recorded runtime executions.
+
+Replay supports:
+
+```text
+EXECUTION RECONSTRUCTION
++
+TRACE CORRELATION
++
+OUTPUT COMPARISON
++
+DIVERGENCE DETECTION
++
+CORRUPTION DETECTION
++
+AUDITABILITY
+```
+
+Replay does not claim ownership or certification of external ecosystem state.
+
+---
+
+# 56. Certification Boundary
+
+Replay certification must be based on direct evidence.
+
+Where evidence exists:
+
+```text
+VERIFIED
+```
+
+Where behaviour has been observed but not independently certified:
+
+```text
+OBSERVED
+```
+
+Where the capability is documented but runtime evidence is insufficient:
+
+```text
+DOCUMENTED
+```
+
+Where required evidence has not yet been produced:
+
+```text
+PENDING
+```
+
+Where implementation exists but formal certification has not occurred:
+
+```text
+NOT YET CERTIFIED
+```
+
+These statuses prevent assumptions from being presented as verified facts.
+
+---
+
+# END OF REPLAY EVIDENCE RECORD
