@@ -1,0 +1,101 @@
+{
+  "identity_type": "RUNTIME_IDENTITY_CARD",
+  "identity_version": "1.0",
+  "system_name": "NICAI",
+  "system_full_name": "Networked Intelligence & Context Analysis Interface",
+  "system_role": "DETERMINISTIC_INTELLIGENCE_LAYER",
+  "system_category": "DECISION_SUPPORT_RUNTIME",
+
+  "ownership": {
+    "owner": "NICAI",
+    "responsibility": [
+      "signal validation",
+      "deterministic intelligence generation",
+      "multi-signal pattern analysis",
+      "trace propagation",
+      "explainable intelligence output",
+      "bounded integration adapter preparation"
+    ],
+    "decision_authority": false,
+    "execution_authority": false
+  },
+
+  "constitutional_position": {
+    "role": "INTELLIGENCE_PROVIDER",
+    "may_generate_decision_signals": true,
+    "may_execute_decisions": false,
+    "may_execute_external_actions": false,
+    "may_override_authority": false,
+    "may_claim_external_registry_ownership": false
+  },
+
+  "runtime_properties": {
+    "deterministic": true,
+    "replayable": true,
+    "traceable": true,
+    "explainable": true,
+    "audit_ready": true,
+    "black_box_ai": false
+  },
+
+  "primary_pipeline": [
+    "DATASET",
+    "SAMACHAR_INPUT_ADAPTER",
+    "SIGNAL_CONVERSION",
+    "VALIDATION_LAYER",
+    "SANSKAR_INTELLIGENCE_ENGINE",
+    "MULTI_SIGNAL_PATTERN_ANALYSIS",
+    "FASTAPI_LAYER",
+    "DASHBOARD",
+    "ACTION_ROUTER_SIMULATION",
+    "LOGGING",
+    "REPLAY",
+    "ECOSYSTEM_ADAPTERS"
+  ],
+
+  "traceability": {
+    "primary_identifier": "trace_id",
+    "trace_required": true,
+    "trace_propagation": true,
+    "trace_continuity_required": true
+  },
+
+  "decision_boundary": {
+    "allowed_outputs": [
+      "eligible_for_escalation",
+      "requires_review",
+      "monitor"
+    ],
+    "forbidden_outputs": [
+      "direct_execution",
+      "automatic_authority_action",
+      "unbounded_external_command"
+    ]
+  },
+
+  "integration_boundary": {
+    "integration_mode": "BOUNDED_ADAPTER",
+    "external_system_ownership_preserved": true,
+    "registry_ownership_external": true,
+    "canonical_external_capability_registry_defined_by_nicai": false
+  },
+
+  "known_runtime_interfaces": {
+    "production_backend": "https://nicai-validation-layer-1-dayj.onrender.com",
+    "api_documentation": "https://nicai-validation-layer-1-dayj.onrender.com/docs",
+    "dashboard": "https://nicai-intelligence-engine-3.onrender.com/dashboard"
+  },
+
+  "health_status": {
+    "dedicated_health_endpoint": false,
+    "status": "OPERATIONAL_OBSERVATION",
+    "note": "The deployed implementation does not currently expose a dedicated /health endpoint."
+  },
+
+  "certification": {
+    "engineering_status": "PRODUCTION_VALIDATED",
+    "external_governance_acceptance": false,
+    "external_capability_registry_registration": false,
+    "external_registry_certificate": false
+  }
+}
