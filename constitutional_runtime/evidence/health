@@ -1,1 +1,746 @@
+# NICAI Constitutional Runtime — Health Evidence
+
+## 1. Purpose
+
+This directory contains evidence related to the runtime health and readiness state of the NICAI constitutional runtime.
+
+The purpose of this evidence is to show:
+
+* whether the runtime can start;
+* whether required runtime components are available;
+* whether health/readiness checks can be performed;
+* whether health state is observable;
+* whether health information can be associated with a trace or runtime instance;
+* whether health evidence can be replayed or audited.
+
+This evidence does **not** claim capabilities that are not implemented or independently verified.
+
+---
+
+## 2. Health Evidence Principle
+
+Health evidence must distinguish between:
+
+```text
+PROCESS ALIVE
+SERVICE READY
+DEPENDENCIES AVAILABLE
+INTEGRATION READY
+PRODUCTION CERTIFIED
+```
+
+These states are not equivalent.
+
+A running process does not automatically mean that the complete NICAI runtime is healthy, ready, integrated, or production-certified.
+
+---
+
+## 3. Canonical Health States
+
+The following health states are used for evidence classification:
+
+| State       | Meaning                                                                       |
+| ----------- | ----------------------------------------------------------------------------- |
+| `UNKNOWN`   | Health state has not been established                                         |
+| `STARTING`  | Runtime is starting                                                           |
+| `HEALTHY`   | Runtime is operational                                                        |
+| `DEGRADED`  | Runtime is operational but one or more capabilities/dependencies are degraded |
+| `UNHEALTHY` | Runtime cannot safely provide its expected service                            |
+| `NOT_READY` | Runtime exists but is not ready to receive expected integration traffic       |
+| `STOPPED`   | Runtime is not running                                                        |
+
+---
+
+## 4. Health Evidence Record
+
+A health evidence record should contain, where available:
+
+```json
+{
+  "evidence_type": "RUNTIME_HEALTH",
+  "runtime": "NICAI",
+  "runtime_version": "1.0",
+  "status": "HEALTHY",
+  "timestamp": "2026-08-26T00:00:00Z",
+  "trace_id": null,
+  "checks": [],
+  "dependencies": [],
+  "observations": [],
+  "source": "NICAI_RUNTIME",
+  "verification_status": "OBSERVED"
+}
+```
+
+The timestamp above is an example format only. Actual evidence must use the timestamp generated during the health check.
+
+---
+
+## 5. Health Check Categories
+
+Health evidence should be classified into the following categories.
+
+### 5.1 Process Health
+
+Determines whether the runtime process is alive.
+
+```text
+PROCESS_HEALTH
+```
+
+Expected interpretation:
+
+```text
+ALIVE
+```
+
+or:
+
+```text
+NOT_ALIVE
+```
+
+---
+
+### 5.2 API Health
+
+Determines whether the API service can respond to requests.
+
+```text
+API_HEALTH
+```
+
+Expected interpretation:
+
+```text
+RESPONSIVE
+```
+
+or:
+
+```text
+UNRESPONSIVE
+```
+
+---
+
+### 5.3 Readiness
+
+Determines whether the runtime is ready to perform its expected integration responsibilities.
+
+```text
+READINESS
+```
+
+Possible states:
+
+```text
+READY
+NOT_READY
+```
+
+---
+
+### 5.4 Dependency Health
+
+Determines whether required dependencies are available.
+
+Examples:
+
+```text
+DATASET_REGISTRY
+CONTRACT_REGISTRY
+LOGGING
+REPLAY
+EXTERNAL_ADAPTERS
+```
+
+A dependency must not be marked healthy merely because it is expected to exist.
+
+It must be supported by an observed check or authoritative evidence.
+
+---
+
+## 6. Dependency Evidence
+
+Dependency evidence should follow this structure:
+
+```json
+{
+  "dependency": "EXAMPLE_DEPENDENCY",
+  "status": "AVAILABLE",
+  "checked_at": "2026-08-26T00:00:00Z",
+  "source": "NICAI_RUNTIME",
+  "verification_status": "OBSERVED"
+}
+```
+
+Allowed dependency states:
+
+```text
+AVAILABLE
+UNAVAILABLE
+DEGRADED
+UNKNOWN
+NOT_REQUIRED
+```
+
+---
+
+## 7. Runtime Health Response Model
+
+Where a health endpoint exists, the response should be representable as:
+
+```json
+{
+  "status": "HEALTHY",
+  "runtime": "NICAI",
+  "version": "1.0",
+  "timestamp": "2026-08-26T00:00:00Z",
+  "checks": {
+    "process": "HEALTHY",
+    "api": "HEALTHY",
+    "dependencies": "HEALTHY",
+    "replay": "HEALTHY"
+  }
+}
+```
+
+This structure is an evidence model.
+
+It must not be interpreted as proof that an endpoint exists unless the endpoint has actually been observed.
+
+---
+
+## 8. Current NICAI Health Observation
+
+The NICAI repository contains runtime and deployment evidence.
+
+The deployed implementation must be checked against the actual runtime rather than inferred from documentation.
+
+A dedicated:
+
+```text
+/health
+```
+
+endpoint must only be claimed as available when the deployed service actually exposes it.
+
+If the endpoint is absent, the evidence must explicitly record:
+
+```text
+HEALTH_ENDPOINT_STATUS = NOT_EXPOSED
+```
+
+and must not fabricate a successful health response.
+
+---
+
+## 9. Health Endpoint Evidence
+
+If `/health` is available:
+
+```json
+{
+  "endpoint": "/health",
+  "method": "GET",
+  "result": "AVAILABLE",
+  "verification_status": "OBSERVED"
+}
+```
+
+If `/health` is not available:
+
+```json
+{
+  "endpoint": "/health",
+  "method": "GET",
+  "result": "NOT_EXPOSED",
+  "verification_status": "OBSERVED"
+}
+```
+
+If the endpoint has not been checked:
+
+```json
+{
+  "endpoint": "/health",
+  "method": "GET",
+  "result": "UNKNOWN",
+  "verification_status": "NOT_VERIFIED"
+}
+```
+
+---
+
+## 10. Readiness Endpoint Evidence
+
+Readiness must be treated independently from health.
+
+If a readiness endpoint exists:
+
+```json
+{
+  "endpoint": "/ready",
+  "method": "GET",
+  "result": "AVAILABLE",
+  "verification_status": "OBSERVED"
+}
+```
+
+If it does not exist:
+
+```json
+{
+  "endpoint": "/ready",
+  "method": "GET",
+  "result": "NOT_EXPOSED",
+  "verification_status": "OBSERVED"
+}
+```
+
+No readiness endpoint should be invented.
+
+---
+
+## 11. Traceability
+
+Health evidence may be associated with a `trace_id` when the health check occurs as part of a traceable runtime operation.
+
+Example:
+
+```json
+{
+  "trace_id": "TRACE_xxx",
+  "evidence_type": "RUNTIME_HEALTH",
+  "status": "HEALTHY"
+}
+```
+
+For standalone infrastructure health checks where no trace exists:
+
+```json
+{
+  "trace_id": null
+}
+```
+
+A missing trace ID in a standalone health check does not automatically constitute a failure.
+
+---
+
+## 12. Replayability
+
+Health evidence should be replayable when it is represented as an immutable evidence record.
+
+Replay must preserve:
+
+```text
+original timestamp
+runtime identity
+runtime version
+health state
+check results
+dependency observations
+verification status
+trace_id
+```
+
+Replay must not convert an historical observation into a current health claim.
+
+For example:
+
+```text
+Historical evidence:
+HEALTHY at T1
+```
+
+does not mean:
+
+```text
+Currently HEALTHY
+```
+
+---
+
+## 13. Evidence Classification
+
+Each health observation must carry one of the following classifications:
+
+```text
+OBSERVED
+DERIVED
+DECLARED
+NOT_VERIFIED
+PENDING
+```
+
+### OBSERVED
+
+Directly verified from runtime execution, API response, log, or other authoritative evidence.
+
+### DERIVED
+
+Computed from observed evidence.
+
+### DECLARED
+
+Provided by an authoritative owner but not independently executed by NICAI.
+
+### NOT_VERIFIED
+
+The capability or state is referenced but has not been verified.
+
+### PENDING
+
+Required evidence has not yet been supplied.
+
+---
+
+## 14. No Fabricated Health Evidence
+
+The following must never be fabricated:
+
+* health endpoint;
+* readiness endpoint;
+* dependency status;
+* uptime;
+* service availability;
+* deployment status;
+* authentication status;
+* external registry availability;
+* external service readiness;
+* production certification.
+
+If evidence is unavailable, record:
+
+```text
+UNKNOWN
+```
+
+or:
+
+```text
+NOT_VERIFIED
+```
+
+or:
+
+```text
+PENDING
+```
+
+depending on the reason.
+
+---
+
+## 15. Ownership Boundary
+
+NICAI owns evidence describing the health of NICAI-controlled runtime components.
+
+External systems own their own health state.
+
+For example:
+
+```text
+NICAI
+  owns
+NICAI runtime health
+```
+
+while:
+
+```text
+External Capability Registry
+  owns
+Capability Registry health
+```
+
+and:
+
+```text
+GOUDHA Runtime
+  owns
+GOUDHA Runtime health
+```
+
+NICAI must not claim external health without authoritative evidence.
+
+---
+
+## 16. External Integration Health
+
+For external participants, health evidence should be represented as:
+
+```json
+{
+  "participant": "EXTERNAL_PARTICIPANT",
+  "health_status": "UNKNOWN",
+  "source": "EXTERNAL_OWNER",
+  "verification_status": "NOT_VERIFIED"
+}
+```
+
+After authoritative verification:
+
+```json
+{
+  "participant": "EXTERNAL_PARTICIPANT",
+  "health_status": "HEALTHY",
+  "source": "EXTERNAL_OWNER",
+  "verification_status": "OBSERVED"
+}
+```
+
+---
+
+## 17. Health Evidence and Constitutional Runtime
+
+Health evidence participates in the constitutional runtime as operational evidence.
+
+The runtime should distinguish:
+
+```text
+IDENTITY
+CONTRACT
+REGISTRY
+API
+EVENT
+REPLAY
+OBSERVABILITY
+HEALTH
+```
+
+Health evidence does not override:
+
+* identity authority;
+* contract authority;
+* registry authority;
+* validation authority;
+* governance authority.
+
+---
+
+## 18. Health Failure Handling
+
+If a required health check fails, the runtime should record the failure without fabricating a successful state.
+
+Example:
+
+```json
+{
+  "evidence_type": "RUNTIME_HEALTH",
+  "status": "UNHEALTHY",
+  "failure_reason": "DEPENDENCY_UNAVAILABLE",
+  "verification_status": "OBSERVED"
+}
+```
+
+A health failure should remain traceable to the relevant check.
+
+---
+
+## 19. Degraded Runtime
+
+A runtime may be:
+
+```text
+DEGRADED
+```
+
+when the core service is operational but a non-critical component is unavailable.
+
+Example:
+
+```json
+{
+  "status": "DEGRADED",
+  "checks": {
+    "process": "HEALTHY",
+    "api": "HEALTHY",
+    "optional_dependency": "UNAVAILABLE"
+  }
+}
+```
+
+The runtime must not report `HEALTHY` if a required dependency has failed.
+
+---
+
+## 20. Health Evidence Retention
+
+Health evidence should preserve:
+
+```text
+timestamp
+runtime identity
+runtime version
+check type
+check result
+source
+verification status
+trace identifier
+failure reason
+```
+
+Historical health evidence should remain immutable.
+
+Corrections should create a new evidence record rather than silently modifying the original observation.
+
+---
+
+## 21. Audit Requirements
+
+A reviewer should be able to determine:
+
+1. What runtime was checked?
+2. When was it checked?
+3. What was checked?
+4. What was the result?
+5. Which dependencies were checked?
+6. Who/what produced the evidence?
+7. Was the result observed or merely declared?
+8. Was a trace ID available?
+9. Can the evidence be replayed?
+10. Does the evidence prove current health or only historical health?
+
+---
+
+## 22. Certification Boundary
+
+Health evidence alone does not constitute production certification.
+
+The following are separate claims:
+
+```text
+RUNTIME HEALTH
+READINESS
+INTEGRATION VALIDATION
+PRODUCTION VALIDATION
+PRODUCTION CERTIFICATION
+```
+
+Each requires its own evidence.
+
+Therefore:
+
+```text
+HEALTHY ≠ PRODUCTION CERTIFIED
+```
+
+and:
+
+```text
+READY ≠ GOVERNANCE ACCEPTED
+```
+
+---
+
+## 23. Current Evidence Status
+
+The status of each health capability must be maintained according to actual repository and deployment evidence.
+
+Use:
+
+```text
+OBSERVED
+```
+
+when verified.
+
+Use:
+
+```text
+NOT_VERIFIED
+```
+
+when referenced but not checked.
+
+Use:
+
+```text
+PENDING
+```
+
+when required evidence is expected but has not yet been supplied.
+
+Do not mark an item `HEALTHY` solely because documentation says that it should be healthy.
+
+---
+
+## 24. Evidence Integrity Rule
+
+The health evidence directory is an evidence boundary.
+
+Therefore:
+
+```text
+NO ASSUMPTION
+NO FABRICATION
+NO IMPLIED CERTIFICATION
+NO EXTERNAL OWNERSHIP CLAIM
+NO UNVERIFIED HEALTH CLAIM
+```
+
+Only evidence-backed runtime health statements are considered valid.
+
+---
+
+## 25. Final Health Evidence Contract
+
+The canonical interpretation is:
+
+```text
+Runtime
+   ↓
+Health Check
+   ↓
+Observed Result
+   ↓
+Evidence Record
+   ↓
+Verification Status
+   ↓
+Audit / Replay
+```
+
+The evidence must preserve the distinction between:
+
+```text
+WHAT WAS OBSERVED
+```
+
+and:
+
+```text
+WHAT IS CURRENTLY TRUE
+```
+
+This distinction is mandatory for constitutional runtime auditability.
+
+---
+
+## 26. Final Status
+
+```text
+HEALTH EVIDENCE MODEL: DEFINED
+
+HEALTH STATES: DEFINED
+
+READINESS MODEL: DEFINED
+
+DEPENDENCY MODEL: DEFINED
+
+TRACEABILITY MODEL: DEFINED
+
+REPLAY MODEL: DEFINED
+
+OWNERSHIP BOUNDARY: DEFINED
+
+FABRICATION PROHIBITION: DEFINED
+
+PRODUCTION CERTIFICATION:
+REQUIRES SEPARATE EVIDENCE
+```
+
+This document defines the health-evidence contract. It does not claim that every health endpoint, dependency, or external service is currently available unless supported by observed evidence.
 
