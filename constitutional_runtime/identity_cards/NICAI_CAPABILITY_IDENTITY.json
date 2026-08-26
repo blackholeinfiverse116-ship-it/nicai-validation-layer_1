@@ -1,0 +1,77 @@
+{
+  "identity_type": "CAPABILITY_IDENTITY",
+  "identity_version": "1.0",
+
+  "system": {
+    "name": "NICAI",
+    "role": "DETERMINISTIC_INTELLIGENCE_PROVIDER"
+  },
+
+  "capabilities": [
+    {
+      "capability_name": "SIGNAL_VALIDATION",
+      "capability_version": "1.0",
+      "status": "IMPLEMENTED",
+      "description": "Validates incoming intelligence signals using deterministic validation rules.",
+      "execution_authority": false,
+      "trace_required": true
+    },
+    {
+      "capability_name": "ANOMALY_DETECTION",
+      "capability_version": "1.0",
+      "status": "IMPLEMENTED",
+      "description": "Detects anomalies using deterministic rule-based intelligence logic.",
+      "execution_authority": false,
+      "trace_required": true
+    },
+    {
+      "capability_name": "MULTI_SIGNAL_PATTERN_ANALYSIS",
+      "capability_version": "1.0",
+      "status": "IMPLEMENTED",
+      "description": "Identifies patterns across multiple processed signals.",
+      "execution_authority": false,
+      "trace_required": true
+    },
+    {
+      "capability_name": "EXPLAINABLE_INTELLIGENCE_OUTPUT",
+      "capability_version": "1.0",
+      "status": "IMPLEMENTED",
+      "description": "Produces structured intelligence with explanation and trace information.",
+      "execution_authority": false,
+      "trace_required": true
+    },
+    {
+      "capability_name": "REPLAY_SUPPORT",
+      "capability_version": "1.0",
+      "status": "IMPLEMENTED",
+      "description": "Supports deterministic reconstruction and validation using runtime evidence and replay data.",
+      "execution_authority": false,
+      "trace_required": true
+    },
+    {
+      "capability_name": "BOUNDED_ECOSYSTEM_INTEGRATION",
+      "capability_version": "1.0",
+      "status": "IMPLEMENTED",
+      "description": "Prepares outputs for external ecosystem participants through bounded adapters.",
+      "execution_authority": false,
+      "external_ownership_preserved": true
+    }
+  ],
+
+  "capability_contract_rules": {
+    "same_input_same_output": true,
+    "black_box_reasoning": false,
+    "trace_id_required": true,
+    "external_action_execution": false,
+    "authority_override": false,
+    "unbounded_integration": false
+  },
+
+  "registry_statement": {
+    "canonical_external_capability_registry": false,
+    "registration_endpoint": null,
+    "discovery_endpoint": null,
+    "registry_owner": "EXTERNAL_PLATFORM_OR_REGISTRY_OWNER",
+    "note": "NICAI declares its capability identity locally but does not claim ownership of an external canonical Capability Registry."
+  }
+}
