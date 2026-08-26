@@ -1,1 +1,858 @@
+# NICAI Constitutional Runtime — Event Evidence
 
+## 1. Purpose
+
+This directory contains event-level evidence for the NICAI Constitutional Runtime.
+
+The purpose of this evidence package is to establish:
+
+* event identification
+* event ownership
+* event contract expectations
+* event ordering
+* trace propagation
+* event-to-evidence linkage
+* validation linkage
+* replay linkage
+* observability
+* constitutional boundary compliance
+
+Events are treated as runtime facts and must remain traceable to the execution that produced them.
+
+---
+
+# 2. Constitutional Event Model
+
+The expected event relationship is:
+
+```text
+Observation
+    ↓
+Event
+    ↓
+Reasoning
+    ↓
+Validation
+    ↓
+Decision / Recommendation
+    ↓
+Replay
+    ↓
+Evidence
+```
+
+An event must not exist as an isolated record when it is part of a constitutional runtime execution.
+
+---
+
+# 3. Event Contract Principle
+
+Every runtime event should contain sufficient information to identify:
+
+```text
+WHO
+WHAT
+WHEN
+WHERE
+WHY
+UNDER WHICH TRACE
+UNDER WHICH CONTRACT
+WITH WHICH RESULT
+```
+
+Minimum conceptual event structure:
+
+```json
+{
+  "trace_id": "...",
+  "timestamp": "...",
+  "event_type": "...",
+  "source": "...",
+  "contract_version": "...",
+  "payload": {}
+}
+```
+
+The exact field names and values must follow the canonical event contract implemented by the runtime.
+
+This document does not create a new canonical event schema.
+
+---
+
+# 4. Required Event Properties
+
+A constitutional runtime event should preserve, where applicable:
+
+| Property           | Purpose                             |
+| ------------------ | ----------------------------------- |
+| `trace_id`         | Links event to execution            |
+| `timestamp`        | Establishes temporal ordering       |
+| `event_type`       | Identifies event category           |
+| `source`           | Identifies producing component      |
+| `contract_version` | Identifies contract version         |
+| `payload`          | Contains event-specific information |
+
+Additional fields may be required by individual event contracts.
+
+---
+
+# 5. Event Types
+
+The constitutional runtime event model can be represented through the following major categories:
+
+```text
+OBSERVATION
+EVENT
+REASONING
+VALIDATION
+RECOMMENDATION
+DECISION
+REPLAY
+MONITORING
+```
+
+These categories describe event roles.
+
+They should not be interpreted as proof that every category currently exists as a separate deployed endpoint or event stream.
+
+---
+
+# 6. Observation Events
+
+Observation events represent incoming facts or signals entering the runtime.
+
+Expected flow:
+
+```text
+External Data
+    ↓
+Observation
+    ↓
+Event
+    ↓
+Runtime Processing
+```
+
+Example evidence shape:
+
+```json
+{
+  "trace_id": "TRACE_EXAMPLE",
+  "timestamp": "2026-01-01T00:00:00Z",
+  "event_type": "OBSERVATION",
+  "source": "NICAI",
+  "contract_version": "1.0",
+  "payload": {
+    "observation_id": "OBS_EXAMPLE"
+  }
+}
+```
+
+This is an evidence-format example and is not a claim of a specific production event.
+
+---
+
+# 7. Reasoning Events
+
+Reasoning events represent execution of intelligence or reasoning logic.
+
+Expected flow:
+
+```text
+Observation
+    ↓
+Context
+    ↓
+Reasoning
+    ↓
+Intelligence Output
+```
+
+A reasoning event should remain linked to the originating `trace_id`.
+
+Example:
+
+```json
+{
+  "trace_id": "TRACE_EXAMPLE",
+  "timestamp": "2026-01-01T00:00:01Z",
+  "event_type": "REASONING",
+  "source": "NICAI",
+  "contract_version": "1.0",
+  "payload": {
+    "reasoning_status": "COMPLETED"
+  }
+}
+```
+
+---
+
+# 8. Validation Events
+
+Validation events represent validation or verification of runtime information.
+
+Expected flow:
+
+```text
+Runtime Output
+    ↓
+Validation
+    ↓
+Validation Result
+```
+
+Example:
+
+```json
+{
+  "trace_id": "TRACE_EXAMPLE",
+  "timestamp": "2026-01-01T00:00:02Z",
+  "event_type": "VALIDATION",
+  "source": "SVACS",
+  "contract_version": "1.0",
+  "payload": {
+    "validation_status": "VERIFIED"
+  }
+}
+```
+
+The example above describes the expected evidence shape only.
+
+It must not be interpreted as production proof unless supported by an actual runtime record.
+
+---
+
+# 9. Recommendation Events
+
+Recommendation events represent an intelligence recommendation or recommendation signal.
+
+NICAI remains a decision-support system.
+
+Expected boundary:
+
+```text
+Intelligence
+    ↓
+Recommendation Signal
+    ↓
+Validation
+    ↓
+Human / Authority Boundary
+```
+
+NICAI must not convert a recommendation event into autonomous operational execution.
+
+Allowed recommendation concepts include:
+
+```text
+eligible_for_escalation
+requires_review
+monitor
+```
+
+---
+
+# 10. Decision Events
+
+Decision events must be treated differently from recommendation events.
+
+NICAI produces intelligence and recommendation signals.
+
+Operational authority remains outside NICAI.
+
+Expected boundary:
+
+```text
+NICAI
+    ↓
+Recommendation
+    ↓
+Validation
+    ↓
+Authority
+    ↓
+Decision
+```
+
+NICAI must not claim ownership of an external authority's decision event unless that ownership is explicitly established.
+
+---
+
+# 11. Event Ordering
+
+Events participating in one execution should preserve their temporal order.
+
+Expected sequence:
+
+```text
+1. OBSERVATION
+2. REASONING
+3. VALIDATION
+4. RECOMMENDATION
+5. DECISION / AUTHORITY ACTION
+```
+
+Actual runtime implementations may contain additional intermediate events.
+
+The evidence record must preserve the actual observed sequence rather than replacing it with an assumed sequence.
+
+---
+
+# 12. Trace Continuity
+
+The primary event-level traceability invariant is:
+
+```text
+Same execution
+      =
+Same trace_id
+```
+
+Expected relationship:
+
+```text
+Event 1
+  trace_id = X
+
+Event 2
+  trace_id = X
+
+Event 3
+  trace_id = X
+
+Event 4
+  trace_id = X
+```
+
+If an event unexpectedly introduces a different trace identifier, trace continuity must be investigated.
+
+---
+
+# 13. Event Chain
+
+A complete constitutional event chain should be representable as:
+
+```text
+OBSERVATION
+    ↓
+EVENT
+    ↓
+REASONING
+    ↓
+VALIDATION
+    ↓
+RECOMMENDATION
+    ↓
+AUTHORITY / DECISION
+    ↓
+REPLAY
+```
+
+Every transition should remain attributable to a runtime component.
+
+---
+
+# 14. Event-to-Evidence Relationship
+
+Events are part of the Truth & Evidence Fabric.
+
+Expected relationship:
+
+```text
+Event
+  ↓
+Evidence
+  ↓
+Reasoning Trace
+  ↓
+Validation
+  ↓
+Replay
+```
+
+Evidence should preserve enough information to reconstruct why an event occurred and how it contributed to the execution.
+
+---
+
+# 15. Event-to-Replay Relationship
+
+Replay should be able to use event history to reconstruct the relevant execution.
+
+Expected model:
+
+```text
+Events
+   ↓
+Ordered Event History
+   ↓
+Trace Reconstruction
+   ↓
+Runtime State
+   ↓
+Replay Result
+```
+
+Replay completeness must not be claimed merely because individual events exist.
+
+Complete replay certification requires:
+
+* event sequence
+* trace continuity
+* relevant state
+* required inputs
+* required outputs
+* validation state
+* replay comparison
+
+---
+
+# 16. Event Immutability
+
+Once an event has been accepted as runtime evidence, it should be treated as immutable.
+
+Expected model:
+
+```text
+Event Created
+     ↓
+Evidence Recorded
+     ↓
+Validation
+     ↓
+Replay
+```
+
+Historical event records should not be silently modified.
+
+Corrections should be represented through explicit correction or replacement semantics when supported by the canonical event contract.
+
+---
+
+# 17. Event Ownership
+
+Event ownership must remain explicit.
+
+| Event Responsibility          | Owner                            |
+| ----------------------------- | -------------------------------- |
+| Intelligence-generation event | NICAI                            |
+| Validation event              | Validation / SVACS boundary      |
+| Operational decision event    | Authorized operational authority |
+| Replay event                  | Replay/runtime infrastructure    |
+| Monitoring event              | Runtime/operations boundary      |
+| External registry event       | External registry owner          |
+
+NICAI must not claim ownership of external system events.
+
+---
+
+# 18. Event Contract Versioning
+
+Events should identify the contract version where required.
+
+Example:
+
+```json
+{
+  "contract_version": "1.0"
+}
+```
+
+Contract versions must be treated as compatibility boundaries.
+
+A consumer must not silently interpret an event according to an incompatible contract version.
+
+---
+
+# 19. Event Compatibility
+
+Event compatibility requires:
+
+```text
+Producer Contract
+        ↓
+Event Schema
+        ↓
+Consumer Contract
+        ↓
+Validation
+```
+
+A contract change should be versioned and reviewed.
+
+Breaking changes must not be silently introduced into an existing event stream.
+
+---
+
+# 20. Event Failure Handling
+
+If an event cannot be validated or processed, the runtime should preserve the failure as an observable runtime fact.
+
+Expected model:
+
+```text
+Event
+  ↓
+Validation Failure
+  ↓
+Failure Event / Error Evidence
+  ↓
+Trace Preservation
+```
+
+A failure must not silently disappear from the execution history.
+
+---
+
+# 21. Event Observability
+
+Operationally relevant events should be observable through the runtime's logging and monitoring mechanisms.
+
+Expected observability relationship:
+
+```text
+Runtime Event
+    ↓
+Telemetry / Logging
+    ↓
+Monitoring
+    ↓
+Operational Review
+```
+
+Event observability must preserve the execution context where applicable.
+
+---
+
+# 22. Event Evidence Record
+
+The recommended evidence record is:
+
+```json
+{
+  "event_id": "EVENT_EXAMPLE",
+  "trace_id": "TRACE_EXAMPLE",
+  "timestamp": "2026-01-01T00:00:00Z",
+  "event_type": "VALIDATION",
+  "source": "NICAI",
+  "contract_version": "1.0",
+  "payload": {},
+  "evidence_reference": "EVIDENCE_EXAMPLE",
+  "replay_reference": "TRACE_EXAMPLE"
+}
+```
+
+This is a canonical evidence-shape example only.
+
+It is not a claim that these exact IDs exist in production.
+
+---
+
+# 23. Event Evidence Levels
+
+Event evidence should be classified into three levels.
+
+## Level 1 — Architectural
+
+Proves that the event concept exists in the architecture.
+
+```text
+Status:
+ARCHITECTURALLY IDENTIFIED
+```
+
+## Level 2 — Runtime Observed
+
+Proves that the event was actually produced or observed by the runtime.
+
+```text
+Status:
+OBSERVED
+```
+
+## Level 3 — Certified
+
+Proves that the event conforms to the approved contract and participates correctly in trace, validation, and replay.
+
+```text
+Status:
+CERTIFIED
+```
+
+These levels must not be conflated.
+
+---
+
+# 24. Current Event Evidence Classification
+
+| Event Area                          | Current Classification       |
+| ----------------------------------- | ---------------------------- |
+| Observation events                  | ARCHITECTURALLY IDENTIFIED   |
+| Reasoning events                    | ARCHITECTURALLY IDENTIFIED   |
+| Validation events                   | ARCHITECTURALLY IDENTIFIED   |
+| Recommendation events               | ARCHITECTURALLY IDENTIFIED   |
+| Decision boundary                   | ARCHITECTURALLY IDENTIFIED   |
+| Replay relationship                 | ARCHITECTURALLY IDENTIFIED   |
+| Monitoring relationship             | ARCHITECTURALLY IDENTIFIED   |
+| Complete production event stream    | REQUIRES DIRECT VERIFICATION |
+| Complete event schema certification | REQUIRES DIRECT VERIFICATION |
+| Complete event ordering proof       | REQUIRES DIRECT VERIFICATION |
+| Complete event replay equivalence   | REQUIRES DIRECT VERIFICATION |
+
+---
+
+# 25. Event Evidence Checklist
+
+For each production event that is being certified, capture:
+
+```text
+[ ] Event ID
+[ ] Trace ID
+[ ] Timestamp
+[ ] Event type
+[ ] Producer
+[ ] Consumer
+[ ] Contract version
+[ ] Request/input context
+[ ] Event payload
+[ ] Response/output context
+[ ] Validation result
+[ ] Evidence reference
+[ ] Replay reference
+[ ] Ordering position
+[ ] Runtime status
+[ ] Ownership
+```
+
+Only when the required evidence is available should the event be marked verified.
+
+---
+
+# 26. Event Certification Rule
+
+Do not mark an event:
+
+```text
+CERTIFIED
+```
+
+based only on:
+
+* source code
+* architecture documents
+* README statements
+* example JSON
+* expected event definitions
+
+Certification requires actual supporting runtime evidence.
+
+---
+
+# 27. No Fabricated Event Evidence
+
+This evidence package must never invent:
+
+* production event IDs
+* production trace IDs
+* timestamps
+* successful event responses
+* event counts
+* event ordering
+* replay equivalence
+* validation results
+* production certification
+
+Where direct evidence is unavailable, the correct classification is:
+
+```text
+REQUIRES DIRECT VERIFICATION
+```
+
+---
+
+# 28. Constitutional Event Boundary
+
+The constitutional runtime event boundary is:
+
+```text
+External Observation
+        ↓
+NICAI / Runtime
+        ↓
+Event
+        ↓
+Reasoning
+        ↓
+Validation
+        ↓
+Recommendation
+        ↓
+Human / Authority Boundary
+```
+
+NICAI does not autonomously cross the authority boundary.
+
+---
+
+# 29. Integration Event Boundary
+
+For ecosystem integration:
+
+```text
+NICAI
+  ↓
+Bounded Event Contract
+  ↓
+External Consumer
+```
+
+The external consumer owns its own processing after receiving the bounded event.
+
+NICAI must not assume ownership of external consumer state.
+
+---
+
+# 30. Event Integration with GOUDHA
+
+For future GOUDHA integration, the event contract must be agreed before event-level integration is certified.
+
+Required information includes:
+
+```text
+Event name
+Event ID format
+Event version
+Producer
+Consumer
+Request schema
+Response schema
+Trace propagation
+Authentication
+Headers
+Lifecycle
+Retry behaviour
+Timeout
+Failure semantics
+Replay behaviour
+Health/readiness
+OpenAPI/specification
+```
+
+Until the canonical GOUDHA event contract is supplied and verified:
+
+```text
+GOUDHA EVENT INTEGRATION
+STATUS: REQUIRES CONTRACT VERIFICATION
+```
+
+No assumed event schema should be treated as canonical.
+
+---
+
+# 31. Event Health and Readiness
+
+Event processing health must be distinguished from API health.
+
+A healthy API does not automatically prove:
+
+```text
+Event ingestion healthy
+Event processing healthy
+Event validation healthy
+Event replay healthy
+```
+
+Each property requires appropriate evidence.
+
+---
+
+# 32. Event Replay Requirements
+
+A replayable event should retain sufficient context to support deterministic reconstruction.
+
+Expected relationship:
+
+```text
+Event
+ +
+Trace
+ +
+Input Context
+ +
+Runtime State
+ +
+Contract Version
+        ↓
+Replay
+```
+
+Replay certification requires comparison between original and replayed execution.
+
+---
+
+# 33. Event Auditability
+
+An event is auditable when an auditor can answer:
+
+```text
+What happened?
+When did it happen?
+Which component produced it?
+Which trace did it belong to?
+Which contract governed it?
+What input caused it?
+What output resulted?
+Was it validated?
+Can it be replayed?
+Who owns the resulting decision?
+```
+
+If any required answer cannot be supported by evidence, the relevant certification item remains unverified.
+
+---
+
+# 34. Event Evidence Status
+
+Current status:
+
+```text
+EVENT MODEL
+ARCHITECTURALLY MAPPED
+
+EVENT CONTRACT EXPECTATIONS
+IDENTIFIED
+
+TRACE REQUIREMENT
+IDENTIFIED
+
+VALIDATION RELATIONSHIP
+IDENTIFIED
+
+REPLAY RELATIONSHIP
+IDENTIFIED
+
+PRODUCTION EVENT STREAM CERTIFICATION
+REQUIRES DIRECT VERIFICATION
+```
+
+---
+
+# 35. Final Event Evidence Statement
+
+The NICAI constitutional runtime requires event execution to remain:
+
+```text
+TRACEABLE
+DETERMINISTIC
+VALIDATABLE
+REPLAYABLE
+AUDITABLE
+OWNER-BOUND
+```
+
+The current evidence package documents the expected event model and constitutional boundaries.
+
+It does not claim production certification for event surfaces where direct runtime evidence has not been captured.
+
+---
+
+# END OF EVENT EVIDENCE RECORD
