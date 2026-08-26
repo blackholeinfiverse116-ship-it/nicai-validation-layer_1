@@ -1,1 +1,585 @@
+# NICAI Constitutional Runtime — API Evidence
 
+## Purpose
+
+This directory contains API-level evidence for the NICAI constitutional runtime integration.
+
+The evidence is intended to establish:
+
+* API availability
+* API ownership
+* API contract alignment
+* request/response contract expectations
+* trace propagation expectations
+* deterministic API behaviour
+* validation and replay integration points
+* health/readiness observations
+* evidence provenance
+
+Every runtime API is expected to follow the approved Execution JSON Contracts. The architectural mapping identifies Reasoning, Graph, Memory, Event, Validation, Replay, and Monitoring APIs as the major runtime API surfaces.
+
+---
+
+## 1. API Runtime Mapping
+
+| API Surface    | Primary Consumer     | Contract Reference             | Evidence Status |
+| -------------- | -------------------- | ------------------------------ | --------------- |
+| Reasoning API  | NICAI                | `RUNTIME_API_SPECIFICATION.md` | IDENTIFIED      |
+| Graph API      | Graph Runtime        | `RUNTIME_API_SPECIFICATION.md` | IDENTIFIED      |
+| Memory API     | Memory Runtime       | `RUNTIME_API_SPECIFICATION.md` | IDENTIFIED      |
+| Event API      | Runtime Engine       | `RUNTIME_API_SPECIFICATION.md` | IDENTIFIED      |
+| Validation API | SVACS                | `RUNTIME_API_SPECIFICATION.md` | IDENTIFIED      |
+| Replay API     | Replay Engine        | `RUNTIME_API_SPECIFICATION.md` | IDENTIFIED      |
+| Monitoring API | Operations Dashboard | `RUNTIME_API_SPECIFICATION.md` | IDENTIFIED      |
+
+The API mapping is architectural evidence. It does not by itself prove that every API is currently deployed as a production endpoint.
+
+---
+
+## 2. API Contract Principle
+
+All runtime APIs must exchange information through approved Runtime APIs and Execution JSON Contracts.
+
+The required relationship is:
+
+```text
+Runtime API
+    ↓
+Execution JSON Contract
+    ↓
+Trace Context
+    ↓
+Evidence
+    ↓
+Validation
+    ↓
+Replay
+```
+
+An API must not introduce an independent or incompatible contract without corresponding runtime and governance updates.
+
+---
+
+## 3. Required API Contract Fields
+
+Where applicable, API evidence should preserve the following fields:
+
+```json
+{
+  "trace_id": "...",
+  "timestamp": "...",
+  "event_type": "...",
+  "source": "...",
+  "contract_version": "...",
+  "payload": {}
+}
+```
+
+The exact field names and values must follow the canonical API specification implemented by the runtime.
+
+No unsupported field is treated as canonical merely because it appears in an example.
+
+---
+
+## 4. Trace Propagation Requirement
+
+Every constitutional runtime API operation that participates in an execution trace should preserve the originating `trace_id`.
+
+Expected flow:
+
+```text
+Input
+  ↓
+API
+  ↓
+Runtime Stage
+  ↓
+Evidence
+  ↓
+Validation
+  ↓
+Replay
+```
+
+Expected invariant:
+
+```text
+same execution
+        =
+same trace_id
+```
+
+A missing, changed, malformed, or independently regenerated trace identifier must be treated as a trace-integrity observation.
+
+---
+
+## 5. Evidence Relationship
+
+API evidence must be connected to the runtime execution evidence.
+
+Expected relationship:
+
+```text
+API Request
+    ↓
+API Response
+    ↓
+Runtime Stage
+    ↓
+Evidence Record
+    ↓
+Validation Result
+    ↓
+Replay Identifier
+```
+
+The architecture requires evidence to include:
+
+* Observation
+* Event
+* Evidence Chain
+* Reasoning Trace
+* Graph Relationships
+* Memory References
+* Confidence Score
+* Validation Result
+* Replay Identifier
+
+Evidence should remain immutable after creation.
+
+---
+
+## 6. Deterministic API Requirement
+
+NICAI is designed as a deterministic intelligence system.
+
+For identical valid inputs and identical runtime state:
+
+```text
+Same Input
+    ↓
+Same Contract
+    ↓
+Same Runtime Rules
+    ↓
+Same Output
+```
+
+The API layer must not introduce uncontrolled randomness into constitutional runtime execution.
+
+Where deterministic equivalence has not been independently demonstrated, this document records the requirement rather than claiming proof.
+
+---
+
+## 7. Validation API
+
+The constitutional architecture identifies a Validation API consumed by SVACS.
+
+```text
+Runtime Recommendation
+        ↓
+Validation API
+        ↓
+Validation Result
+        ↓
+Governance / Operator Boundary
+```
+
+Validation is required for:
+
+* observations
+* events
+* rule execution
+* evidence
+* memory references
+* recommendations
+* confidence
+* decisions
+
+Only validated recommendations should be presented to operators.
+
+---
+
+## 8. Replay API
+
+The architecture identifies a Replay API associated with the Replay Engine.
+
+Replay is required to support:
+
+* auditing
+* debugging
+* operational transparency
+* deterministic reconstruction
+
+Expected replay relationship:
+
+```text
+Decision
+  ↓
+Recommendation
+  ↓
+Validation
+  ↓
+Reasoning
+  ↓
+Memory
+  ↓
+Knowledge Graph
+  ↓
+Events
+  ↓
+Observations
+```
+
+A replay endpoint returning a summary is not, by itself, proof of complete replay equivalence.
+
+Replay equivalence requires the complete execution sequence and corresponding evidence to be available and comparable.
+
+---
+
+## 9. Monitoring API
+
+The architecture identifies a Monitoring API for the Operations Dashboard.
+
+Expected responsibility:
+
+```text
+Runtime
+   ↓
+Monitoring API
+   ↓
+Operational Dashboard
+```
+
+Monitoring should expose operationally relevant runtime state without changing the underlying intelligence result.
+
+---
+
+## 10. Health / Readiness
+
+A dedicated production health endpoint must be treated separately from the general API contract.
+
+Current NICAI production observation:
+
+```text
+/health
+```
+
+was previously observed as:
+
+```text
+404 Not Found
+```
+
+Therefore this evidence package does **not** claim that a dedicated production `/health` endpoint is currently certified.
+
+Health/readiness certification requires direct verification against the deployed runtime.
+
+---
+
+## 11. API Evidence Required for Certification
+
+For an API to be marked as runtime-certified, the following evidence should be captured:
+
+```text
+1. Endpoint
+2. HTTP method
+3. Request
+4. Response
+5. HTTP status
+6. Contract version
+7. trace_id
+8. timestamp
+9. Runtime stage
+10. Evidence record
+11. Validation result
+12. Replay reference
+```
+
+Example evidence structure:
+
+```json
+{
+  "endpoint": "/example",
+  "method": "POST",
+  "http_status": 200,
+  "trace_id": "TRACE_EXAMPLE",
+  "contract_version": "1.0",
+  "request": {},
+  "response": {},
+  "runtime_stage": "VALIDATION",
+  "validation_status": "VERIFIED",
+  "replay_reference": "TRACE_EXAMPLE"
+}
+```
+
+This example defines the evidence shape only. It is not production execution evidence.
+
+---
+
+## 12. API Ownership Boundary
+
+API ownership must remain explicit.
+
+```text
+NICAI
+  ↓
+Intelligence Generation
+  ↓
+Bounded API Contract
+  ↓
+External Runtime / Ecosystem
+```
+
+NICAI must not claim ownership of an external registry, validation system, replay service, or knowledge-management service unless that ownership is explicitly established.
+
+The architectural governance mapping assigns:
+
+| Component                 | Responsibility                |
+| ------------------------- | ----------------------------- |
+| NICAI                     | Intelligence Generation       |
+| SVACS                     | Validation & Verification     |
+| Runtime Engineering Team  | Runtime Execution             |
+| Operations Command Center | Operational Decision Approval |
+| Marine MasterDB           | Master Data Management        |
+
+Every runtime operation should have a clearly defined owner.
+
+---
+
+## 13. API Contract Evidence vs Architectural Evidence
+
+The following distinction must be maintained.
+
+### Architectural Evidence
+
+Proves that an API is defined or expected by the architecture.
+
+Examples:
+
+```text
+Reasoning API
+Graph API
+Memory API
+Event API
+Validation API
+Replay API
+Monitoring API
+```
+
+### Runtime Evidence
+
+Proves that a concrete deployed endpoint actually exists and responds.
+
+Required:
+
+```text
+URL
++
+HTTP method
++
+request
++
+response
++
+status code
++
+trace_id
++
+timestamp
+```
+
+### Certification Evidence
+
+Proves that the endpoint behaves according to the approved contract.
+
+Required:
+
+```text
+Runtime Evidence
++
+Contract Comparison
++
+Trace Verification
++
+Validation Verification
++
+Replay Verification
+```
+
+These three evidence levels must not be conflated.
+
+---
+
+## 14. Current Evidence Classification
+
+| Evidence Item                               | Classification               |
+| ------------------------------------------- | ---------------------------- |
+| Runtime API architecture mapping            | IDENTIFIED                   |
+| Execution JSON Contract requirement         | IDENTIFIED                   |
+| Reasoning API                               | ARCHITECTURALLY IDENTIFIED   |
+| Graph API                                   | ARCHITECTURALLY IDENTIFIED   |
+| Memory API                                  | ARCHITECTURALLY IDENTIFIED   |
+| Event API                                   | ARCHITECTURALLY IDENTIFIED   |
+| Validation API                              | ARCHITECTURALLY IDENTIFIED   |
+| Replay API                                  | ARCHITECTURALLY IDENTIFIED   |
+| Monitoring API                              | ARCHITECTURALLY IDENTIFIED   |
+| Complete production endpoint evidence       | REQUIRES DIRECT VERIFICATION |
+| Complete API request/response certification | REQUIRES DIRECT VERIFICATION |
+| Complete API trace propagation proof        | REQUIRES DIRECT VERIFICATION |
+| Complete API replay equivalence proof       | REQUIRES DIRECT VERIFICATION |
+| Dedicated production health endpoint        | NOT CERTIFIED                |
+
+---
+
+## 15. Certification Rule
+
+Do not mark an API as:
+
+```text
+CERTIFIED
+```
+
+unless concrete runtime evidence exists.
+
+Do not mark an API as:
+
+```text
+VERIFIED
+```
+
+based only on an architectural document.
+
+Use:
+
+```text
+IDENTIFIED
+```
+
+when the API exists in the architecture.
+
+Use:
+
+```text
+OBSERVED
+```
+
+when direct runtime behaviour has been captured.
+
+Use:
+
+```text
+VERIFIED
+```
+
+when runtime behaviour has been compared against the approved contract.
+
+Use:
+
+```text
+CERTIFIED
+```
+
+only after the required evidence chain has been completed.
+
+---
+
+## 16. Evidence Integrity Rule
+
+This file is an evidence index and contract-boundary record.
+
+It must not fabricate:
+
+* endpoint URLs
+* successful responses
+* trace IDs
+* API versions
+* authentication credentials
+* registry ownership
+* replay equivalence
+* health status
+* production certification
+
+Any item without direct supporting evidence remains explicitly classified as requiring verification.
+
+---
+
+## 17. Constitutional API Chain
+
+The intended constitutional API relationship is:
+
+```text
+Observation
+    ↓
+Event API
+    ↓
+Reasoning / Intelligence API
+    ↓
+Graph / Memory Context
+    ↓
+Validation API
+    ↓
+Replay API
+    ↓
+Monitoring API
+    ↓
+Operator Boundary
+```
+
+Each stage must remain traceable.
+
+---
+
+## 18. Final API Evidence Status
+
+```text
+API ARCHITECTURE IDENTIFIED
+        ↓
+API CONTRACT EXPECTATIONS IDENTIFIED
+        ↓
+TRACE REQUIREMENT IDENTIFIED
+        ↓
+VALIDATION REQUIREMENT IDENTIFIED
+        ↓
+REPLAY REQUIREMENT IDENTIFIED
+        ↓
+PRODUCTION ENDPOINT EVIDENCE
+        ↓
+CONTRACT VERIFICATION
+        ↓
+CERTIFICATION
+```
+
+The first five stages are supported by the current architectural material.
+
+The final certification stages require concrete runtime evidence and must not be inferred from documentation alone.
+
+---
+
+## 19. Source References
+
+Primary architectural references:
+
+```text
+RUNTIME_API_SPECIFICATION.md
+EXECUTION_JSON_CONTRACTS.md
+COGNITIVE_RUNTIME_ENGINE.md
+EVENT_RUNTIME_SPECIFICATION.md
+REPLAY_AND_PROVENANCE_SPECIFICATION.md
+TRUTH_AND_EVIDENCE_FABRIC.md
+ENGINEERING_HANDOVER.md
+```
+
+The architecture explicitly states that integration points exchange information through approved Runtime APIs and Execution JSON Contracts.
+
+---
+
+## 20. End of API Evidence Record
+
+Status:
+
+```text
+API EVIDENCE PACKAGE
+ARCHITECTURALLY MAPPED
+RUNTIME CERTIFICATION REQUIRES DIRECT EVIDENCE
+```
